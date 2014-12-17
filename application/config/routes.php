@@ -39,6 +39,7 @@
 */
 
 $route['futbol'] 			 = "etickets/futbol";
+$route['shop']                           = "etickets/shop";
 $route['conciertos']                     = "etickets/conciertos";
 $route['nosotros'] 			 = "etickets/nosotros";
 $route['contacto'] 			 = "etickets/contacto";
