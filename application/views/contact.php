@@ -36,7 +36,7 @@
                 <blockquote class="">
                 <p>La filosofía de nuestra empresa se basa en la eficiencia y el trato de excelencia a nuestros
                     usuarios en todo momento.</p>
-                <small>- Patricio & Pablo</small>
+                <small>- Equipo E-Tickets</small>
                 </blockquote>		
             </div>
 	</div>

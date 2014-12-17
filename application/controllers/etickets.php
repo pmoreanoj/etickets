@@ -72,6 +72,13 @@ class etickets extends CI_Controller {
 		$contenido['data'] 		= "";
 		$this->load->view("template/_layout.php", $contenido);
 	}
+        
+        public function shop( )
+	{
+		$contenido['contenido'] = "shoppingcart.php";
+		$contenido['data'] 		= "";
+		$this->load->view("template/_layout.php", $contenido);
+	}
 	
 	
 }
