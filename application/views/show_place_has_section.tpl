@@ -17,11 +17,11 @@
                                 <th>Value</th>
                         	</thead>
 						    <tr class="{cycle values='odd,even'}">
-                            <td>{$place_has_section_fields.place_id}:</td>
-                            <td>{$place_has_section_data.place_id}</td>
+                            <td>{$place_has_section_fields.placeID}:</td>
+                            <td>{$place_has_section_data.placeID}</td>
                         </tr><tr class="{cycle values='odd,even'}">
-                            <td>{$place_has_section_fields.section_id}:</td>
-                            <td>{$place_has_section_data.section_id}</td>
+                            <td>{$place_has_section_fields.sectionID}:</td>
+                            <td>{$place_has_section_data.sectionID}</td>
                         </tr>
 						</table>
                         <div class="actions-bar wat-cf">

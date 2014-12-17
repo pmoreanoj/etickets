@@ -17,11 +17,14 @@
                                 <th>Value</th>
                         	</thead>
 						    <tr class="{cycle values='odd,even'}">
+                            <td>{$user_fields.user_id}:</td>
+                            <td>{$user_data.user_id}</td>
+                        </tr><tr class="{cycle values='odd,even'}">
                             <td>{$user_fields.password}:</td>
                             <td>{$user_data.password}</td>
                         </tr><tr class="{cycle values='odd,even'}">
-                            <td>{$user_fields.id}:</td>
-                            <td>{$user_data.id}</td>
+                            <td>{$user_fields.roleID}:</td>
+                            <td>{$user_data.roleID}</td>
                         </tr><tr class="{cycle values='odd,even'}">
                             <td>{$user_fields.name}:</td>
                             <td>{$user_data.name}</td>
@@ -31,9 +34,6 @@
                         </tr><tr class="{cycle values='odd,even'}">
                             <td>{$user_fields.username}:</td>
                             <td>{$user_data.username}</td>
-                        </tr><tr class="{cycle values='odd,even'}">
-                            <td>{$user_fields.role_id}:</td>
-                            <td>{$user_data.role_id}</td>
                         </tr><tr class="{cycle values='odd,even'}">
                             <td>{$user_fields.delete}:</td>
                             <td>{$user_data.delete}</td>

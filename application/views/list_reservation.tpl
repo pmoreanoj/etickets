@@ -16,9 +16,9 @@
                             <table class="table">
                             	<thead>
                                     <th width="20"> </th>
-                                    			<th>{$reservation_fields.id}</th>
-			<th>{$reservation_fields.user_id}</th>
-			<th>{$reservation_fields.event_id}</th>
+                                    			<th>{$reservation_fields.reservation_id}</th>
+			<th>{$reservation_fields.userID}</th>
+			<th>{$reservation_fields.eventID}</th>
 			<th>{$reservation_fields.date}</th>
 			<th>{$reservation_fields.state}</th>
 			<th>{$reservation_fields.more}</th>
@@ -28,18 +28,18 @@
                             	<tbody>
                                 	{foreach $reservation_data as $row}
                                         <tr class="{cycle values='odd,even'}">
-                                            <td><input type="checkbox" class="checkbox" name="delete_ids[]" value="{$row.id}" /></td>
-                                            				<td>{$row.id}</td>
-				<td>{$row.user_id}</td>
-				<td>{$row.event_id}</td>
+                                            <td><input type="checkbox" class="checkbox" name="delete_ids[]" value="{$row.reservation_id}" /></td>
+                                            				<td>{$row.reservation_id}</td>
+				<td>{$row.userID}</td>
+				<td>{$row.eventID}</td>
 				<td>{$row.date}</td>
 				<td>{$row.state}</td>
 				<td>{$row.more}</td>
 
                                             <td width="80">
-                                                <a href="reservation/show/{$row.id}"><img src="iscaffold/images/view.png" alt="Show record" /></a>
-                                                <a href="reservation/edit/{$row.id}"><img src="iscaffold/images/edit.png" alt="Edit record" /></a>
-                                                <a href="javascript:chk('reservation/delete/{$row.id}')"><img src="iscaffold/images/delete.png" alt="Delete record" /></a>
+                                                <a href="reservation/show/{$row.reservation_id}"><img src="iscaffold/images/view.png" alt="Show record" /></a>
+                                                <a href="reservation/edit/{$row.reservation_id}"><img src="iscaffold/images/edit.png" alt="Edit record" /></a>
+                                                <a href="javascript:chk('reservation/delete/{$row.reservation_id}')"><img src="iscaffold/images/delete.png" alt="Delete record" /></a>
                                             </td>
                             		    </tr>
                                 	{/foreach}

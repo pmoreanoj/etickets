@@ -16,22 +16,22 @@
                             <table class="table">
                             	<thead>
                                     <th width="20"> </th>
-                                    			<th>{$place_has_section_fields.place_id}</th>
-			<th>{$place_has_section_fields.section_id}</th>
+                                    			<th>{$place_has_section_fields.placeID}</th>
+			<th>{$place_has_section_fields.sectionID}</th>
 
                                     <th width="80">Actions</th>
                             	</thead>
                             	<tbody>
                                 	{foreach $place_has_section_data as $row}
                                         <tr class="{cycle values='odd,even'}">
-                                            <td><input type="checkbox" class="checkbox" name="delete_ids[]" value="{$row.place_id}" /></td>
-                                            				<td>{$row.place_id}</td>
-				<td>{$row.section_id}</td>
+                                            <td><input type="checkbox" class="checkbox" name="delete_ids[]" value="{$row.placeID}" /></td>
+                                            				<td>{$row.placeID}</td>
+				<td>{$row.sectionID}</td>
 
                                             <td width="80">
-                                                <a href="place_has_section/show/{$row.place_id}"><img src="iscaffold/images/view.png" alt="Show record" /></a>
-                                                <a href="place_has_section/edit/{$row.place_id}"><img src="iscaffold/images/edit.png" alt="Edit record" /></a>
-                                                <a href="javascript:chk('place_has_section/delete/{$row.place_id}')"><img src="iscaffold/images/delete.png" alt="Delete record" /></a>
+                                                <a href="place_has_section/show/{$row.placeID}"><img src="iscaffold/images/view.png" alt="Show record" /></a>
+                                                <a href="place_has_section/edit/{$row.placeID}"><img src="iscaffold/images/edit.png" alt="Edit record" /></a>
+                                                <a href="javascript:chk('place_has_section/delete/{$row.placeID}')"><img src="iscaffold/images/delete.png" alt="Delete record" /></a>
                                             </td>
                             		    </tr>
                                 	{/foreach}

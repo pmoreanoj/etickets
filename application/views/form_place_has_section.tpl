@@ -26,15 +26,12 @@
 
                             
     	<div class="group">
-            <label class="label">{$place_has_section_fields.section_id}<span class="error">*</span></label>
-    		<select class="field select addr" name="section_id" >
-                <option value="0"></option>
-                {foreach $related_user_profile as $rel}
-                    <option value="{$rel.user_profile_id}"{if isset($place_has_section_data)}{if $place_has_section_data.section_id == $rel.user_profile_id} selected="selected"{/if}{/if}>{$rel.user_profile_name}</option>
-                {/foreach}
-        	</select>
-    		<p class="instruct">Seccion</p>
-        </div>
+            <label class="label">{$place_has_section_fields.sectionID}<span class="error">*</span></label>
+    		<div>
+    	       	<input class="text_field" type="text" maxlength="255" value="{if isset($place_has_section_data)}{$place_has_section_data.sectionID}{/if}" name="sectionID" />
+    		</div>
+    		
+    	</div>
     
 
                             <div class="group navform wat-cf">

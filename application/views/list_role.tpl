@@ -16,7 +16,7 @@
                             <table class="table">
                             	<thead>
                                     <th width="20"> </th>
-                                    			<th>{$role_fields.id}</th>
+                                    			<th>{$role_fields.role_id}</th>
 			<th>{$role_fields.role}</th>
 			<th>{$role_fields.default}</th>
 
@@ -25,15 +25,15 @@
                             	<tbody>
                                 	{foreach $role_data as $row}
                                         <tr class="{cycle values='odd,even'}">
-                                            <td><input type="checkbox" class="checkbox" name="delete_ids[]" value="{$row.id}" /></td>
-                                            				<td>{$row.id}</td>
+                                            <td><input type="checkbox" class="checkbox" name="delete_ids[]" value="{$row.role_id}" /></td>
+                                            				<td>{$row.role_id}</td>
 				<td>{$row.role}</td>
 				<td>{$row.default}</td>
 
                                             <td width="80">
-                                                <a href="role/show/{$row.id}"><img src="iscaffold/images/view.png" alt="Show record" /></a>
-                                                <a href="role/edit/{$row.id}"><img src="iscaffold/images/edit.png" alt="Edit record" /></a>
-                                                <a href="javascript:chk('role/delete/{$row.id}')"><img src="iscaffold/images/delete.png" alt="Delete record" /></a>
+                                                <a href="role/show/{$row.role_id}"><img src="iscaffold/images/view.png" alt="Show record" /></a>
+                                                <a href="role/edit/{$row.role_id}"><img src="iscaffold/images/edit.png" alt="Edit record" /></a>
+                                                <a href="javascript:chk('role/delete/{$row.role_id}')"><img src="iscaffold/images/delete.png" alt="Delete record" /></a>
                                             </td>
                             		    </tr>
                                 	{/foreach}

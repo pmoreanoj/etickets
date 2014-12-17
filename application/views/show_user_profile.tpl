@@ -17,11 +17,11 @@
                                 <th>Value</th>
                         	</thead>
 						    <tr class="{cycle values='odd,even'}">
-                            <td>{$user_profile_fields.id}:</td>
-                            <td>{$user_profile_data.id}</td>
+                            <td>{$user_profile_fields.profile_id}:</td>
+                            <td>{$user_profile_data.profile_id}</td>
                         </tr><tr class="{cycle values='odd,even'}">
-                            <td>{$user_profile_fields.user_id}:</td>
-                            <td>{$user_profile_data.user_id}</td>
+                            <td>{$user_profile_fields.userID}:</td>
+                            <td>{$user_profile_data.userID}</td>
                         </tr><tr class="{cycle values='odd,even'}">
                             <td>{$user_profile_fields.address}:</td>
                             <td>{$user_profile_data.address}</td>

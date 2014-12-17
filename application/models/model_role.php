@@ -26,8 +26,8 @@ class Model_role extends CI_Model
 
 	function get ( $id, $get_one = false )
 	{
-        
-	    $select_statement = ( $this->raw_data ) ? 'id,role,default' : 'id,role,default';
+        $meta = $this->metadata();
+	    $select_statement = ( $this->raw_data ) ? 'role_id,role,default' : 'role_id,role,default';
 		$this->db->select( $select_statement );
 		$this->db->from('role');
         
@@ -40,7 +40,7 @@ class Model_role extends CI_Model
         }
 		else // Select the desired record
         {
-            $this->db->where( 'id', $id );
+            $this->db->where( 'role_id', $id );
         }
 
 		$query = $this->db->get();
@@ -49,8 +49,8 @@ class Model_role extends CI_Model
 		{
 			$row = $query->row_array();
 			return array( 
-	'id' => $row['id'],
-	'role' => $row['role'],
+	'role_id' => $row['role_id'],
+	'role' => ( array_search( $row['role'], $meta['role']['enum_values'] ) !== FALSE ) ? $meta['role']['enum_names'][ array_search( $row['role'], $meta['role']['enum_values'] ) ] : '',
 	'default' => $row['default'],
  );
 		}
@@ -72,7 +72,7 @@ class Model_role extends CI_Model
 
 	function update ( $id, $data )
 	{
-		$this->db->where( 'id', $id );
+		$this->db->where( 'role_id', $id );
 		$this->db->update( 'role', $data );
 	}
 
@@ -82,23 +82,31 @@ class Model_role extends CI_Model
 	{
         if( is_array( $id ) )
         {
-            $this->db->where_in( 'id', $id );            
+            $this->db->where_in( 'role_id', $id );            
         }
         else
         {
-            $this->db->where( 'id', $id );
+            $this->db->where( 'role_id', $id );
         }
         $this->db->delete( 'role' );
         
+		$this->db->where( 'role_id', $id );
+        $this->db->delete('user_role');
+
+
+		$this->db->where( 'role_id', $id );
+        $this->db->delete('user_role');
+
+
 	}
 
 
 
 	function lister ( $page = FALSE )
 	{
-        
+        $meta = $this->metadata();
 	    $this->db->start_cache();
-		$this->db->select( 'id,role,default');
+		$this->db->select( 'role_id,role,default');
 		$this->db->from( 'role' );
 		//$this->db->order_by( '', 'ASC' );
         
@@ -132,8 +140,8 @@ class Model_role extends CI_Model
 		foreach ( $query->result_array() as $row )
 		{
 			$temp_result[] = array( 
-	'id' => $row['id'],
-	'role' => $row['role'],
+	'role_id' => $row['role_id'],
+	'role' => ( array_search( $row['role'], $meta['role']['enum_values'] ) !== FALSE ) ? $meta['role']['enum_names'][ array_search( $row['role'], $meta['role']['enum_values'] ) ] : '',
 	'default' => $row['default'],
  );
 		}
@@ -147,7 +155,7 @@ class Model_role extends CI_Model
 	{
 	    $meta = $this->metadata();
 	    $this->db->start_cache();
-		$this->db->select( 'id,role,default');
+		$this->db->select( 'role_id,role,default');
 		$this->db->from( 'role' );
         
 
@@ -186,8 +194,8 @@ class Model_role extends CI_Model
 		foreach ( $query->result_array() as $row )
 		{
 			$temp_result[] = array( 
-	'id' => $row['id'],
-	'role' => $row['role'],
+	'role_id' => $row['role_id'],
+	'role' => ( array_search( $row['role'], $meta['role']['enum_values'] ) !== FALSE ) ? $meta['role']['enum_names'][ array_search( $row['role'], $meta['role']['enum_values'] ) ] : '',
 	'default' => $row['default'],
  );
 		}
@@ -205,7 +213,7 @@ class Model_role extends CI_Model
     function fields( $withID = FALSE )
     {
         $fs = array(
-	'id' => lang('id'),
+	'role_id' => lang('role_id'),
 	'role' => lang('role'),
 	'default' => lang('default')
 );

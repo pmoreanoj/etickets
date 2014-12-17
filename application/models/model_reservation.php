@@ -27,10 +27,11 @@ class Model_reservation extends CI_Model
 	function get ( $id, $get_one = false )
 	{
         $meta = $this->metadata();
-	    $select_statement = ( $this->raw_data ) ? 'id,user_id,event_id,date,state,more' : 'id,user_profile.name AS user_id,user_profile.name AS event_id,date,state,more';
+	    $select_statement = ( $this->raw_data ) ? 'reservation_id,userID,eventID,date,state,more' : 'reservation_id,user.username AS userID,event.name AS eventID,date,state,more';
 		$this->db->select( $select_statement );
 		$this->db->from('reservation');
-        $this->db->join( 'user_profile', 'user_id = id', 'left' );
+        $this->db->join( 'user', 'userID = user_id', 'left' );
+$this->db->join( 'event', 'eventID = event_id', 'left' );
 
 
 		// Pick one record
@@ -41,7 +42,7 @@ class Model_reservation extends CI_Model
         }
 		else // Select the desired record
         {
-            $this->db->where( 'id', $id );
+            $this->db->where( 'reservation_id', $id );
         }
 
 		$query = $this->db->get();
@@ -50,9 +51,9 @@ class Model_reservation extends CI_Model
 		{
 			$row = $query->row_array();
 			return array( 
-	'id' => $row['id'],
-	'user_id' => $row['user_id'],
-	'event_id' => $row['event_id'],
+	'reservation_id' => $row['reservation_id'],
+	'userID' => $row['userID'],
+	'eventID' => $row['eventID'],
 	'date' => date( 'Y-m-d', $row['date'] ),
 	'state' => ( array_search( $row['state'], $meta['state']['enum_values'] ) !== FALSE ) ? $meta['state']['enum_names'][ array_search( $row['state'], $meta['state']['enum_values'] ) ] : '',
 	'more' => $row['more'],
@@ -76,7 +77,7 @@ class Model_reservation extends CI_Model
 
 	function update ( $id, $data )
 	{
-		$this->db->where( 'id', $id );
+		$this->db->where( 'reservation_id', $id );
 		$this->db->update( 'reservation', $data );
 	}
 
@@ -86,11 +87,11 @@ class Model_reservation extends CI_Model
 	{
         if( is_array( $id ) )
         {
-            $this->db->where_in( 'id', $id );            
+            $this->db->where_in( 'reservation_id', $id );            
         }
         else
         {
-            $this->db->where( 'id', $id );
+            $this->db->where( 'reservation_id', $id );
         }
         $this->db->delete( 'reservation' );
         
@@ -102,10 +103,11 @@ class Model_reservation extends CI_Model
 	{
         $meta = $this->metadata();
 	    $this->db->start_cache();
-		$this->db->select( 'id,user_profile.name AS user_id,user_profile.name AS event_id,date,state,more');
+		$this->db->select( 'reservation_id,user.username AS userID,event.name AS eventID,date,state,more');
 		$this->db->from( 'reservation' );
 		//$this->db->order_by( '', 'ASC' );
-        $this->db->join( 'user_profile', 'user_id = id', 'left' );
+        $this->db->join( 'user', 'userID = user_id', 'left' );
+$this->db->join( 'event', 'eventID = event_id', 'left' );
 
 
         /**
@@ -137,9 +139,9 @@ class Model_reservation extends CI_Model
 		foreach ( $query->result_array() as $row )
 		{
 			$temp_result[] = array( 
-	'id' => $row['id'],
-	'user_id' => $row['user_id'],
-	'event_id' => $row['event_id'],
+	'reservation_id' => $row['reservation_id'],
+	'userID' => $row['userID'],
+	'eventID' => $row['eventID'],
 	'date' => date( 'Y-m-d', $row['date'] ),
 	'state' => ( array_search( $row['state'], $meta['state']['enum_values'] ) !== FALSE ) ? $meta['state']['enum_names'][ array_search( $row['state'], $meta['state']['enum_values'] ) ] : '',
 	'more' => $row['more'],
@@ -155,9 +157,10 @@ class Model_reservation extends CI_Model
 	{
 	    $meta = $this->metadata();
 	    $this->db->start_cache();
-		$this->db->select( 'id,user_profile.name AS user_id,user_profile.name AS event_id,date,state,more');
+		$this->db->select( 'reservation_id,user.username AS userID,event.name AS eventID,date,state,more');
 		$this->db->from( 'reservation' );
-        $this->db->join( 'user_profile', 'user_id = id', 'left' );
+        $this->db->join( 'user', 'userID = user_id', 'left' );
+$this->db->join( 'event', 'eventID = event_id', 'left' );
 
 
 		// Delete this line after setting up the search conditions 
@@ -195,9 +198,9 @@ class Model_reservation extends CI_Model
 		foreach ( $query->result_array() as $row )
 		{
 			$temp_result[] = array( 
-	'id' => $row['id'],
-	'user_id' => $row['user_id'],
-	'event_id' => $row['event_id'],
+	'reservation_id' => $row['reservation_id'],
+	'userID' => $row['userID'],
+	'eventID' => $row['eventID'],
 	'date' => date( 'Y-m-d', $row['date'] ),
 	'state' => ( array_search( $row['state'], $meta['state']['enum_values'] ) !== FALSE ) ? $meta['state']['enum_names'][ array_search( $row['state'], $meta['state']['enum_values'] ) ] : '',
 	'more' => $row['more'],
@@ -207,10 +210,19 @@ class Model_reservation extends CI_Model
 		return $temp_result;
 	}
 
-	function related_user_profile()
+	function related_user()
     {
-        $this->db->select( 'id AS user_profile_id, name AS user_profile_name' );
-        $rel_data = $this->db->get( 'user_profile' );
+        $this->db->select( 'user_id AS user_id, username AS user_name' );
+        $rel_data = $this->db->get( 'user' );
+        return $rel_data->result_array();
+    }
+
+
+
+	function related_event()
+    {
+        $this->db->select( 'event_id AS event_id, name AS event_name' );
+        $rel_data = $this->db->get( 'event' );
         return $rel_data->result_array();
     }
 
@@ -226,9 +238,9 @@ class Model_reservation extends CI_Model
     function fields( $withID = FALSE )
     {
         $fs = array(
-	'id' => lang('id'),
-	'user_id' => lang('user_id'),
-	'event_id' => lang('event_id'),
+	'reservation_id' => lang('reservation_id'),
+	'userID' => lang('userID'),
+	'eventID' => lang('eventID'),
 	'date' => lang('date'),
 	'state' => lang('state'),
 	'more' => lang('more')

@@ -30,15 +30,23 @@
     		<div>
     	       	<input class="text_field" type="text" maxlength="255" value="{if isset($place_data)}{$place_data.name}{/if}" name="name" />
     		</div>
-    		<p class="instruct">Nombre del Lugar</p>
+    		<p class="instruct">Nombre del lugar</p>
     	</div>
     
     	<div class="group">
-            <label class="label">{$place_fields.photo}</label>
-    		<div>
-    	       	<input class="text_field" type="text" maxlength="255" value="{if isset($place_data)}{$place_data.photo}{/if}" name="photo" />
-    		</div>
-    		<p class="instruct">Foto del Lugar</p>
+        	<fieldset>
+                <legend class="label">{$place_fields.photo}</legend>
+                <input type="hidden" value="{if isset($place_data)}{$place_data.photo}{/if}" name="photo-original-name" />
+                {if isset($place_data.photo)}
+                    {if !$place_data.photo}
+                        <p>No file uploaded</p>
+                    {else}
+                        <p>File uploaded: <a href="uploads/{$place_data.photo}">{$place_data.photo}</a></p>
+                    {/if}
+                {/if}
+                <input class="field file" type="file" name="photo" />
+        		<p class="instruct">Foto del Lugar</p>
+        	</fieldset>
     	</div>
     
     	<div class="group">
@@ -46,7 +54,7 @@
     		<div>
     	       	<input class="text_field" type="text" maxlength="255" value="{if isset($place_data)}{$place_data.description}{/if}" name="description" />
     		</div>
-    		<p class="instruct">Breve descripcion del lugar</p>
+    		<p class="instruct">Desripcion del Lugar</p>
     	</div>
     
 

@@ -74,9 +74,9 @@ class User extends CI_Controller
         {
             case 'GET':
                 $fields = $this->model_user->fields();
-                $user_profile_set = $this->model_user->related_user_profile();
+                $role_set = $this->model_user->related_role();
 
-                $this->template->assign( 'related_user_profile', $user_profile_set );
+                $this->template->assign( 'related_role', $role_set );
 
                 
                 $this->template->assign( 'action_mode', 'create' );
@@ -95,27 +95,27 @@ class User extends CI_Controller
 
                 /* we set the rules */
                 /* don't forget to edit these */
-				$this->form_validation->set_rules( 'id', lang('id'), 'required|max_length[11]|integer' );
+				$this->form_validation->set_rules( 'password', lang('password'), 'required|max_length[300]' );
+				$this->form_validation->set_rules( 'roleID', lang('roleID'), 'required|max_length[11]|integer' );
 				$this->form_validation->set_rules( 'name', lang('name'), 'required|max_length[50]' );
 				$this->form_validation->set_rules( 'email', lang('email'), 'required|max_length[80]' );
 				$this->form_validation->set_rules( 'username', lang('username'), 'required|max_length[45]' );
-				$this->form_validation->set_rules( 'role_id', lang('role_id'), 'required|max_length[11]|integer' );
 				$this->form_validation->set_rules( 'delete', lang('delete'), 'required|max_length[1]|integer' );
 
-				$data_post['id'] = $this->input->post( 'id' );
+				$data_post['password'] = $this->input->post( 'password' );
+				$data_post['roleID'] = $this->input->post( 'roleID' );
 				$data_post['name'] = $this->input->post( 'name' );
 				$data_post['email'] = $this->input->post( 'email' );
 				$data_post['username'] = $this->input->post( 'username' );
-				$data_post['role_id'] = $this->input->post( 'role_id' );
-				$data_post['delete'] = ( $this->input->post( 'delete' ) == FALSE ) ? 0 : $this->input->post( 'delete' );
+				$data_post['delete'] = $this->input->post( 'delete' );
 
                 if ( $this->form_validation->run() == FALSE )
                 {
                     $errors = validation_errors();
                     
-                    $user_profile_set = $this->model_user->related_user_profile();
+                    $role_set = $this->model_user->related_role();
 
-                    $this->template->assign( 'related_user_profile', $user_profile_set );
+                    $this->template->assign( 'related_role', $role_set );
 
                     
               		$this->template->assign( 'errors', $errors );
@@ -153,10 +153,10 @@ class User extends CI_Controller
                 $this->model_user->raw_data = TRUE;
         		$data = $this->model_user->get( $id );
                 $fields = $this->model_user->fields();
-                $user_profile_set = $this->model_user->related_user_profile();
+                $role_set = $this->model_user->related_role();
 
                 
-                $this->template->assign( 'related_user_profile', $user_profile_set );
+                $this->template->assign( 'related_role', $role_set );
 
                 
           		$this->template->assign( 'action_mode', 'edit' );
@@ -174,27 +174,27 @@ class User extends CI_Controller
                 $fields = $this->model_user->fields();
                 /* we set the rules */
                 /* don't forget to edit these */
-				$this->form_validation->set_rules( 'id', lang('id'), 'required|max_length[11]|integer' );
+				$this->form_validation->set_rules( 'password', lang('password'), 'required|max_length[300]' );
+				$this->form_validation->set_rules( 'roleID', lang('roleID'), 'required|max_length[11]|integer' );
 				$this->form_validation->set_rules( 'name', lang('name'), 'required|max_length[50]' );
 				$this->form_validation->set_rules( 'email', lang('email'), 'required|max_length[80]' );
 				$this->form_validation->set_rules( 'username', lang('username'), 'required|max_length[45]' );
-				$this->form_validation->set_rules( 'role_id', lang('role_id'), 'required|max_length[11]|integer' );
 				$this->form_validation->set_rules( 'delete', lang('delete'), 'required|max_length[1]|integer' );
 
-				$data_post['id'] = $this->input->post( 'id' );
+				$data_post['password'] = $this->input->post( 'password' );
+				$data_post['roleID'] = $this->input->post( 'roleID' );
 				$data_post['name'] = $this->input->post( 'name' );
 				$data_post['email'] = $this->input->post( 'email' );
 				$data_post['username'] = $this->input->post( 'username' );
-				$data_post['role_id'] = $this->input->post( 'role_id' );
-				$data_post['delete'] = ( $this->input->post( 'delete' ) == FALSE ) ? 0 : $this->input->post( 'delete' );
+				$data_post['delete'] = $this->input->post( 'delete' );
 
                 if ( $this->form_validation->run() == FALSE )
                 {
                     $errors = validation_errors();
                     
-                    $user_profile_set = $this->model_user->related_user_profile();
+                    $role_set = $this->model_user->related_role();
 
-                    $this->template->assign( 'related_user_profile', $user_profile_set );
+                    $this->template->assign( 'related_role', $role_set );
 
                     
               		$this->template->assign( 'action_mode', 'edit' );

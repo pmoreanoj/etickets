@@ -17,11 +17,11 @@
                                 <th>Value</th>
                         	</thead>
 						    <tr class="{cycle values='odd,even'}">
-                            <td>{$seat_fields.id}:</td>
-                            <td>{$seat_data.id}</td>
+                            <td>{$seat_fields.seat_id}:</td>
+                            <td>{$seat_data.seat_id}</td>
                         </tr><tr class="{cycle values='odd,even'}">
-                            <td>{$seat_fields.section_id}:</td>
-                            <td>{$seat_data.section_id}</td>
+                            <td>{$seat_fields.sectionID}:</td>
+                            <td>{$seat_data.sectionID}</td>
                         </tr><tr class="{cycle values='odd,even'}">
                             <td>{$seat_fields.number_row}:</td>
                             <td>{$seat_data.number_row}</td>

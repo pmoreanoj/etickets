@@ -1,17 +1,17 @@
-<?php /* Smarty version Smarty-3.1.7, created on 2014-12-17 16:40:43
+<?php /* Smarty version Smarty-3.1.7, created on 2014-12-17 17:47:14
          compiled from "application/views/form_user.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:5009331585491a3fbacf6b0-60908768%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:14479089775491b392e57780-95891906%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     '19867657cb1f92e123a1f5c5565719b6cac85f52' => 
     array (
       0 => 'application/views/form_user.tpl',
-      1 => 1418828990,
+      1 => 1418834713,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '5009331585491a3fbacf6b0-60908768',
+  'nocache_hash' => '14479089775491b392e57780-95891906',
   'function' => 
   array (
   ),
@@ -22,12 +22,14 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'errors' => 0,
     'user_fields' => 0,
     'user_data' => 0,
+    'related_role' => 0,
+    'rel' => 0,
   ),
   'has_nocache_code' => false,
   'version' => 'Smarty-3.1.7',
-  'unifunc' => 'content_5491a3fbb1f18',
+  'unifunc' => 'content_5491b392eb54f',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_5491a3fbb1f18')) {function content_5491a3fbb1f18($_smarty_tpl) {?><div class="block" id="block-tables">
+<?php if ($_valid && !is_callable('content_5491b392eb54f')) {function content_5491b392eb54f($_smarty_tpl) {?><div class="block" id="block-tables">
 
                 <div class="secondary-navigation">
                     <ul class="wat-cf">
@@ -59,13 +61,41 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 
                             
     	<div class="group">
+            <label class="label"><?php echo $_smarty_tpl->tpl_vars['user_fields']->value['password'];?>
+<span class="error">*</span></label>
+    		<div>
+    	       	<input class="text_field" type="text" maxlength="255" value="<?php if (isset($_smarty_tpl->tpl_vars['user_data']->value)){?><?php echo $_smarty_tpl->tpl_vars['user_data']->value['password'];?>
+<?php }?>" name="password" />
+    		</div>
+    		<p class="instruct">Contrasena del usuario</p>
+    	</div>
+    
+    	<div class="group">
+            <label class="label"><?php echo $_smarty_tpl->tpl_vars['user_fields']->value['roleID'];?>
+<span class="error">*</span></label>
+    		<select class="field select addr" name="roleID" >
+                <option value="0"></option>
+                <?php  $_smarty_tpl->tpl_vars['rel'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['rel']->_loop = false;
+ $_from = $_smarty_tpl->tpl_vars['related_role']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['rel']->key => $_smarty_tpl->tpl_vars['rel']->value){
+$_smarty_tpl->tpl_vars['rel']->_loop = true;
+?>
+                    <option value="<?php echo $_smarty_tpl->tpl_vars['rel']->value['role_id'];?>
+"<?php if (isset($_smarty_tpl->tpl_vars['user_data']->value)){?><?php if ($_smarty_tpl->tpl_vars['user_data']->value['roleID']==$_smarty_tpl->tpl_vars['rel']->value['role_id']){?> selected="selected"<?php }?><?php }?>><?php echo $_smarty_tpl->tpl_vars['rel']->value['role_name'];?>
+</option>
+                <?php } ?>
+        	</select>
+    		<p class="instruct">Rol del usuario</p>
+        </div>
+    
+    	<div class="group">
             <label class="label"><?php echo $_smarty_tpl->tpl_vars['user_fields']->value['name'];?>
 <span class="error">*</span></label>
     		<div>
     	       	<input class="text_field" type="text" maxlength="255" value="<?php if (isset($_smarty_tpl->tpl_vars['user_data']->value)){?><?php echo $_smarty_tpl->tpl_vars['user_data']->value['name'];?>
 <?php }?>" name="name" />
     		</div>
-    		
+    		<p class="instruct">Nombre completo del usuario</p>
     	</div>
     
     	<div class="group">
@@ -75,7 +105,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     	       	<input class="text_field" type="text" maxlength="255" value="<?php if (isset($_smarty_tpl->tpl_vars['user_data']->value)){?><?php echo $_smarty_tpl->tpl_vars['user_data']->value['email'];?>
 <?php }?>" name="email" />
     		</div>
-    		
+    		<p class="instruct">E-mail del usuario</p>
     	</div>
     
     	<div class="group">
@@ -85,17 +115,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     	       	<input class="text_field" type="text" maxlength="255" value="<?php if (isset($_smarty_tpl->tpl_vars['user_data']->value)){?><?php echo $_smarty_tpl->tpl_vars['user_data']->value['username'];?>
 <?php }?>" name="username" />
     		</div>
-    		
-    	</div>
-    
-    	<div class="group">
-            <label class="label"><?php echo $_smarty_tpl->tpl_vars['user_fields']->value['role_id'];?>
-<span class="error">*</span></label>
-    		<div>
-    	       	<input class="text_field" type="text" maxlength="255" value="<?php if (isset($_smarty_tpl->tpl_vars['user_data']->value)){?><?php echo $_smarty_tpl->tpl_vars['user_data']->value['role_id'];?>
-<?php }?>" name="role_id" />
-    		</div>
-    		
+    		<p class="instruct">Usuario</p>
     	</div>
     
     	<div class="group">
@@ -105,7 +125,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     	       	<input class="text_field" type="text" maxlength="255" value="<?php if (isset($_smarty_tpl->tpl_vars['user_data']->value)){?><?php echo $_smarty_tpl->tpl_vars['user_data']->value['delete'];?>
 <?php }?>" name="delete" />
     		</div>
-    		
+    		<p class="instruct">Si el usuario se borro</p>
     	</div>
     
 

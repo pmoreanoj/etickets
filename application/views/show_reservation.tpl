@@ -17,14 +17,14 @@
                                 <th>Value</th>
                         	</thead>
 						    <tr class="{cycle values='odd,even'}">
-                            <td>{$reservation_fields.id}:</td>
-                            <td>{$reservation_data.id}</td>
+                            <td>{$reservation_fields.reservation_id}:</td>
+                            <td>{$reservation_data.reservation_id}</td>
                         </tr><tr class="{cycle values='odd,even'}">
-                            <td>{$reservation_fields.user_id}:</td>
-                            <td>{$reservation_data.user_id}</td>
+                            <td>{$reservation_fields.userID}:</td>
+                            <td>{$reservation_data.userID}</td>
                         </tr><tr class="{cycle values='odd,even'}">
-                            <td>{$reservation_fields.event_id}:</td>
-                            <td>{$reservation_data.event_id}</td>
+                            <td>{$reservation_fields.eventID}:</td>
+                            <td>{$reservation_data.eventID}</td>
                         </tr><tr class="{cycle values='odd,even'}">
                             <td>{$reservation_fields.date}:</td>
                             <td>{$reservation_data.date}</td>

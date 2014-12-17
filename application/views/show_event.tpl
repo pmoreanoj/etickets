@@ -17,11 +17,11 @@
                                 <th>Value</th>
                         	</thead>
 						    <tr class="{cycle values='odd,even'}">
-                            <td>{$event_fields.id}:</td>
-                            <td>{$event_data.id}</td>
+                            <td>{$event_fields.event_id}:</td>
+                            <td>{$event_data.event_id}</td>
                         </tr><tr class="{cycle values='odd,even'}">
-                            <td>{$event_fields.place_id}:</td>
-                            <td>{$event_data.place_id}</td>
+                            <td>{$event_fields.placeID}:</td>
+                            <td>{$event_data.placeID}</td>
                         </tr><tr class="{cycle values='odd,even'}">
                             <td>{$event_fields.name}:</td>
                             <td>{$event_data.name}</td>

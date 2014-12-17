@@ -74,10 +74,8 @@ class Place_has_section extends CI_Controller
         {
             case 'GET':
                 $fields = $this->model_place_has_section->fields();
-                $user_profile_set = $this->model_place_has_section->related_user_profile();
-
-                $this->template->assign( 'related_user_profile', $user_profile_set );
-
+                
+                
                 
                 $this->template->assign( 'action_mode', 'create' );
         		$this->template->assign( 'place_has_section_fields', $fields );
@@ -95,18 +93,16 @@ class Place_has_section extends CI_Controller
 
                 /* we set the rules */
                 /* don't forget to edit these */
-				$this->form_validation->set_rules( 'section_id', lang('section_id'), 'required|max_length[11]|integer' );
+				$this->form_validation->set_rules( 'sectionID', lang('sectionID'), 'required|max_length[11]|integer' );
 
-				$data_post['section_id'] = $this->input->post( 'section_id' );
+				$data_post['sectionID'] = $this->input->post( 'sectionID' );
 
                 if ( $this->form_validation->run() == FALSE )
                 {
                     $errors = validation_errors();
                     
-                    $user_profile_set = $this->model_place_has_section->related_user_profile();
-
-                    $this->template->assign( 'related_user_profile', $user_profile_set );
-
+                    
+                    
                     
               		$this->template->assign( 'errors', $errors );
               		$this->template->assign( 'action_mode', 'create' );
@@ -143,11 +139,9 @@ class Place_has_section extends CI_Controller
                 $this->model_place_has_section->raw_data = TRUE;
         		$data = $this->model_place_has_section->get( $id );
                 $fields = $this->model_place_has_section->fields();
-                $user_profile_set = $this->model_place_has_section->related_user_profile();
-
                 
-                $this->template->assign( 'related_user_profile', $user_profile_set );
-
+                
+                
                 
           		$this->template->assign( 'action_mode', 'edit' );
         		$this->template->assign( 'place_has_section_data', $data );
@@ -164,18 +158,16 @@ class Place_has_section extends CI_Controller
                 $fields = $this->model_place_has_section->fields();
                 /* we set the rules */
                 /* don't forget to edit these */
-				$this->form_validation->set_rules( 'section_id', lang('section_id'), 'required|max_length[11]|integer' );
+				$this->form_validation->set_rules( 'sectionID', lang('sectionID'), 'required|max_length[11]|integer' );
 
-				$data_post['section_id'] = $this->input->post( 'section_id' );
+				$data_post['sectionID'] = $this->input->post( 'sectionID' );
 
                 if ( $this->form_validation->run() == FALSE )
                 {
                     $errors = validation_errors();
                     
-                    $user_profile_set = $this->model_place_has_section->related_user_profile();
-
-                    $this->template->assign( 'related_user_profile', $user_profile_set );
-
+                    
+                    
                     
               		$this->template->assign( 'action_mode', 'edit' );
               		$this->template->assign( 'errors', $errors );

@@ -17,8 +17,8 @@
                                 <th>Value</th>
                         	</thead>
 						    <tr class="{cycle values='odd,even'}">
-                            <td>{$section_fields.id}:</td>
-                            <td>{$section_data.id}</td>
+                            <td>{$section_fields.section_id}:</td>
+                            <td>{$section_data.section_id}</td>
                         </tr><tr class="{cycle values='odd,even'}">
                             <td>{$section_fields.rows}:</td>
                             <td>{$section_data.rows}</td>

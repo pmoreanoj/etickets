@@ -15,6 +15,7 @@ class Login extends CI_Controller
 
         // Quick logged in test, if check() recieves true, then it redirects to the index page
 		$this->load->model( 'model_auth' );
+                $this->load->model( 'User_Model', 'user');
 		$this->template->assign( 'logged_in', $this->model_auth->check( FALSE ) );
 	}
 
@@ -37,10 +38,19 @@ class Login extends CI_Controller
         $user = $this->input->post( 'user' );
         $pass = $this->input->post( 'pass' ); 
         
-        if( $this->rootUser == $user && $this->rootPass == $pass )
+        $data = $this->user->login( $user, $pass );
+        
+        if( isset( $data )  ) //log correcto
         {
             $this->model_auth->login( array( 'valid' => 'yes' ) );
-            redirect( base_url() . '/dashboard' );
+            if( $data['role_id'] == $this->user->getAdminRole( ) )
+            {
+                redirect( base_url() . '/dashboard' );
+            }
+            else
+            {
+                redirect( base_url() );
+            }
             die();
         }
         else

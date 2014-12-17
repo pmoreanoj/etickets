@@ -1,17 +1,17 @@
-<?php /* Smarty version Smarty-3.1.7, created on 2014-12-17 16:40:24
+<?php /* Smarty version Smarty-3.1.7, created on 2014-12-17 17:46:39
          compiled from "application/views/list_reservation.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:7815254465491a3e8587680-54260501%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:15767774045491b36f3ce973-90890732%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     'e6744b469f557d51753076cd8820f942df606b37' => 
     array (
       0 => 'application/views/list_reservation.tpl',
-      1 => 1418828990,
+      1 => 1418834713,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '7815254465491a3e8587680-54260501',
+  'nocache_hash' => '15767774045491b36f3ce973-90890732',
   'function' => 
   array (
   ),
@@ -25,9 +25,9 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
   'version' => 'Smarty-3.1.7',
-  'unifunc' => 'content_5491a3e85c4e9',
+  'unifunc' => 'content_5491b36f40c8a',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_5491a3e85c4e9')) {function content_5491a3e85c4e9($_smarty_tpl) {?><?php if (!is_callable('smarty_function_cycle')) include '/Applications/XAMPP/xamppfiles/htdocs/etickets/application/libraries/smarty/plugins/function.cycle.php';
+<?php if ($_valid && !is_callable('content_5491b36f40c8a')) {function content_5491b36f40c8a($_smarty_tpl) {?><?php if (!is_callable('smarty_function_cycle')) include '/Applications/XAMPP/xamppfiles/htdocs/etickets/application/libraries/smarty/plugins/function.cycle.php';
 ?><div class="block" id="block-tables">
 
                 <div class="secondary-navigation">
@@ -47,11 +47,11 @@ $_valid = $_smarty_tpl->decodeProperties(array (
                             <table class="table">
                             	<thead>
                                     <th width="20"> </th>
-                                    			<th><?php echo $_smarty_tpl->tpl_vars['reservation_fields']->value['id'];?>
+                                    			<th><?php echo $_smarty_tpl->tpl_vars['reservation_fields']->value['reservation_id'];?>
 </th>
-			<th><?php echo $_smarty_tpl->tpl_vars['reservation_fields']->value['user_id'];?>
+			<th><?php echo $_smarty_tpl->tpl_vars['reservation_fields']->value['userID'];?>
 </th>
-			<th><?php echo $_smarty_tpl->tpl_vars['reservation_fields']->value['event_id'];?>
+			<th><?php echo $_smarty_tpl->tpl_vars['reservation_fields']->value['eventID'];?>
 </th>
 			<th><?php echo $_smarty_tpl->tpl_vars['reservation_fields']->value['date'];?>
 </th>
@@ -70,13 +70,13 @@ $_smarty_tpl->tpl_vars['row']->_loop = true;
 ?>
                                         <tr class="<?php echo smarty_function_cycle(array('values'=>'odd,even'),$_smarty_tpl);?>
 ">
-                                            <td><input type="checkbox" class="checkbox" name="delete_ids[]" value="<?php echo $_smarty_tpl->tpl_vars['row']->value['id'];?>
+                                            <td><input type="checkbox" class="checkbox" name="delete_ids[]" value="<?php echo $_smarty_tpl->tpl_vars['row']->value['reservation_id'];?>
 " /></td>
-                                            				<td><?php echo $_smarty_tpl->tpl_vars['row']->value['id'];?>
+                                            				<td><?php echo $_smarty_tpl->tpl_vars['row']->value['reservation_id'];?>
 </td>
-				<td><?php echo $_smarty_tpl->tpl_vars['row']->value['user_id'];?>
+				<td><?php echo $_smarty_tpl->tpl_vars['row']->value['userID'];?>
 </td>
-				<td><?php echo $_smarty_tpl->tpl_vars['row']->value['event_id'];?>
+				<td><?php echo $_smarty_tpl->tpl_vars['row']->value['eventID'];?>
 </td>
 				<td><?php echo $_smarty_tpl->tpl_vars['row']->value['date'];?>
 </td>
@@ -86,11 +86,11 @@ $_smarty_tpl->tpl_vars['row']->_loop = true;
 </td>
 
                                             <td width="80">
-                                                <a href="reservation/show/<?php echo $_smarty_tpl->tpl_vars['row']->value['id'];?>
+                                                <a href="reservation/show/<?php echo $_smarty_tpl->tpl_vars['row']->value['reservation_id'];?>
 "><img src="iscaffold/images/view.png" alt="Show record" /></a>
-                                                <a href="reservation/edit/<?php echo $_smarty_tpl->tpl_vars['row']->value['id'];?>
+                                                <a href="reservation/edit/<?php echo $_smarty_tpl->tpl_vars['row']->value['reservation_id'];?>
 "><img src="iscaffold/images/edit.png" alt="Edit record" /></a>
-                                                <a href="javascript:chk('reservation/delete/<?php echo $_smarty_tpl->tpl_vars['row']->value['id'];?>
+                                                <a href="javascript:chk('reservation/delete/<?php echo $_smarty_tpl->tpl_vars['row']->value['reservation_id'];?>
 ')"><img src="iscaffold/images/delete.png" alt="Delete record" /></a>
                                             </td>
                             		    </tr>

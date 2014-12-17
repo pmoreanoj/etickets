@@ -27,7 +27,7 @@ class Model_section extends CI_Model
 	function get ( $id, $get_one = false )
 	{
         
-	    $select_statement = ( $this->raw_data ) ? 'id,rows,seats_per_rows,price,description' : 'id,rows,seats_per_rows,price,description';
+	    $select_statement = ( $this->raw_data ) ? 'section_id,rows,seats_per_rows,price,description' : 'section_id,rows,seats_per_rows,price,description';
 		$this->db->select( $select_statement );
 		$this->db->from('section');
         
@@ -40,7 +40,7 @@ class Model_section extends CI_Model
         }
 		else // Select the desired record
         {
-            $this->db->where( 'id', $id );
+            $this->db->where( 'section_id', $id );
         }
 
 		$query = $this->db->get();
@@ -49,7 +49,7 @@ class Model_section extends CI_Model
 		{
 			$row = $query->row_array();
 			return array( 
-	'id' => $row['id'],
+	'section_id' => $row['section_id'],
 	'rows' => $row['rows'],
 	'seats_per_rows' => $row['seats_per_rows'],
 	'price' => $row['price'],
@@ -74,7 +74,7 @@ class Model_section extends CI_Model
 
 	function update ( $id, $data )
 	{
-		$this->db->where( 'id', $id );
+		$this->db->where( 'section_id', $id );
 		$this->db->update( 'section', $data );
 	}
 
@@ -84,14 +84,30 @@ class Model_section extends CI_Model
 	{
         if( is_array( $id ) )
         {
-            $this->db->where_in( 'id', $id );            
+            $this->db->where_in( 'section_id', $id );            
         }
         else
         {
-            $this->db->where( 'id', $id );
+            $this->db->where( 'section_id', $id );
         }
         $this->db->delete( 'section' );
         
+		$this->db->where( 'section_id', $id );
+        $this->db->delete('seat_section');
+
+
+		$this->db->where( 'section_id', $id );
+        $this->db->delete('seat_section');
+
+
+		$this->db->where( 'section_id', $id );
+        $this->db->delete('seat_section');
+
+
+		$this->db->where( 'section_id', $id );
+        $this->db->delete('seat_section');
+
+
 	}
 
 
@@ -100,7 +116,7 @@ class Model_section extends CI_Model
 	{
         
 	    $this->db->start_cache();
-		$this->db->select( 'id,rows,seats_per_rows,price,description');
+		$this->db->select( 'section_id,rows,seats_per_rows,price,description');
 		$this->db->from( 'section' );
 		//$this->db->order_by( '', 'ASC' );
         
@@ -134,7 +150,7 @@ class Model_section extends CI_Model
 		foreach ( $query->result_array() as $row )
 		{
 			$temp_result[] = array( 
-	'id' => $row['id'],
+	'section_id' => $row['section_id'],
 	'rows' => $row['rows'],
 	'seats_per_rows' => $row['seats_per_rows'],
 	'price' => $row['price'],
@@ -151,7 +167,7 @@ class Model_section extends CI_Model
 	{
 	    $meta = $this->metadata();
 	    $this->db->start_cache();
-		$this->db->select( 'id,rows,seats_per_rows,price,description');
+		$this->db->select( 'section_id,rows,seats_per_rows,price,description');
 		$this->db->from( 'section' );
         
 
@@ -190,7 +206,7 @@ class Model_section extends CI_Model
 		foreach ( $query->result_array() as $row )
 		{
 			$temp_result[] = array( 
-	'id' => $row['id'],
+	'section_id' => $row['section_id'],
 	'rows' => $row['rows'],
 	'seats_per_rows' => $row['seats_per_rows'],
 	'price' => $row['price'],
@@ -211,7 +227,7 @@ class Model_section extends CI_Model
     function fields( $withID = FALSE )
     {
         $fs = array(
-	'id' => lang('id'),
+	'section_id' => lang('section_id'),
 	'rows' => lang('rows'),
 	'seats_per_rows' => lang('seats_per_rows'),
 	'price' => lang('price'),

@@ -27,11 +27,10 @@ class Model_place_has_section extends CI_Model
 	function get ( $id, $get_one = false )
 	{
         
-	    $select_statement = ( $this->raw_data ) ? 'place_id,section_id' : 'user_profile.name AS place_id,user_profile.description AS section_id';
+	    $select_statement = ( $this->raw_data ) ? 'placeID,sectionID' : 'placeID,sectionID';
 		$this->db->select( $select_statement );
 		$this->db->from('place_has_section');
-        $this->db->join( 'user_profile', 'section_id = id', 'left' );
-
+        
 
 		// Pick one record
 		// Field order sample may be empty because no record is requested, eg. create/GET event
@@ -41,7 +40,7 @@ class Model_place_has_section extends CI_Model
         }
 		else // Select the desired record
         {
-            $this->db->where( 'place_id', $id );
+            $this->db->where( 'placeID', $id );
         }
 
 		$query = $this->db->get();
@@ -50,8 +49,8 @@ class Model_place_has_section extends CI_Model
 		{
 			$row = $query->row_array();
 			return array( 
-	'place_id' => $row['place_id'],
-	'section_id' => $row['section_id'],
+	'placeID' => $row['placeID'],
+	'sectionID' => $row['sectionID'],
  );
 		}
         else
@@ -72,7 +71,7 @@ class Model_place_has_section extends CI_Model
 
 	function update ( $id, $data )
 	{
-		$this->db->where( 'place_id', $id );
+		$this->db->where( 'placeID', $id );
 		$this->db->update( 'place_has_section', $data );
 	}
 
@@ -82,11 +81,11 @@ class Model_place_has_section extends CI_Model
 	{
         if( is_array( $id ) )
         {
-            $this->db->where_in( 'place_id', $id );            
+            $this->db->where_in( 'placeID', $id );            
         }
         else
         {
-            $this->db->where( 'place_id', $id );
+            $this->db->where( 'placeID', $id );
         }
         $this->db->delete( 'place_has_section' );
         
@@ -98,11 +97,10 @@ class Model_place_has_section extends CI_Model
 	{
         
 	    $this->db->start_cache();
-		$this->db->select( 'user_profile.name AS place_id,user_profile.description AS section_id');
+		$this->db->select( 'placeID,sectionID');
 		$this->db->from( 'place_has_section' );
 		//$this->db->order_by( '', 'ASC' );
-        $this->db->join( 'user_profile', 'section_id = id', 'left' );
-
+        
 
         /**
          *   PAGINATION
@@ -133,8 +131,8 @@ class Model_place_has_section extends CI_Model
 		foreach ( $query->result_array() as $row )
 		{
 			$temp_result[] = array( 
-	'place_id' => $row['place_id'],
-	'section_id' => $row['section_id'],
+	'placeID' => $row['placeID'],
+	'sectionID' => $row['sectionID'],
  );
 		}
         $this->db->flush_cache(); 
@@ -147,10 +145,9 @@ class Model_place_has_section extends CI_Model
 	{
 	    $meta = $this->metadata();
 	    $this->db->start_cache();
-		$this->db->select( 'user_profile.name AS place_id,user_profile.description AS section_id');
+		$this->db->select( 'placeID,sectionID');
 		$this->db->from( 'place_has_section' );
-        $this->db->join( 'user_profile', 'section_id = id', 'left' );
-
+        
 
 		// Delete this line after setting up the search conditions 
         die('Please see models/model_place_has_section.php for setting up the search method.');
@@ -187,22 +184,13 @@ class Model_place_has_section extends CI_Model
 		foreach ( $query->result_array() as $row )
 		{
 			$temp_result[] = array( 
-	'place_id' => $row['place_id'],
-	'section_id' => $row['section_id'],
+	'placeID' => $row['placeID'],
+	'sectionID' => $row['sectionID'],
  );
 		}
         $this->db->flush_cache(); 
 		return $temp_result;
 	}
-
-	function related_user_profile()
-    {
-        $this->db->select( 'id AS user_profile_id, description AS user_profile_name' );
-        $rel_data = $this->db->get( 'user_profile' );
-        return $rel_data->result_array();
-    }
-
-
 
 
 
@@ -214,8 +202,8 @@ class Model_place_has_section extends CI_Model
     function fields( $withID = FALSE )
     {
         $fs = array(
-	'place_id' => lang('place_id'),
-	'section_id' => lang('section_id')
+	'placeID' => lang('placeID'),
+	'sectionID' => lang('sectionID')
 );
 
         if( $withID == FALSE )

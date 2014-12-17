@@ -27,10 +27,10 @@ class Model_user extends CI_Model
 	function get ( $id, $get_one = false )
 	{
         
-	    $select_statement = ( $this->raw_data ) ? 'password,id,name,email,username,role_id,delete' : 'password,id,name,email,username,user_profile.role AS role_id,delete';
+	    $select_statement = ( $this->raw_data ) ? 'user_id,password,roleID,name,email,username,delete' : 'user_id,password,role.role AS roleID,name,email,username,delete';
 		$this->db->select( $select_statement );
 		$this->db->from('user');
-        $this->db->join( 'user_profile', 'role_id = id', 'left' );
+        $this->db->join( 'role', 'roleID = role_id', 'left' );
 
 
 		// Pick one record
@@ -41,7 +41,7 @@ class Model_user extends CI_Model
         }
 		else // Select the desired record
         {
-            $this->db->where( 'password', $id );
+            $this->db->where( 'user_id', $id );
         }
 
 		$query = $this->db->get();
@@ -50,12 +50,12 @@ class Model_user extends CI_Model
 		{
 			$row = $query->row_array();
 			return array( 
+	'user_id' => $row['user_id'],
 	'password' => $row['password'],
-	'id' => $row['id'],
+	'roleID' => $row['roleID'],
 	'name' => $row['name'],
 	'email' => $row['email'],
 	'username' => $row['username'],
-	'role_id' => $row['role_id'],
 	'delete' => $row['delete'],
  );
 		}
@@ -77,7 +77,7 @@ class Model_user extends CI_Model
 
 	function update ( $id, $data )
 	{
-		$this->db->where( 'password', $id );
+		$this->db->where( 'user_id', $id );
 		$this->db->update( 'user', $data );
 	}
 
@@ -87,14 +87,62 @@ class Model_user extends CI_Model
 	{
         if( is_array( $id ) )
         {
-            $this->db->where_in( 'password', $id );            
+            $this->db->where_in( 'user_id', $id );            
         }
         else
         {
-            $this->db->where( 'password', $id );
+            $this->db->where( 'user_id', $id );
         }
         $this->db->delete( 'user' );
         
+		$this->db->where( 'user_id', $id );
+        $this->db->delete('reservation_user');
+
+
+		$this->db->where( 'user_id', $id );
+        $this->db->delete('user_profile_user');
+
+
+		$this->db->where( 'user_id', $id );
+        $this->db->delete('reservation_user');
+
+
+		$this->db->where( 'user_id', $id );
+        $this->db->delete('user_profile_user');
+
+
+		$this->db->where( 'user_id', $id );
+        $this->db->delete('reservation_user');
+
+
+		$this->db->where( 'user_id', $id );
+        $this->db->delete('user_profile_user');
+
+
+		$this->db->where( 'user_id', $id );
+        $this->db->delete('reservation_user');
+
+
+		$this->db->where( 'user_id', $id );
+        $this->db->delete('user_profile_user');
+
+
+		$this->db->where( 'user_id', $id );
+        $this->db->delete('reservation_user');
+
+
+		$this->db->where( 'user_id', $id );
+        $this->db->delete('user_profile_user');
+
+
+		$this->db->where( 'user_id', $id );
+        $this->db->delete('reservation_user');
+
+
+		$this->db->where( 'user_id', $id );
+        $this->db->delete('user_profile_user');
+
+
 	}
 
 
@@ -103,10 +151,10 @@ class Model_user extends CI_Model
 	{
         
 	    $this->db->start_cache();
-		$this->db->select( 'password,id,name,email,username,user_profile.role AS role_id,delete');
+		$this->db->select( 'user_id,password,role.role AS roleID,name,email,username,delete');
 		$this->db->from( 'user' );
 		//$this->db->order_by( '', 'ASC' );
-        $this->db->join( 'user_profile', 'role_id = id', 'left' );
+        $this->db->join( 'role', 'roleID = role_id', 'left' );
 
 
         /**
@@ -138,12 +186,12 @@ class Model_user extends CI_Model
 		foreach ( $query->result_array() as $row )
 		{
 			$temp_result[] = array( 
+	'user_id' => $row['user_id'],
 	'password' => $row['password'],
-	'id' => $row['id'],
+	'roleID' => $row['roleID'],
 	'name' => $row['name'],
 	'email' => $row['email'],
 	'username' => $row['username'],
-	'role_id' => $row['role_id'],
 	'delete' => $row['delete'],
  );
 		}
@@ -157,9 +205,9 @@ class Model_user extends CI_Model
 	{
 	    $meta = $this->metadata();
 	    $this->db->start_cache();
-		$this->db->select( 'password,id,name,email,username,user_profile.role AS role_id,delete');
+		$this->db->select( 'user_id,password,role.role AS roleID,name,email,username,delete');
 		$this->db->from( 'user' );
-        $this->db->join( 'user_profile', 'role_id = id', 'left' );
+        $this->db->join( 'role', 'roleID = role_id', 'left' );
 
 
 		// Delete this line after setting up the search conditions 
@@ -197,12 +245,12 @@ class Model_user extends CI_Model
 		foreach ( $query->result_array() as $row )
 		{
 			$temp_result[] = array( 
+	'user_id' => $row['user_id'],
 	'password' => $row['password'],
-	'id' => $row['id'],
+	'roleID' => $row['roleID'],
 	'name' => $row['name'],
 	'email' => $row['email'],
 	'username' => $row['username'],
-	'role_id' => $row['role_id'],
 	'delete' => $row['delete'],
  );
 		}
@@ -210,10 +258,10 @@ class Model_user extends CI_Model
 		return $temp_result;
 	}
 
-	function related_user_profile()
+	function related_role()
     {
-        $this->db->select( 'id AS user_profile_id, role AS user_profile_name' );
-        $rel_data = $this->db->get( 'user_profile' );
+        $this->db->select( 'role_id AS role_id, role AS role_name' );
+        $rel_data = $this->db->get( 'role' );
         return $rel_data->result_array();
     }
 
@@ -229,12 +277,12 @@ class Model_user extends CI_Model
     function fields( $withID = FALSE )
     {
         $fs = array(
+	'user_id' => lang('user_id'),
 	'password' => lang('password'),
-	'id' => lang('id'),
+	'roleID' => lang('roleID'),
 	'name' => lang('name'),
 	'email' => lang('email'),
 	'username' => lang('username'),
-	'role_id' => lang('role_id'),
 	'delete' => lang('delete')
 );
 

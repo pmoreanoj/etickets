@@ -1,17 +1,17 @@
-<?php /* Smarty version Smarty-3.1.7, created on 2014-12-17 16:40:23
+<?php /* Smarty version Smarty-3.1.7, created on 2014-12-17 17:46:36
          compiled from "application/views/list_place_has_section.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:21252116085491a3e771f931-44449502%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:12433332635491b36c5f8f44-23675651%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     'e40d82f9dcb0ed299616d68f6b0a1529139d49d5' => 
     array (
       0 => 'application/views/list_place_has_section.tpl',
-      1 => 1418828990,
+      1 => 1418834713,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '21252116085491a3e771f931-44449502',
+  'nocache_hash' => '12433332635491b36c5f8f44-23675651',
   'function' => 
   array (
   ),
@@ -25,9 +25,9 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
   'version' => 'Smarty-3.1.7',
-  'unifunc' => 'content_5491a3e77536d',
+  'unifunc' => 'content_5491b36c62bd7',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_5491a3e77536d')) {function content_5491a3e77536d($_smarty_tpl) {?><?php if (!is_callable('smarty_function_cycle')) include '/Applications/XAMPP/xamppfiles/htdocs/etickets/application/libraries/smarty/plugins/function.cycle.php';
+<?php if ($_valid && !is_callable('content_5491b36c62bd7')) {function content_5491b36c62bd7($_smarty_tpl) {?><?php if (!is_callable('smarty_function_cycle')) include '/Applications/XAMPP/xamppfiles/htdocs/etickets/application/libraries/smarty/plugins/function.cycle.php';
 ?><div class="block" id="block-tables">
 
                 <div class="secondary-navigation">
@@ -47,9 +47,9 @@ $_valid = $_smarty_tpl->decodeProperties(array (
                             <table class="table">
                             	<thead>
                                     <th width="20"> </th>
-                                    			<th><?php echo $_smarty_tpl->tpl_vars['place_has_section_fields']->value['place_id'];?>
+                                    			<th><?php echo $_smarty_tpl->tpl_vars['place_has_section_fields']->value['placeID'];?>
 </th>
-			<th><?php echo $_smarty_tpl->tpl_vars['place_has_section_fields']->value['section_id'];?>
+			<th><?php echo $_smarty_tpl->tpl_vars['place_has_section_fields']->value['sectionID'];?>
 </th>
 
                                     <th width="80">Actions</th>
@@ -62,19 +62,19 @@ $_smarty_tpl->tpl_vars['row']->_loop = true;
 ?>
                                         <tr class="<?php echo smarty_function_cycle(array('values'=>'odd,even'),$_smarty_tpl);?>
 ">
-                                            <td><input type="checkbox" class="checkbox" name="delete_ids[]" value="<?php echo $_smarty_tpl->tpl_vars['row']->value['place_id'];?>
+                                            <td><input type="checkbox" class="checkbox" name="delete_ids[]" value="<?php echo $_smarty_tpl->tpl_vars['row']->value['placeID'];?>
 " /></td>
-                                            				<td><?php echo $_smarty_tpl->tpl_vars['row']->value['place_id'];?>
+                                            				<td><?php echo $_smarty_tpl->tpl_vars['row']->value['placeID'];?>
 </td>
-				<td><?php echo $_smarty_tpl->tpl_vars['row']->value['section_id'];?>
+				<td><?php echo $_smarty_tpl->tpl_vars['row']->value['sectionID'];?>
 </td>
 
                                             <td width="80">
-                                                <a href="place_has_section/show/<?php echo $_smarty_tpl->tpl_vars['row']->value['place_id'];?>
+                                                <a href="place_has_section/show/<?php echo $_smarty_tpl->tpl_vars['row']->value['placeID'];?>
 "><img src="iscaffold/images/view.png" alt="Show record" /></a>
-                                                <a href="place_has_section/edit/<?php echo $_smarty_tpl->tpl_vars['row']->value['place_id'];?>
+                                                <a href="place_has_section/edit/<?php echo $_smarty_tpl->tpl_vars['row']->value['placeID'];?>
 "><img src="iscaffold/images/edit.png" alt="Edit record" /></a>
-                                                <a href="javascript:chk('place_has_section/delete/<?php echo $_smarty_tpl->tpl_vars['row']->value['place_id'];?>
+                                                <a href="javascript:chk('place_has_section/delete/<?php echo $_smarty_tpl->tpl_vars['row']->value['placeID'];?>
 ')"><img src="iscaffold/images/delete.png" alt="Delete record" /></a>
                                             </td>
                             		    </tr>

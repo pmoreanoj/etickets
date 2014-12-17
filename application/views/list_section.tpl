@@ -16,7 +16,7 @@
                             <table class="table">
                             	<thead>
                                     <th width="20"> </th>
-                                    			<th>{$section_fields.id}</th>
+                                    			<th>{$section_fields.section_id}</th>
 			<th>{$section_fields.rows}</th>
 			<th>{$section_fields.seats_per_rows}</th>
 			<th>{$section_fields.price}</th>
@@ -27,17 +27,17 @@
                             	<tbody>
                                 	{foreach $section_data as $row}
                                         <tr class="{cycle values='odd,even'}">
-                                            <td><input type="checkbox" class="checkbox" name="delete_ids[]" value="{$row.id}" /></td>
-                                            				<td>{$row.id}</td>
+                                            <td><input type="checkbox" class="checkbox" name="delete_ids[]" value="{$row.section_id}" /></td>
+                                            				<td>{$row.section_id}</td>
 				<td>{$row.rows}</td>
 				<td>{$row.seats_per_rows}</td>
 				<td>{$row.price}</td>
 				<td>{$row.description}</td>
 
                                             <td width="80">
-                                                <a href="section/show/{$row.id}"><img src="iscaffold/images/view.png" alt="Show record" /></a>
-                                                <a href="section/edit/{$row.id}"><img src="iscaffold/images/edit.png" alt="Edit record" /></a>
-                                                <a href="javascript:chk('section/delete/{$row.id}')"><img src="iscaffold/images/delete.png" alt="Delete record" /></a>
+                                                <a href="section/show/{$row.section_id}"><img src="iscaffold/images/view.png" alt="Show record" /></a>
+                                                <a href="section/edit/{$row.section_id}"><img src="iscaffold/images/edit.png" alt="Edit record" /></a>
+                                                <a href="javascript:chk('section/delete/{$row.section_id}')"><img src="iscaffold/images/delete.png" alt="Delete record" /></a>
                                             </td>
                             		    </tr>
                                 	{/foreach}

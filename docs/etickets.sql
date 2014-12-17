@@ -24,14 +24,14 @@ USE `etickets`;
 --
 
 CREATE TABLE IF NOT EXISTS `event` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `place_id` int(11) NOT NULL,
+  `event_id` int(11) NOT NULL AUTO_INCREMENT,
+  `placeID` int(11) NOT NULL,
   `name` varchar(100) NOT NULL,
-  `photo` text,
+  `photo` varchar(100),
   `dateTime` datetime NOT NULL,
   `delete` tinyint(1) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`),
-  KEY `fk_event_place_idx` (`place_id`)
+  PRIMARY KEY (`event_id`),
+  KEY `fk_event_place_idx` (`placeID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
@@ -41,11 +41,11 @@ CREATE TABLE IF NOT EXISTS `event` (
 --
 
 CREATE TABLE IF NOT EXISTS `place` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(45) DEFAULT NULL,
-  `photo` text,
+  `place_id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(45) NOT NULL,
+  `photo` varchar(100),
   `description` text,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`place_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
@@ -55,10 +55,10 @@ CREATE TABLE IF NOT EXISTS `place` (
 --
 
 CREATE TABLE IF NOT EXISTS `place_has_section` (
-  `place_id` int(11) NOT NULL,
-  `section_id` int(11) NOT NULL,
-  KEY `fk_place_has_section_place1_idx` (`place_id`),
-  KEY `fk_place_has_section_section1_idx` (`section_id`)
+  `placeID` int(11) NOT NULL,
+  `sectionID` int(11) NOT NULL,
+  KEY `fk_place_has_section_place1_idx` (`placeID`),
+  KEY `fk_place_has_section_section1_idx` (`sectionID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -68,15 +68,15 @@ CREATE TABLE IF NOT EXISTS `place_has_section` (
 --
 
 CREATE TABLE IF NOT EXISTS `reservation` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `user_id` int(11) NOT NULL,
-  `event_id` int(11) NOT NULL,
+  `reservation_id` int(11) NOT NULL AUTO_INCREMENT,
+  `userID` int(11) NOT NULL,
+  `eventID` int(11) NOT NULL,
   `date` date NOT NULL,
   `state` enum('PROCESSING','DELIVERED') NOT NULL DEFAULT 'PROCESSING',
   `more` text,
-  PRIMARY KEY (`id`),
-  KEY `fk_reservation_user1_idx` (`user_id`),
-  KEY `fk_reservation_event1_idx` (`event_id`)
+  PRIMARY KEY (`reservation_id`),
+  KEY `fk_reservation_user1_idx` (`userID`),
+  KEY `fk_reservation_event1_idx` (`eventID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
@@ -86,17 +86,17 @@ CREATE TABLE IF NOT EXISTS `reservation` (
 --
 
 CREATE TABLE IF NOT EXISTS `role` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `role_id` int(11) NOT NULL AUTO_INCREMENT,
   `role` varchar(50) NOT NULL,
   `default` tinyint(1) NOT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`role_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
 
 --
 -- Dumping data for table `role`
 --
 
-INSERT INTO `role` (`id`, `role`, `default`) VALUES
+INSERT INTO `role` (`role_id`, `role`, `default`) VALUES
 (1, 'admin', 0),
 (2, 'organizador', 0),
 (3, 'vendedor', 0),
@@ -109,13 +109,13 @@ INSERT INTO `role` (`id`, `role`, `default`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `seat` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `section_id` int(11) NOT NULL,
+  `seat_id` int(11) NOT NULL AUTO_INCREMENT,
+  `sectionID` int(11) NOT NULL,
   `number_row` int(11) NOT NULL,
   `number_seat` int(11) NOT NULL,
   `occupied` tinyint(1) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`),
-  KEY `fk_seat_section1_idx` (`section_id`)
+  PRIMARY KEY (`seat_id`),
+  KEY `fk_seat_section1_idx` (`sectionID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
@@ -125,12 +125,12 @@ CREATE TABLE IF NOT EXISTS `seat` (
 --
 
 CREATE TABLE IF NOT EXISTS `section` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `section_id` int(11) NOT NULL AUTO_INCREMENT,
   `rows` int(11) NOT NULL,
   `seats_per_rows` int(11) NOT NULL,
   `price` float NOT NULL,
   `description` text,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`section_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
@@ -158,17 +158,17 @@ CREATE TABLE IF NOT EXISTS `sf_config` (
 
 INSERT INTO `sf_config` (`sf_id`, `sf_table`, `sf_field`, `sf_type`, `sf_related`, `sf_label`, `sf_desc`, `sf_order`, `sf_hidden`) VALUES
 (1, 'event', 'id', 'default', '|', '', '', 0, 1),
-(2, 'event', 'place_id', 'related', 'event|id|place|id', 'Lugar', 'Lugar del evento', 1, 0),
+(2, 'event', 'place_id', 'related', 'place|place_id|place|name', 'Lugar', 'Lugar del evento', 1, 0),
 (3, 'event', 'name', 'default', '|', 'Nombre', 'Nombre del evento', 2, 0),
 (4, 'event', 'photo', 'file', '|', 'Foto', 'Foto del evento', 3, 0),
 (5, 'event', 'dateTime', 'default', '|', 'Fecha', 'Fecha y Hora del evento', 4, 0),
 (6, 'event', 'delete', 'checkbox', '|', '', '', 5, 1),
 (7, 'place', 'id', 'default', '|', '', '', 0, 0),
-(8, 'place', 'name', 'default', '|', '', '', 1, 0),
-(9, 'place', 'photo', 'default', '|', '', '', 2, 0),
-(10, 'place', 'description', 'default', '|', '', '', 3, 0),
-(11, 'place_has_section', 'place_id', 'default', '|', '', '', 0, 0),
-(12, 'place_has_section', 'section_id', 'default', '|', '', '', 1, 0),
+(8, 'place', 'name', 'default', '|', 'Nombre', 'Nombre del lugar', 1, 0),
+(9, 'place', 'photo', 'file', '|', 'Foto', 'Foto del Lugar', 2, 0),
+(10, 'place', 'description', 'default', '|', 'Descripcion', 'Desripcion del Lugar', 3, 0),
+(11, 'place_has_section', 'place_id', 'related', 'place|place_id|place|name', 'Lugar', 'Id del lugar', 0, 0),
+(12, 'place_has_section', 'section_id', 'related', 'section|section_id|section|description', 'Seccion', 'Id de la sección', 1, 0),
 (13, 'reservation', 'id', 'default', '|', '', '', 0, 0),
 (14, 'reservation', 'user_id', 'default', '|', '', '', 1, 0),
 (15, 'reservation', 'event_id', 'default', '|', '', '', 2, 0),
@@ -189,11 +189,11 @@ INSERT INTO `sf_config` (`sf_id`, `sf_table`, `sf_field`, `sf_type`, `sf_related
 (30, 'section', 'price', 'default', '|', '', '', 3, 0),
 (31, 'section', 'description', 'default', '|', '', '', 4, 0),
 (32, 'user', 'id', 'default', '|', '', '', 0, 0),
-(33, 'user', 'name', 'default', '|', '', '', 1, 0),
-(34, 'user', 'email', 'default', '|', '', '', 2, 0),
-(35, 'user', 'username', 'default', '|', '', '', 3, 0),
-(36, 'user', 'role_id', 'default', '|', '', '', 4, 0),
-(37, 'user', 'delete', 'default', '|', '', '', 5, 0),
+(33, 'user', 'name', 'default', '|', '', '', 2, 0),
+(34, 'user', 'email', 'default', '|', '', '', 3, 0),
+(35, 'user', 'username', 'default', '|', '', '', 4, 0),
+(36, 'user', 'role_id', 'default', '|', '', '', 5, 0),
+(37, 'user', 'delete', 'default', '|', '', '', 6, 0),
 (38, 'user_profile', 'id', 'default', '|', '', '', 0, 0),
 (39, 'user_profile', 'user_id', 'default', '|', '', '', 1, 0),
 (40, 'user_profile', 'address', 'default', '|', '', '', 2, 0),
@@ -213,18 +213,18 @@ INSERT INTO `sf_config` (`sf_id`, `sf_table`, `sf_field`, `sf_type`, `sf_related
 
 
 CREATE TABLE IF NOT EXISTS `user` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
   `password` varchar(300) NOT NULL,
   `email` varchar(80) NOT NULL,
   `username` varchar(45) NOT NULL,
-  `role_id` int(11) NOT NULL, 
+  `roleID` int(11) NOT NULL, 
   `delete` tinyint(1) NOT NULL DEFAULT '0',
-  FOREIGN KEY(`role_id`) REFERENCES `role` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  PRIMARY KEY (`id`)
+  FOREIGN KEY(`roleID`) REFERENCES `role` (`role_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  PRIMARY KEY (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
-INSERT INTO `user` (`name`, `password`, `email`, `username`, `role_id`, `delete` ) VALUES
+INSERT INTO `user` (`name`, `password`, `email`, `username`, `roleID`, `delete` ) VALUES
 	('admin', 'admin', 'admin@etickets.com', 'admin', 1, 0 );
 
 -- --------------------------------------------------------
@@ -234,16 +234,16 @@ INSERT INTO `user` (`name`, `password`, `email`, `username`, `role_id`, `delete`
 --
 
 CREATE TABLE IF NOT EXISTS `user_profile` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `user_id` int(11) NOT NULL,
+  `profile_id` int(11) NOT NULL AUTO_INCREMENT,
+  `userID` int(11) NOT NULL,
   `address` varchar(80) NOT NULL,
   `city` varchar(45) NOT NULL,
   `province` varchar(40) NOT NULL,
   `zipcode` varchar(45) NOT NULL,
   `phone` varchar(20) NOT NULL,
   `celular` varchar(20) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `user_id` (`user_id`)
+  PRIMARY KEY (`profile_id`),
+  KEY `user_id` (`userID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
@@ -254,31 +254,31 @@ CREATE TABLE IF NOT EXISTS `user_profile` (
 -- Constraints for table `event`
 --
 ALTER TABLE `event`
-  ADD CONSTRAINT `fk_event_place` FOREIGN KEY (`place_id`) REFERENCES `place` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_event_place` FOREIGN KEY (`placeID`) REFERENCES `place` (`place_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `place_has_section`
 --
 ALTER TABLE `place_has_section`
-  ADD CONSTRAINT `fk_place_has_section_place1` FOREIGN KEY (`place_id`) REFERENCES `place` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_place_has_section_section1` FOREIGN KEY (`section_id`) REFERENCES `section` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_place_has_section_place1` FOREIGN KEY (`placeID`) REFERENCES `place` (`place_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_place_has_section_section1` FOREIGN KEY (`sectionID`) REFERENCES `section` (`section_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `reservation`
 --
 ALTER TABLE `reservation`
-  ADD CONSTRAINT `fk_reservation_event1` FOREIGN KEY (`event_id`) REFERENCES `event` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_reservation_user1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_reservation_event1` FOREIGN KEY (`eventID`) REFERENCES `event` (`event_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_reservation_user1` FOREIGN KEY (`userID`) REFERENCES `user` (`user_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `seat`
 --
 ALTER TABLE `seat`
-  ADD CONSTRAINT `fk_seat_section1` FOREIGN KEY (`section_id`) REFERENCES `section` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_seat_section1` FOREIGN KEY (`sectionID`) REFERENCES `section` (`section_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 
 --
 -- Constraints for table `user_profile`
 --
 ALTER TABLE `user_profile`
-  ADD CONSTRAINT `user_profile_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `user_profile_ibfk_1` FOREIGN KEY (`userID`) REFERENCES `user` (`user_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;

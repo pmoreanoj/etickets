@@ -27,17 +27,25 @@
                             
     	<div class="group">
             <label class="label">{$role_fields.role}<span class="error">*</span></label>
-    		<div>
-    	       	<input class="text_field" type="text" maxlength="255" value="{if isset($role_data)}{$role_data.role}{/if}" name="role" />
-    		</div>
-    		<p class="instruct">Rol de usuario</p>
-    	</div>
+            <span class="error">can't be blank</span>
+        	<div class="block">
+        	<span class="left">
+        		<select class="field select addr" name="role" >
+                    <option value="0"></option>
+                    {foreach $metadata.role.enum_values as $k => $e}
+                        <option value="{$e}"{if isset($role_data.role)}{if $role_data == $metadata.role.enum_names[$k]} selected="selected"{/if}{/if}>{$metadata.role.enum_names[$k]}</option>
+                    {/foreach}
+            	</select>
+            </span>
+            </div>
+    		<p class="instruct">Nombre del Rol</p>
+        </div>
     
     	<div class="group">
             <label class="label">{$role_fields.default}<span class="error">*</span></label>
             <input class="field checkbox" type="checkbox" value="1" name="default"{if isset($role_data)}{if $role_data.default == 1} checked="checked"{/if}{/if} />
 
-    		<p class="instruct">Es rol por defecto</p>
+    		<p class="instruct">Rol por defecto</p>
     	</div>
     
 

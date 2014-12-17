@@ -26,14 +26,14 @@
 
                             
     	<div class="group">
-            <label class="label">{$seat_fields.section_id}<span class="error">*</span></label>
-    		<select class="field select addr" name="section_id" >
+            <label class="label">{$seat_fields.sectionID}<span class="error">*</span></label>
+    		<select class="field select addr" name="sectionID" >
                 <option value="0"></option>
-                {foreach $related_user_profile as $rel}
-                    <option value="{$rel.user_profile_id}"{if isset($seat_data)}{if $seat_data.section_id == $rel.user_profile_id} selected="selected"{/if}{/if}>{$rel.user_profile_name}</option>
+                {foreach $related_section as $rel}
+                    <option value="{$rel.section_id}"{if isset($seat_data)}{if $seat_data.sectionID == $rel.section_id} selected="selected"{/if}{/if}>{$rel.section_name}</option>
                 {/foreach}
         	</select>
-    		<p class="instruct">Sección a la que pertenece la silla</p>
+    		<p class="instruct">ID de la sección a la que pertenece</p>
         </div>
     
     	<div class="group">
@@ -41,7 +41,7 @@
     		<div>
     	       	<input class="text_field" type="text" maxlength="255" value="{if isset($seat_data)}{$seat_data.number_row}{/if}" name="number_row" />
     		</div>
-    		<p class="instruct">Numero de fila donde esta la silla</p>
+    		<p class="instruct">Numero de la fila donde esta la silla</p>
     	</div>
     
     	<div class="group">
@@ -49,14 +49,14 @@
     		<div>
     	       	<input class="text_field" type="text" maxlength="255" value="{if isset($seat_data)}{$seat_data.number_seat}{/if}" name="number_seat" />
     		</div>
-    		<p class="instruct">Numero de la silla</p>
+    		<p class="instruct">Numero de silla</p>
     	</div>
     
     	<div class="group">
             <label class="label">{$seat_fields.occupied}<span class="error">*</span></label>
             <input class="field checkbox" type="checkbox" value="1" name="occupied"{if isset($seat_data)}{if $seat_data.occupied == 1} checked="checked"{/if}{/if} />
 
-    		<p class="instruct">Esta ocupada la silla</p>
+    		<p class="instruct">Si la silla ya esta ocupada</p>
     	</div>
     
 

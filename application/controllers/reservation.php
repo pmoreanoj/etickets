@@ -74,9 +74,11 @@ class Reservation extends CI_Controller
         {
             case 'GET':
                 $fields = $this->model_reservation->fields();
-                $user_profile_set = $this->model_reservation->related_user_profile();
+                $user_set = $this->model_reservation->related_user();
+$event_set = $this->model_reservation->related_event();
 
-                $this->template->assign( 'related_user_profile', $user_profile_set );
+                $this->template->assign( 'related_user', $user_set );
+$this->template->assign( 'related_event', $event_set );
 
                 
                 $this->template->assign( 'action_mode', 'create' );
@@ -95,13 +97,13 @@ class Reservation extends CI_Controller
 
                 /* we set the rules */
                 /* don't forget to edit these */
-				$this->form_validation->set_rules( 'user_id', lang('user_id'), 'required|max_length[11]|integer' );
-				$this->form_validation->set_rules( 'event_id', lang('event_id'), 'required|max_length[11]|integer' );
+				$this->form_validation->set_rules( 'userID', lang('userID'), 'required|max_length[11]|integer' );
+				$this->form_validation->set_rules( 'eventID', lang('eventID'), 'required|max_length[11]|integer' );
 				$this->form_validation->set_rules( 'date', lang('date'), 'required' );
 				$this->form_validation->set_rules( 'state', lang('state'), 'required' );
 
-				$data_post['user_id'] = $this->input->post( 'user_id' );
-				$data_post['event_id'] = $this->input->post( 'event_id' );
+				$data_post['userID'] = $this->input->post( 'userID' );
+				$data_post['eventID'] = $this->input->post( 'eventID' );
 				$data_post['date'] = ( $this->input->post( 'date' ) == '' ) ? time() : strtotime( $this->input->post( 'date' ) );
 				$data_post['state'] = $this->input->post( 'state' );
 				$data_post['more'] = $this->input->post( 'more' );
@@ -110,9 +112,11 @@ class Reservation extends CI_Controller
                 {
                     $errors = validation_errors();
                     
-                    $user_profile_set = $this->model_reservation->related_user_profile();
+                    $user_set = $this->model_reservation->related_user();
+$event_set = $this->model_reservation->related_event();
 
-                    $this->template->assign( 'related_user_profile', $user_profile_set );
+                    $this->template->assign( 'related_user', $user_set );
+$this->template->assign( 'related_event', $event_set );
 
                     
               		$this->template->assign( 'errors', $errors );
@@ -150,10 +154,12 @@ class Reservation extends CI_Controller
                 $this->model_reservation->raw_data = TRUE;
         		$data = $this->model_reservation->get( $id );
                 $fields = $this->model_reservation->fields();
-                $user_profile_set = $this->model_reservation->related_user_profile();
+                $user_set = $this->model_reservation->related_user();
+$event_set = $this->model_reservation->related_event();
 
                 
-                $this->template->assign( 'related_user_profile', $user_profile_set );
+                $this->template->assign( 'related_user', $user_set );
+$this->template->assign( 'related_event', $event_set );
 
                 
           		$this->template->assign( 'action_mode', 'edit' );
@@ -171,13 +177,13 @@ class Reservation extends CI_Controller
                 $fields = $this->model_reservation->fields();
                 /* we set the rules */
                 /* don't forget to edit these */
-				$this->form_validation->set_rules( 'user_id', lang('user_id'), 'required|max_length[11]|integer' );
-				$this->form_validation->set_rules( 'event_id', lang('event_id'), 'required|max_length[11]|integer' );
+				$this->form_validation->set_rules( 'userID', lang('userID'), 'required|max_length[11]|integer' );
+				$this->form_validation->set_rules( 'eventID', lang('eventID'), 'required|max_length[11]|integer' );
 				$this->form_validation->set_rules( 'date', lang('date'), 'required' );
 				$this->form_validation->set_rules( 'state', lang('state'), 'required' );
 
-				$data_post['user_id'] = $this->input->post( 'user_id' );
-				$data_post['event_id'] = $this->input->post( 'event_id' );
+				$data_post['userID'] = $this->input->post( 'userID' );
+				$data_post['eventID'] = $this->input->post( 'eventID' );
 				$data_post['date'] = ( $this->input->post( 'date' ) == '' ) ? time() : strtotime( $this->input->post( 'date' ) );
 				$data_post['state'] = $this->input->post( 'state' );
 				$data_post['more'] = $this->input->post( 'more' );
@@ -186,9 +192,11 @@ class Reservation extends CI_Controller
                 {
                     $errors = validation_errors();
                     
-                    $user_profile_set = $this->model_reservation->related_user_profile();
+                    $user_set = $this->model_reservation->related_user();
+$event_set = $this->model_reservation->related_event();
 
-                    $this->template->assign( 'related_user_profile', $user_profile_set );
+                    $this->template->assign( 'related_user', $user_set );
+$this->template->assign( 'related_event', $event_set );
 
                     
               		$this->template->assign( 'action_mode', 'edit' );

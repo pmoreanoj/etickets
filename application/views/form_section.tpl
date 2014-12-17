@@ -30,7 +30,7 @@
     		<div>
     	       	<input class="text_field" type="text" maxlength="255" value="{if isset($section_data)}{$section_data.rows}{/if}" name="rows" />
     		</div>
-    		<p class="instruct">Filas que tiene la sección</p>
+    		<p class="instruct">Numero de filas de la seccion</p>
     	</div>
     
     	<div class="group">
@@ -38,7 +38,7 @@
     		<div>
     	       	<input class="text_field" type="text" maxlength="255" value="{if isset($section_data)}{$section_data.seats_per_rows}{/if}" name="seats_per_rows" />
     		</div>
-    		<p class="instruct">Sillas que tiene cada fila</p>
+    		<p class="instruct">Numero de sillas por fila</p>
     	</div>
     
     	<div class="group">
@@ -46,7 +46,7 @@
     		<div>
     	       	<input class="text_field" type="text" maxlength="255" value="{if isset($section_data)}{$section_data.price}{/if}" name="price" />
     		</div>
-    		<p class="instruct">Precio de una silla en la sección</p>
+    		<p class="instruct">Precio de la seccion</p>
     	</div>
     
     	<div class="group">
@@ -54,7 +54,7 @@
     		<div>
     	       	<input class="text_field" type="text" maxlength="255" value="{if isset($section_data)}{$section_data.description}{/if}" name="description" />
     		</div>
-    		<p class="instruct">Una breve descripción de la sección</p>
+    		<p class="instruct">Descripcion de la seccion</p>
     	</div>
     
 

@@ -17,8 +17,8 @@
                                 <th>Value</th>
                         	</thead>
 						    <tr class="{cycle values='odd,even'}">
-                            <td>{$role_fields.id}:</td>
-                            <td>{$role_data.id}</td>
+                            <td>{$role_fields.role_id}:</td>
+                            <td>{$role_data.role_id}</td>
                         </tr><tr class="{cycle values='odd,even'}">
                             <td>{$role_fields.role}:</td>
                             <td>{$role_data.role}</td>

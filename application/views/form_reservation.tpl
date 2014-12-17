@@ -26,25 +26,25 @@
 
                             
     	<div class="group">
-            <label class="label">{$reservation_fields.user_id}<span class="error">*</span></label>
-    		<select class="field select addr" name="user_id" >
+            <label class="label">{$reservation_fields.userID}<span class="error">*</span></label>
+    		<select class="field select addr" name="userID" >
                 <option value="0"></option>
-                {foreach $related_user_profile as $rel}
-                    <option value="{$rel.user_profile_id}"{if isset($reservation_data)}{if $reservation_data.user_id == $rel.user_profile_id} selected="selected"{/if}{/if}>{$rel.user_profile_name}</option>
+                {foreach $related_user as $rel}
+                    <option value="{$rel.user_id}"{if isset($reservation_data)}{if $reservation_data.userID == $rel.user_id} selected="selected"{/if}{/if}>{$rel.user_name}</option>
                 {/foreach}
         	</select>
-    		<p class="instruct">Usuario</p>
+    		<p class="instruct">ID del usuario</p>
         </div>
     
     	<div class="group">
-            <label class="label">{$reservation_fields.event_id}<span class="error">*</span></label>
-    		<select class="field select addr" name="event_id" >
+            <label class="label">{$reservation_fields.eventID}<span class="error">*</span></label>
+    		<select class="field select addr" name="eventID" >
                 <option value="0"></option>
-                {foreach $related_user_profile as $rel}
-                    <option value="{$rel.user_profile_id}"{if isset($reservation_data)}{if $reservation_data.event_id == $rel.user_profile_id} selected="selected"{/if}{/if}>{$rel.user_profile_name}</option>
+                {foreach $related_event as $rel}
+                    <option value="{$rel.event_id}"{if isset($reservation_data)}{if $reservation_data.eventID == $rel.event_id} selected="selected"{/if}{/if}>{$rel.event_name}</option>
                 {/foreach}
         	</select>
-    		<p class="instruct">Evento</p>
+    		<p class="instruct">ID del evento</p>
         </div>
     
     	<div class="group">
@@ -56,7 +56,7 @@
     		<span>
     		      <img src="iscaffold/images/calendar.png" class="icon" alt="Pick date." />
     		</span>
-    		<p class="instruct">Fecha en la que se realizo la reservación</p>
+    		<p class="instruct">Fecha de la reserva</p>
     	</div>
     
     	<div class="group">
@@ -80,7 +80,7 @@
     		<div>
     	       	<input class="text_field" type="text" maxlength="255" value="{if isset($reservation_data)}{$reservation_data.more}{/if}" name="more" />
     		</div>
-    		<p class="instruct">Informacion extra</p>
+    		<p class="instruct">Mas información</p>
     	</div>
     
 

@@ -74,9 +74,9 @@ class User_profile extends CI_Controller
         {
             case 'GET':
                 $fields = $this->model_user_profile->fields();
-                $user_profile_set = $this->model_user_profile->related_user_profile();
+                $user_set = $this->model_user_profile->related_user();
 
-                $this->template->assign( 'related_user_profile', $user_profile_set );
+                $this->template->assign( 'related_user', $user_set );
 
                 
                 $this->template->assign( 'action_mode', 'create' );
@@ -95,7 +95,7 @@ class User_profile extends CI_Controller
 
                 /* we set the rules */
                 /* don't forget to edit these */
-				$this->form_validation->set_rules( 'user_id', lang('user_id'), 'required|max_length[11]|integer' );
+				$this->form_validation->set_rules( 'userID', lang('userID'), 'required|max_length[11]|integer' );
 				$this->form_validation->set_rules( 'address', lang('address'), 'required|max_length[80]' );
 				$this->form_validation->set_rules( 'city', lang('city'), 'required|max_length[45]' );
 				$this->form_validation->set_rules( 'province', lang('province'), 'required|max_length[40]' );
@@ -103,7 +103,7 @@ class User_profile extends CI_Controller
 				$this->form_validation->set_rules( 'phone', lang('phone'), 'required|max_length[20]' );
 				$this->form_validation->set_rules( 'celular', lang('celular'), 'required|max_length[20]' );
 
-				$data_post['user_id'] = $this->input->post( 'user_id' );
+				$data_post['userID'] = $this->input->post( 'userID' );
 				$data_post['address'] = $this->input->post( 'address' );
 				$data_post['city'] = $this->input->post( 'city' );
 				$data_post['province'] = $this->input->post( 'province' );
@@ -115,9 +115,9 @@ class User_profile extends CI_Controller
                 {
                     $errors = validation_errors();
                     
-                    $user_profile_set = $this->model_user_profile->related_user_profile();
+                    $user_set = $this->model_user_profile->related_user();
 
-                    $this->template->assign( 'related_user_profile', $user_profile_set );
+                    $this->template->assign( 'related_user', $user_set );
 
                     
               		$this->template->assign( 'errors', $errors );
@@ -155,10 +155,10 @@ class User_profile extends CI_Controller
                 $this->model_user_profile->raw_data = TRUE;
         		$data = $this->model_user_profile->get( $id );
                 $fields = $this->model_user_profile->fields();
-                $user_profile_set = $this->model_user_profile->related_user_profile();
+                $user_set = $this->model_user_profile->related_user();
 
                 
-                $this->template->assign( 'related_user_profile', $user_profile_set );
+                $this->template->assign( 'related_user', $user_set );
 
                 
           		$this->template->assign( 'action_mode', 'edit' );
@@ -176,7 +176,7 @@ class User_profile extends CI_Controller
                 $fields = $this->model_user_profile->fields();
                 /* we set the rules */
                 /* don't forget to edit these */
-				$this->form_validation->set_rules( 'user_id', lang('user_id'), 'required|max_length[11]|integer' );
+				$this->form_validation->set_rules( 'userID', lang('userID'), 'required|max_length[11]|integer' );
 				$this->form_validation->set_rules( 'address', lang('address'), 'required|max_length[80]' );
 				$this->form_validation->set_rules( 'city', lang('city'), 'required|max_length[45]' );
 				$this->form_validation->set_rules( 'province', lang('province'), 'required|max_length[40]' );
@@ -184,7 +184,7 @@ class User_profile extends CI_Controller
 				$this->form_validation->set_rules( 'phone', lang('phone'), 'required|max_length[20]' );
 				$this->form_validation->set_rules( 'celular', lang('celular'), 'required|max_length[20]' );
 
-				$data_post['user_id'] = $this->input->post( 'user_id' );
+				$data_post['userID'] = $this->input->post( 'userID' );
 				$data_post['address'] = $this->input->post( 'address' );
 				$data_post['city'] = $this->input->post( 'city' );
 				$data_post['province'] = $this->input->post( 'province' );
@@ -196,9 +196,9 @@ class User_profile extends CI_Controller
                 {
                     $errors = validation_errors();
                     
-                    $user_profile_set = $this->model_user_profile->related_user_profile();
+                    $user_set = $this->model_user_profile->related_user();
 
-                    $this->template->assign( 'related_user_profile', $user_profile_set );
+                    $this->template->assign( 'related_user', $user_set );
 
                     
               		$this->template->assign( 'action_mode', 'edit' );

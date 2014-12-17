@@ -27,7 +27,7 @@ class Model_place extends CI_Model
 	function get ( $id, $get_one = false )
 	{
         
-	    $select_statement = ( $this->raw_data ) ? 'id,name,photo,description' : 'id,name,photo,description';
+	    $select_statement = ( $this->raw_data ) ? 'place_id,name,photo,description' : 'place_id,name,photo,description';
 		$this->db->select( $select_statement );
 		$this->db->from('place');
         
@@ -40,7 +40,7 @@ class Model_place extends CI_Model
         }
 		else // Select the desired record
         {
-            $this->db->where( 'id', $id );
+            $this->db->where( 'place_id', $id );
         }
 
 		$query = $this->db->get();
@@ -49,7 +49,7 @@ class Model_place extends CI_Model
 		{
 			$row = $query->row_array();
 			return array( 
-	'id' => $row['id'],
+	'place_id' => $row['place_id'],
 	'name' => $row['name'],
 	'photo' => $row['photo'],
 	'description' => $row['description'],
@@ -73,7 +73,7 @@ class Model_place extends CI_Model
 
 	function update ( $id, $data )
 	{
-		$this->db->where( 'id', $id );
+		$this->db->where( 'place_id', $id );
 		$this->db->update( 'place', $data );
 	}
 
@@ -83,11 +83,11 @@ class Model_place extends CI_Model
 	{
         if( is_array( $id ) )
         {
-            $this->db->where_in( 'id', $id );            
+            $this->db->where_in( 'place_id', $id );            
         }
         else
         {
-            $this->db->where( 'id', $id );
+            $this->db->where( 'place_id', $id );
         }
         $this->db->delete( 'place' );
         
@@ -99,7 +99,7 @@ class Model_place extends CI_Model
 	{
         
 	    $this->db->start_cache();
-		$this->db->select( 'id,name,photo,description');
+		$this->db->select( 'place_id,name,photo,description');
 		$this->db->from( 'place' );
 		//$this->db->order_by( '', 'ASC' );
         
@@ -133,7 +133,7 @@ class Model_place extends CI_Model
 		foreach ( $query->result_array() as $row )
 		{
 			$temp_result[] = array( 
-	'id' => $row['id'],
+	'place_id' => $row['place_id'],
 	'name' => $row['name'],
 	'photo' => $row['photo'],
 	'description' => $row['description'],
@@ -149,7 +149,7 @@ class Model_place extends CI_Model
 	{
 	    $meta = $this->metadata();
 	    $this->db->start_cache();
-		$this->db->select( 'id,name,photo,description');
+		$this->db->select( 'place_id,name,photo,description');
 		$this->db->from( 'place' );
         
 
@@ -188,7 +188,7 @@ class Model_place extends CI_Model
 		foreach ( $query->result_array() as $row )
 		{
 			$temp_result[] = array( 
-	'id' => $row['id'],
+	'place_id' => $row['place_id'],
 	'name' => $row['name'],
 	'photo' => $row['photo'],
 	'description' => $row['description'],
@@ -208,7 +208,7 @@ class Model_place extends CI_Model
     function fields( $withID = FALSE )
     {
         $fs = array(
-	'id' => lang('id'),
+	'place_id' => lang('place_id'),
 	'name' => lang('name'),
 	'photo' => lang('photo'),
 	'description' => lang('description')

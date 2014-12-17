@@ -54,7 +54,7 @@
                 <div class='col-md-6'>
             <div class="panel-body">
                 <h2>Inicio de sesión</h2>
-            <form class="form-horizontal" role="form" action="validation.php" method="post" name="form">
+                <form class="form-horizontal" role="form" action="<?php echo base_url(); ?>login/validate" method="post" name="form">
                 <div class="form-group">
                     <label for="username" class="col-sm-4 control-label">Nombre de usuario</label>
                     <div class="col-sm-4">

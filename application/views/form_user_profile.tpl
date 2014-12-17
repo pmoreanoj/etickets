@@ -26,14 +26,14 @@
 
                             
     	<div class="group">
-            <label class="label">{$user_profile_fields.user_id}<span class="error">*</span></label>
-    		<select class="field select addr" name="user_id" >
+            <label class="label">{$user_profile_fields.userID}<span class="error">*</span></label>
+    		<select class="field select addr" name="userID" >
                 <option value="0"></option>
-                {foreach $related_user_profile as $rel}
-                    <option value="{$rel.user_profile_id}"{if isset($user_profile_data)}{if $user_profile_data.user_id == $rel.user_profile_id} selected="selected"{/if}{/if}>{$rel.user_profile_name}</option>
+                {foreach $related_user as $rel}
+                    <option value="{$rel.user_id}"{if isset($user_profile_data)}{if $user_profile_data.userID == $rel.user_id} selected="selected"{/if}{/if}>{$rel.user_name}</option>
                 {/foreach}
         	</select>
-    		<p class="instruct">Nombre de Usuario</p>
+    		<p class="instruct">ID del usuario</p>
         </div>
     
     	<div class="group">
@@ -49,7 +49,7 @@
     		<div>
     	       	<input class="text_field" type="text" maxlength="255" value="{if isset($user_profile_data)}{$user_profile_data.city}{/if}" name="city" />
     		</div>
-    		<p class="instruct">Ciudad del Usuario</p>
+    		<p class="instruct">Ciudad del usuario</p>
     	</div>
     
     	<div class="group">
@@ -65,7 +65,7 @@
     		<div>
     	       	<input class="text_field" type="text" maxlength="255" value="{if isset($user_profile_data)}{$user_profile_data.zipcode}{/if}" name="zipcode" />
     		</div>
-    		<p class="instruct">Codigo postal del Usuario</p>
+    		<p class="instruct">Codigo Postal</p>
     	</div>
     
     	<div class="group">
@@ -73,7 +73,7 @@
     		<div>
     	       	<input class="text_field" type="text" maxlength="255" value="{if isset($user_profile_data)}{$user_profile_data.phone}{/if}" name="phone" />
     		</div>
-    		<p class="instruct">Telefono del Usuario</p>
+    		<p class="instruct">Telefono del usuario</p>
     	</div>
     
     	<div class="group">

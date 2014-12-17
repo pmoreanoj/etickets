@@ -16,8 +16,7 @@
                             <table class="table">
                             	<thead>
                                     <th width="20"> </th>
-                                    			<th>{$place_fields.id}</th>
-			<th>{$place_fields.name}</th>
+                                    			<th>{$place_fields.name}</th>
 			<th>{$place_fields.photo}</th>
 			<th>{$place_fields.description}</th>
 
@@ -26,16 +25,15 @@
                             	<tbody>
                                 	{foreach $place_data as $row}
                                         <tr class="{cycle values='odd,even'}">
-                                            <td><input type="checkbox" class="checkbox" name="delete_ids[]" value="{$row.id}" /></td>
-                                            				<td>{$row.id}</td>
-				<td>{$row.name}</td>
+                                            <td><input type="checkbox" class="checkbox" name="delete_ids[]" value="{$row.place_id}" /></td>
+                                            				<td>{$row.name}</td>
 				<td>{$row.photo}</td>
 				<td>{$row.description}</td>
 
                                             <td width="80">
-                                                <a href="place/show/{$row.id}"><img src="iscaffold/images/view.png" alt="Show record" /></a>
-                                                <a href="place/edit/{$row.id}"><img src="iscaffold/images/edit.png" alt="Edit record" /></a>
-                                                <a href="javascript:chk('place/delete/{$row.id}')"><img src="iscaffold/images/delete.png" alt="Delete record" /></a>
+                                                <a href="place/show/{$row.place_id}"><img src="iscaffold/images/view.png" alt="Show record" /></a>
+                                                <a href="place/edit/{$row.place_id}"><img src="iscaffold/images/edit.png" alt="Edit record" /></a>
+                                                <a href="javascript:chk('place/delete/{$row.place_id}')"><img src="iscaffold/images/delete.png" alt="Delete record" /></a>
                                             </td>
                             		    </tr>
                                 	{/foreach}

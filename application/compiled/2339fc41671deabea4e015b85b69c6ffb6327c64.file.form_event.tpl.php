@@ -1,35 +1,33 @@
-<?php /* Smarty version Smarty-3.1.7, created on 2014-12-17 16:44:04
+<?php /* Smarty version Smarty-3.1.7, created on 2014-12-17 17:46:33
          compiled from "application/views/form_event.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:2435092575491a4c4f0db52-30178172%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:16511862045491b1756cc522-58976327%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     '2339fc41671deabea4e015b85b69c6ffb6327c64' => 
     array (
       0 => 'application/views/form_event.tpl',
-      1 => 1418828990,
+      1 => 1418834713,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '2435092575491a4c4f0db52-30178172',
+  'nocache_hash' => '16511862045491b1756cc522-58976327',
   'function' => 
   array (
   ),
+  'version' => 'Smarty-3.1.7',
+  'unifunc' => 'content_5491b175725b4',
   'variables' => 
   array (
     'action_mode' => 0,
     'record_id' => 0,
     'errors' => 0,
     'event_fields' => 0,
-    'related_event' => 0,
-    'rel' => 0,
     'event_data' => 0,
   ),
   'has_nocache_code' => false,
-  'version' => 'Smarty-3.1.7',
-  'unifunc' => 'content_5491a4c5028f5',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_5491a4c5028f5')) {function content_5491a4c5028f5($_smarty_tpl) {?><div class="block" id="block-tables">
+<?php if ($_valid && !is_callable('content_5491b175725b4')) {function content_5491b175725b4($_smarty_tpl) {?><div class="block" id="block-tables">
 
                 <div class="secondary-navigation">
                     <ul class="wat-cf">
@@ -61,22 +59,14 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 
                             
     	<div class="group">
-            <label class="label"><?php echo $_smarty_tpl->tpl_vars['event_fields']->value['place_id'];?>
+            <label class="label"><?php echo $_smarty_tpl->tpl_vars['event_fields']->value['placeID'];?>
 <span class="error">*</span></label>
-    		<select class="field select addr" name="place_id" >
-                <option value="0"></option>
-                <?php  $_smarty_tpl->tpl_vars['rel'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['rel']->_loop = false;
- $_from = $_smarty_tpl->tpl_vars['related_event']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
-foreach ($_from as $_smarty_tpl->tpl_vars['rel']->key => $_smarty_tpl->tpl_vars['rel']->value){
-$_smarty_tpl->tpl_vars['rel']->_loop = true;
-?>
-                    <option value="<?php echo $_smarty_tpl->tpl_vars['rel']->value['event_id'];?>
-"<?php if (isset($_smarty_tpl->tpl_vars['event_data']->value)){?><?php if ($_smarty_tpl->tpl_vars['event_data']->value['place_id']==$_smarty_tpl->tpl_vars['rel']->value['event_id']){?> selected="selected"<?php }?><?php }?>><?php echo $_smarty_tpl->tpl_vars['rel']->value['event_name'];?>
-</option>
-                <?php } ?>
-        	</select>
-    		<p class="instruct">Lugar del evento</p>
-        </div>
+    		<div>
+    	       	<input class="text_field" type="text" maxlength="255" value="<?php if (isset($_smarty_tpl->tpl_vars['event_data']->value)){?><?php echo $_smarty_tpl->tpl_vars['event_data']->value['placeID'];?>
+<?php }?>" name="placeID" />
+    		</div>
+    		<p class="instruct">Id del lugar</p>
+    	</div>
     
     	<div class="group">
             <label class="label"><?php echo $_smarty_tpl->tpl_vars['event_fields']->value['name'];?>

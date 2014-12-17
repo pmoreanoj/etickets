@@ -16,12 +16,12 @@
                             <table class="table">
                             	<thead>
                                     <th width="20"> </th>
-                                    			<th>{$user_fields.password}</th>
-			<th>{$user_fields.id}</th>
+                                    			<th>{$user_fields.user_id}</th>
+			<th>{$user_fields.password}</th>
+			<th>{$user_fields.roleID}</th>
 			<th>{$user_fields.name}</th>
 			<th>{$user_fields.email}</th>
 			<th>{$user_fields.username}</th>
-			<th>{$user_fields.role_id}</th>
 			<th>{$user_fields.delete}</th>
 
                                     <th width="80">Actions</th>
@@ -29,19 +29,19 @@
                             	<tbody>
                                 	{foreach $user_data as $row}
                                         <tr class="{cycle values='odd,even'}">
-                                            <td><input type="checkbox" class="checkbox" name="delete_ids[]" value="{$row.password}" /></td>
-                                            				<td>{$row.password}</td>
-				<td>{$row.id}</td>
+                                            <td><input type="checkbox" class="checkbox" name="delete_ids[]" value="{$row.user_id}" /></td>
+                                            				<td>{$row.user_id}</td>
+				<td>{$row.password}</td>
+				<td>{$row.roleID}</td>
 				<td>{$row.name}</td>
 				<td>{$row.email}</td>
 				<td>{$row.username}</td>
-				<td>{$row.role_id}</td>
 				<td>{$row.delete}</td>
 
                                             <td width="80">
-                                                <a href="user/show/{$row.password}"><img src="iscaffold/images/view.png" alt="Show record" /></a>
-                                                <a href="user/edit/{$row.password}"><img src="iscaffold/images/edit.png" alt="Edit record" /></a>
-                                                <a href="javascript:chk('user/delete/{$row.password}')"><img src="iscaffold/images/delete.png" alt="Delete record" /></a>
+                                                <a href="user/show/{$row.user_id}"><img src="iscaffold/images/view.png" alt="Show record" /></a>
+                                                <a href="user/edit/{$row.user_id}"><img src="iscaffold/images/edit.png" alt="Edit record" /></a>
+                                                <a href="javascript:chk('user/delete/{$row.user_id}')"><img src="iscaffold/images/delete.png" alt="Delete record" /></a>
                                             </td>
                             		    </tr>
                                 	{/foreach}

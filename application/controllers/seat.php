@@ -74,9 +74,9 @@ class Seat extends CI_Controller
         {
             case 'GET':
                 $fields = $this->model_seat->fields();
-                $user_profile_set = $this->model_seat->related_user_profile();
+                $section_set = $this->model_seat->related_section();
 
-                $this->template->assign( 'related_user_profile', $user_profile_set );
+                $this->template->assign( 'related_section', $section_set );
 
                 
                 $this->template->assign( 'action_mode', 'create' );
@@ -95,12 +95,12 @@ class Seat extends CI_Controller
 
                 /* we set the rules */
                 /* don't forget to edit these */
-				$this->form_validation->set_rules( 'section_id', lang('section_id'), 'required|max_length[11]|integer' );
+				$this->form_validation->set_rules( 'sectionID', lang('sectionID'), 'required|max_length[11]|integer' );
 				$this->form_validation->set_rules( 'number_row', lang('number_row'), 'required|max_length[11]|integer' );
 				$this->form_validation->set_rules( 'number_seat', lang('number_seat'), 'required|max_length[11]|integer' );
 				$this->form_validation->set_rules( 'occupied', lang('occupied'), 'required|max_length[1]|integer' );
 
-				$data_post['section_id'] = $this->input->post( 'section_id' );
+				$data_post['sectionID'] = $this->input->post( 'sectionID' );
 				$data_post['number_row'] = $this->input->post( 'number_row' );
 				$data_post['number_seat'] = $this->input->post( 'number_seat' );
 				$data_post['occupied'] = ( $this->input->post( 'occupied' ) == FALSE ) ? 0 : $this->input->post( 'occupied' );
@@ -109,9 +109,9 @@ class Seat extends CI_Controller
                 {
                     $errors = validation_errors();
                     
-                    $user_profile_set = $this->model_seat->related_user_profile();
+                    $section_set = $this->model_seat->related_section();
 
-                    $this->template->assign( 'related_user_profile', $user_profile_set );
+                    $this->template->assign( 'related_section', $section_set );
 
                     
               		$this->template->assign( 'errors', $errors );
@@ -149,10 +149,10 @@ class Seat extends CI_Controller
                 $this->model_seat->raw_data = TRUE;
         		$data = $this->model_seat->get( $id );
                 $fields = $this->model_seat->fields();
-                $user_profile_set = $this->model_seat->related_user_profile();
+                $section_set = $this->model_seat->related_section();
 
                 
-                $this->template->assign( 'related_user_profile', $user_profile_set );
+                $this->template->assign( 'related_section', $section_set );
 
                 
           		$this->template->assign( 'action_mode', 'edit' );
@@ -170,12 +170,12 @@ class Seat extends CI_Controller
                 $fields = $this->model_seat->fields();
                 /* we set the rules */
                 /* don't forget to edit these */
-				$this->form_validation->set_rules( 'section_id', lang('section_id'), 'required|max_length[11]|integer' );
+				$this->form_validation->set_rules( 'sectionID', lang('sectionID'), 'required|max_length[11]|integer' );
 				$this->form_validation->set_rules( 'number_row', lang('number_row'), 'required|max_length[11]|integer' );
 				$this->form_validation->set_rules( 'number_seat', lang('number_seat'), 'required|max_length[11]|integer' );
 				$this->form_validation->set_rules( 'occupied', lang('occupied'), 'required|max_length[1]|integer' );
 
-				$data_post['section_id'] = $this->input->post( 'section_id' );
+				$data_post['sectionID'] = $this->input->post( 'sectionID' );
 				$data_post['number_row'] = $this->input->post( 'number_row' );
 				$data_post['number_seat'] = $this->input->post( 'number_seat' );
 				$data_post['occupied'] = ( $this->input->post( 'occupied' ) == FALSE ) ? 0 : $this->input->post( 'occupied' );
@@ -184,9 +184,9 @@ class Seat extends CI_Controller
                 {
                     $errors = validation_errors();
                     
-                    $user_profile_set = $this->model_seat->related_user_profile();
+                    $section_set = $this->model_seat->related_section();
 
-                    $this->template->assign( 'related_user_profile', $user_profile_set );
+                    $this->template->assign( 'related_section', $section_set );
 
                     
               		$this->template->assign( 'action_mode', 'edit' );

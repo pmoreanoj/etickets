@@ -26,15 +26,12 @@
 
                             
     	<div class="group">
-            <label class="label">{$event_fields.place_id}<span class="error">*</span></label>
-    		<select class="field select addr" name="place_id" >
-                <option value="0"></option>
-                {foreach $related_user_profile as $rel}
-                    <option value="{$rel.user_profile_id}"{if isset($event_data)}{if $event_data.place_id == $rel.user_profile_id} selected="selected"{/if}{/if}>{$rel.user_profile_name}</option>
-                {/foreach}
-        	</select>
-    		<p class="instruct">Lugar del evento</p>
-        </div>
+            <label class="label">{$event_fields.placeID}<span class="error">*</span></label>
+    		<div>
+    	       	<input class="text_field" type="text" maxlength="255" value="{if isset($event_data)}{$event_data.placeID}{/if}" name="placeID" />
+    		</div>
+    		<p class="instruct">Id del lugar</p>
+    	</div>
     
     	<div class="group">
             <label class="label">{$event_fields.name}<span class="error">*</span></label>

@@ -17,8 +17,8 @@
                                 <th>Value</th>
                         	</thead>
 						    <tr class="{cycle values='odd,even'}">
-                            <td>{$place_fields.id}:</td>
-                            <td>{$place_data.id}</td>
+                            <td>{$place_fields.place_id}:</td>
+                            <td>{$place_data.place_id}</td>
                         </tr><tr class="{cycle values='odd,even'}">
                             <td>{$place_fields.name}:</td>
                             <td>{$place_data.name}</td>

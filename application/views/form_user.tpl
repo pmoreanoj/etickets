@@ -26,19 +26,30 @@
 
                             
     	<div class="group">
-            <label class="label">{$user_fields.id}<span class="error">*</span></label>
+            <label class="label">{$user_fields.password}<span class="error">*</span></label>
     		<div>
-    	       	<input class="text_field" type="text" maxlength="255" value="{if isset($user_data)}{$user_data.id}{/if}" name="id" />
+    	       	<input class="text_field" type="text" maxlength="255" value="{if isset($user_data)}{$user_data.password}{/if}" name="password" />
     		</div>
-    		<p class="instruct">ID</p>
+    		<p class="instruct">Contrasena del usuario</p>
     	</div>
+    
+    	<div class="group">
+            <label class="label">{$user_fields.roleID}<span class="error">*</span></label>
+    		<select class="field select addr" name="roleID" >
+                <option value="0"></option>
+                {foreach $related_role as $rel}
+                    <option value="{$rel.role_id}"{if isset($user_data)}{if $user_data.roleID == $rel.role_id} selected="selected"{/if}{/if}>{$rel.role_name}</option>
+                {/foreach}
+        	</select>
+    		<p class="instruct">Rol del usuario</p>
+        </div>
     
     	<div class="group">
             <label class="label">{$user_fields.name}<span class="error">*</span></label>
     		<div>
     	       	<input class="text_field" type="text" maxlength="255" value="{if isset($user_data)}{$user_data.name}{/if}" name="name" />
     		</div>
-    		<p class="instruct">Nombre del Usuario</p>
+    		<p class="instruct">Nombre completo del usuario</p>
     	</div>
     
     	<div class="group">
@@ -46,7 +57,7 @@
     		<div>
     	       	<input class="text_field" type="text" maxlength="255" value="{if isset($user_data)}{$user_data.email}{/if}" name="email" />
     		</div>
-    		<p class="instruct">Email del usuario</p>
+    		<p class="instruct">E-mail del usuario</p>
     	</div>
     
     	<div class="group">
@@ -54,25 +65,15 @@
     		<div>
     	       	<input class="text_field" type="text" maxlength="255" value="{if isset($user_data)}{$user_data.username}{/if}" name="username" />
     		</div>
-    		<p class="instruct">usuario</p>
+    		<p class="instruct">Usuario</p>
     	</div>
     
     	<div class="group">
-            <label class="label">{$user_fields.role_id}<span class="error">*</span></label>
-    		<select class="field select addr" name="role_id" >
-                <option value="0"></option>
-                {foreach $related_user_profile as $rel}
-                    <option value="{$rel.user_profile_id}"{if isset($user_data)}{if $user_data.role_id == $rel.user_profile_id} selected="selected"{/if}{/if}>{$rel.user_profile_name}</option>
-                {/foreach}
-        	</select>
-    		<p class="instruct">Rol del usuario</p>
-        </div>
-    
-    	<div class="group">
             <label class="label">{$user_fields.delete}<span class="error">*</span></label>
-            <input class="field checkbox" type="checkbox" value="1" name="delete"{if isset($user_data)}{if $user_data.delete == 1} checked="checked"{/if}{/if} />
-
-    		<p class="instruct">Si el usuario esta borrado</p>
+    		<div>
+    	       	<input class="text_field" type="text" maxlength="255" value="{if isset($user_data)}{$user_data.delete}{/if}" name="delete" />
+    		</div>
+    		<p class="instruct">Si el usuario se borro</p>
     	</div>
     
 

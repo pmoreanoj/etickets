@@ -27,10 +27,10 @@ class Model_seat extends CI_Model
 	function get ( $id, $get_one = false )
 	{
         
-	    $select_statement = ( $this->raw_data ) ? 'id,section_id,number_row,number_seat,occupied' : 'id,user_profile.description AS section_id,number_row,number_seat,occupied';
+	    $select_statement = ( $this->raw_data ) ? 'seat_id,sectionID,number_row,number_seat,occupied' : 'seat_id,section.description AS sectionID,number_row,number_seat,occupied';
 		$this->db->select( $select_statement );
 		$this->db->from('seat');
-        $this->db->join( 'user_profile', 'section_id = id', 'left' );
+        $this->db->join( 'section', 'sectionID = section_id', 'left' );
 
 
 		// Pick one record
@@ -41,7 +41,7 @@ class Model_seat extends CI_Model
         }
 		else // Select the desired record
         {
-            $this->db->where( 'id', $id );
+            $this->db->where( 'seat_id', $id );
         }
 
 		$query = $this->db->get();
@@ -50,8 +50,8 @@ class Model_seat extends CI_Model
 		{
 			$row = $query->row_array();
 			return array( 
-	'id' => $row['id'],
-	'section_id' => $row['section_id'],
+	'seat_id' => $row['seat_id'],
+	'sectionID' => $row['sectionID'],
 	'number_row' => $row['number_row'],
 	'number_seat' => $row['number_seat'],
 	'occupied' => $row['occupied'],
@@ -75,7 +75,7 @@ class Model_seat extends CI_Model
 
 	function update ( $id, $data )
 	{
-		$this->db->where( 'id', $id );
+		$this->db->where( 'seat_id', $id );
 		$this->db->update( 'seat', $data );
 	}
 
@@ -85,11 +85,11 @@ class Model_seat extends CI_Model
 	{
         if( is_array( $id ) )
         {
-            $this->db->where_in( 'id', $id );            
+            $this->db->where_in( 'seat_id', $id );            
         }
         else
         {
-            $this->db->where( 'id', $id );
+            $this->db->where( 'seat_id', $id );
         }
         $this->db->delete( 'seat' );
         
@@ -101,10 +101,10 @@ class Model_seat extends CI_Model
 	{
         
 	    $this->db->start_cache();
-		$this->db->select( 'id,user_profile.description AS section_id,number_row,number_seat,occupied');
+		$this->db->select( 'seat_id,section.description AS sectionID,number_row,number_seat,occupied');
 		$this->db->from( 'seat' );
 		//$this->db->order_by( '', 'ASC' );
-        $this->db->join( 'user_profile', 'section_id = id', 'left' );
+        $this->db->join( 'section', 'sectionID = section_id', 'left' );
 
 
         /**
@@ -136,8 +136,8 @@ class Model_seat extends CI_Model
 		foreach ( $query->result_array() as $row )
 		{
 			$temp_result[] = array( 
-	'id' => $row['id'],
-	'section_id' => $row['section_id'],
+	'seat_id' => $row['seat_id'],
+	'sectionID' => $row['sectionID'],
 	'number_row' => $row['number_row'],
 	'number_seat' => $row['number_seat'],
 	'occupied' => $row['occupied'],
@@ -153,9 +153,9 @@ class Model_seat extends CI_Model
 	{
 	    $meta = $this->metadata();
 	    $this->db->start_cache();
-		$this->db->select( 'id,user_profile.description AS section_id,number_row,number_seat,occupied');
+		$this->db->select( 'seat_id,section.description AS sectionID,number_row,number_seat,occupied');
 		$this->db->from( 'seat' );
-        $this->db->join( 'user_profile', 'section_id = id', 'left' );
+        $this->db->join( 'section', 'sectionID = section_id', 'left' );
 
 
 		// Delete this line after setting up the search conditions 
@@ -193,8 +193,8 @@ class Model_seat extends CI_Model
 		foreach ( $query->result_array() as $row )
 		{
 			$temp_result[] = array( 
-	'id' => $row['id'],
-	'section_id' => $row['section_id'],
+	'seat_id' => $row['seat_id'],
+	'sectionID' => $row['sectionID'],
 	'number_row' => $row['number_row'],
 	'number_seat' => $row['number_seat'],
 	'occupied' => $row['occupied'],
@@ -204,10 +204,10 @@ class Model_seat extends CI_Model
 		return $temp_result;
 	}
 
-	function related_user_profile()
+	function related_section()
     {
-        $this->db->select( 'id AS user_profile_id, description AS user_profile_name' );
-        $rel_data = $this->db->get( 'user_profile' );
+        $this->db->select( 'section_id AS section_id, description AS section_name' );
+        $rel_data = $this->db->get( 'section' );
         return $rel_data->result_array();
     }
 
@@ -223,8 +223,8 @@ class Model_seat extends CI_Model
     function fields( $withID = FALSE )
     {
         $fs = array(
-	'id' => lang('id'),
-	'section_id' => lang('section_id'),
+	'seat_id' => lang('seat_id'),
+	'sectionID' => lang('sectionID'),
 	'number_row' => lang('number_row'),
 	'number_seat' => lang('number_seat'),
 	'occupied' => lang('occupied')

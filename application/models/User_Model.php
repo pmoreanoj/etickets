@@ -18,15 +18,15 @@ class User_Model extends CI_Model
     function login( $username, $password )
     {
         $param['username'] = $this->db->escape($username);
-        $param['password'] = password_hash($password, PASSWORD_BCRYPT);
+        $param['password'] = $password;
 
-        $sql = "SELECT `id`, `role_id` FROM `user` WHERE username=? AND password=?";
+        $sql = "SELECT `user_id`, `roleID` FROM `user` WHERE username=? AND password=?";
         $query = $this->db->query( $sql, $param );
 
         if ($query->num_rows() > 0) {
            $row = $query->row( );
-           $data['id'] = $row->id;
-           $data['role_id'] = $row->role_id;
+           $data['user_id'] = $row->user_id;
+           $data['role_id'] = $row->roleID;
         }
 
         return $data;
@@ -42,9 +42,9 @@ class User_Model extends CI_Model
 
         $data['name'] = $this->db->escape($name);
         $data['username'] = $this->db->escape($username);
-        $data['password'] = password_hash($password, PASSWORD_BCRYPT);
+        $data['password'] = $password;
         $data['email'] = $this->db->escape($email);
-        $data['role_id'] = $role_id;
+        $data['roleID'] = $role_id;
 
         if ($this->db->insert($this->table_name, $data)) {
                 $user_id = $this->db->insert_id();
@@ -66,9 +66,9 @@ class User_Model extends CI_Model
 
         $data['name'] = $this->db->escape($name);
         $data['username'] = $this->db->escape($username);
-        $data['password'] = password_hash($password, PASSWORD_BCRYPT);
+        $data['password'] = $password;
         $data['email'] = $this->db->escape($email);
-        $data['role_id'] = $role_id;
+        $data['roleID'] = $role_id;
 
         if ($this->db->insert($this->table_name, $data)) {
                 $user_id = $this->db->insert_id();
@@ -76,6 +76,7 @@ class User_Model extends CI_Model
         }
     }
 
+    /**
     function changePassword( $username, $password, $newPassword )
     {
         if( isset(login($username, $password)))
@@ -83,7 +84,7 @@ class User_Model extends CI_Model
             $this->db->where( 'username', $this->db->escape($username) );
             $this->db->update( 'password', password_hash( $newPassword, PASSWORD_BCRYPT));
         }
-    }
+    } */
 
     function usuario_existe( $username )
     {
@@ -98,34 +99,34 @@ class User_Model extends CI_Model
 
     function getDefaultRole(  )
     {
-        $sql = "SELECT `id` FROM role WHERE default=1";
+        $sql = "SELECT `role_id` FROM role WHERE default=1";
         $query = $this->db->query( $sql );
         $row = $query->row( );
-        return $row->id;
+        return $row->role_id;
     }
 
     function getRoleID( $role  )
     {
-        $sql = "SELECT `id` FROM role WHERE role=?";
+        $sql = "SELECT `role_id` FROM role WHERE role=?";
         $query = $this->db->query( $sql, array($role) );
         $row = $query->row( );
-        return $row->id;
+        return $row->role_id;
     }
 
     function getAdminRole(  )
     {
-        $sql = "SELECT `id` FROM role WHERE `role`='admin'";
+        $sql = "SELECT `role_id` FROM role WHERE `role`='admin'";
         $query = $this->db->query( $sql );
         $row = $query->row( );
-        return $row->id;
+        return $row->role_id;
     }
 
     function admin( $admin, $password )
     {
         $param['username'] = $this->db->escape($admin);
-        $param['password'] = password_hash($password, PASSWORD_BCRYPT);
+        $param['password'] = $password;
 
-        $sql = "SELECT `role_id` FROM `user` WHERE username=? AND password=?";
+        $sql = "SELECT `roleID` FROM `user` WHERE username=? AND password=?";
         $query = $this->db->query( $sql, $param );
 
         if ($query->num_rows() > 0) {

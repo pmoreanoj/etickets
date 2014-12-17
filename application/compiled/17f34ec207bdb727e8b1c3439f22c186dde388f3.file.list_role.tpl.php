@@ -1,17 +1,17 @@
-<?php /* Smarty version Smarty-3.1.7, created on 2014-12-17 16:40:24
+<?php /* Smarty version Smarty-3.1.7, created on 2014-12-17 17:46:48
          compiled from "application/views/list_role.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:12707903615491a3e8e23b38-78451773%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:4143735135491b378363288-70715579%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     '17f34ec207bdb727e8b1c3439f22c186dde388f3' => 
     array (
       0 => 'application/views/list_role.tpl',
-      1 => 1418828990,
+      1 => 1418834713,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '12707903615491a3e8e23b38-78451773',
+  'nocache_hash' => '4143735135491b378363288-70715579',
   'function' => 
   array (
   ),
@@ -25,9 +25,9 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
   'version' => 'Smarty-3.1.7',
-  'unifunc' => 'content_5491a3e8e56b2',
+  'unifunc' => 'content_5491b37839843',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_5491a3e8e56b2')) {function content_5491a3e8e56b2($_smarty_tpl) {?><?php if (!is_callable('smarty_function_cycle')) include '/Applications/XAMPP/xamppfiles/htdocs/etickets/application/libraries/smarty/plugins/function.cycle.php';
+<?php if ($_valid && !is_callable('content_5491b37839843')) {function content_5491b37839843($_smarty_tpl) {?><?php if (!is_callable('smarty_function_cycle')) include '/Applications/XAMPP/xamppfiles/htdocs/etickets/application/libraries/smarty/plugins/function.cycle.php';
 ?><div class="block" id="block-tables">
 
                 <div class="secondary-navigation">
@@ -47,7 +47,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
                             <table class="table">
                             	<thead>
                                     <th width="20"> </th>
-                                    			<th><?php echo $_smarty_tpl->tpl_vars['role_fields']->value['id'];?>
+                                    			<th><?php echo $_smarty_tpl->tpl_vars['role_fields']->value['role_id'];?>
 </th>
 			<th><?php echo $_smarty_tpl->tpl_vars['role_fields']->value['role'];?>
 </th>
@@ -64,9 +64,9 @@ $_smarty_tpl->tpl_vars['row']->_loop = true;
 ?>
                                         <tr class="<?php echo smarty_function_cycle(array('values'=>'odd,even'),$_smarty_tpl);?>
 ">
-                                            <td><input type="checkbox" class="checkbox" name="delete_ids[]" value="<?php echo $_smarty_tpl->tpl_vars['row']->value['id'];?>
+                                            <td><input type="checkbox" class="checkbox" name="delete_ids[]" value="<?php echo $_smarty_tpl->tpl_vars['row']->value['role_id'];?>
 " /></td>
-                                            				<td><?php echo $_smarty_tpl->tpl_vars['row']->value['id'];?>
+                                            				<td><?php echo $_smarty_tpl->tpl_vars['row']->value['role_id'];?>
 </td>
 				<td><?php echo $_smarty_tpl->tpl_vars['row']->value['role'];?>
 </td>
@@ -74,11 +74,11 @@ $_smarty_tpl->tpl_vars['row']->_loop = true;
 </td>
 
                                             <td width="80">
-                                                <a href="role/show/<?php echo $_smarty_tpl->tpl_vars['row']->value['id'];?>
+                                                <a href="role/show/<?php echo $_smarty_tpl->tpl_vars['row']->value['role_id'];?>
 "><img src="iscaffold/images/view.png" alt="Show record" /></a>
-                                                <a href="role/edit/<?php echo $_smarty_tpl->tpl_vars['row']->value['id'];?>
+                                                <a href="role/edit/<?php echo $_smarty_tpl->tpl_vars['row']->value['role_id'];?>
 "><img src="iscaffold/images/edit.png" alt="Edit record" /></a>
-                                                <a href="javascript:chk('role/delete/<?php echo $_smarty_tpl->tpl_vars['row']->value['id'];?>
+                                                <a href="javascript:chk('role/delete/<?php echo $_smarty_tpl->tpl_vars['row']->value['role_id'];?>
 ')"><img src="iscaffold/images/delete.png" alt="Delete record" /></a>
                                             </td>
                             		    </tr>

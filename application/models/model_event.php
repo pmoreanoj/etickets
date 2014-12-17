@@ -27,11 +27,10 @@ class Model_event extends CI_Model
 	function get ( $id, $get_one = false )
 	{
         
-	    $select_statement = ( $this->raw_data ) ? 'id,place_id,name,photo,dateTime,delete' : 'id,user_profile.name AS place_id,name,photo,dateTime,delete';
+	    $select_statement = ( $this->raw_data ) ? 'event_id,placeID,name,photo,dateTime,delete' : 'event_id,placeID,name,photo,dateTime,delete';
 		$this->db->select( $select_statement );
 		$this->db->from('event');
-        $this->db->join( 'user_profile', 'place_id = id', 'left' );
-
+        
 
 		// Pick one record
 		// Field order sample may be empty because no record is requested, eg. create/GET event
@@ -41,7 +40,7 @@ class Model_event extends CI_Model
         }
 		else // Select the desired record
         {
-            $this->db->where( 'id', $id );
+            $this->db->where( 'event_id', $id );
         }
 
 		$query = $this->db->get();
@@ -50,8 +49,8 @@ class Model_event extends CI_Model
 		{
 			$row = $query->row_array();
 			return array( 
-	'id' => $row['id'],
-	'place_id' => $row['place_id'],
+	'event_id' => $row['event_id'],
+	'placeID' => $row['placeID'],
 	'name' => $row['name'],
 	'photo' => $row['photo'],
 	'dateTime' => $row['dateTime'],
@@ -76,7 +75,7 @@ class Model_event extends CI_Model
 
 	function update ( $id, $data )
 	{
-		$this->db->where( 'id', $id );
+		$this->db->where( 'event_id', $id );
 		$this->db->update( 'event', $data );
 	}
 
@@ -86,14 +85,34 @@ class Model_event extends CI_Model
 	{
         if( is_array( $id ) )
         {
-            $this->db->where_in( 'id', $id );            
+            $this->db->where_in( 'event_id', $id );            
         }
         else
         {
-            $this->db->where( 'id', $id );
+            $this->db->where( 'event_id', $id );
         }
         $this->db->delete( 'event' );
         
+		$this->db->where( 'event_id', $id );
+        $this->db->delete('reservation_event');
+
+
+		$this->db->where( 'event_id', $id );
+        $this->db->delete('reservation_event');
+
+
+		$this->db->where( 'event_id', $id );
+        $this->db->delete('reservation_event');
+
+
+		$this->db->where( 'event_id', $id );
+        $this->db->delete('reservation_event');
+
+
+		$this->db->where( 'event_id', $id );
+        $this->db->delete('reservation_event');
+
+
 	}
 
 
@@ -102,11 +121,10 @@ class Model_event extends CI_Model
 	{
         
 	    $this->db->start_cache();
-		$this->db->select( 'id,user_profile.name AS place_id,name,photo,dateTime,delete');
+		$this->db->select( 'event_id,placeID,name,photo,dateTime,delete');
 		$this->db->from( 'event' );
 		//$this->db->order_by( '', 'ASC' );
-        $this->db->join( 'user_profile', 'place_id = id', 'left' );
-
+        
 
         /**
          *   PAGINATION
@@ -137,8 +155,8 @@ class Model_event extends CI_Model
 		foreach ( $query->result_array() as $row )
 		{
 			$temp_result[] = array( 
-	'id' => $row['id'],
-	'place_id' => $row['place_id'],
+	'event_id' => $row['event_id'],
+	'placeID' => $row['placeID'],
 	'name' => $row['name'],
 	'photo' => $row['photo'],
 	'dateTime' => $row['dateTime'],
@@ -155,10 +173,9 @@ class Model_event extends CI_Model
 	{
 	    $meta = $this->metadata();
 	    $this->db->start_cache();
-		$this->db->select( 'id,user_profile.name AS place_id,name,photo,dateTime,delete');
+		$this->db->select( 'event_id,placeID,name,photo,dateTime,delete');
 		$this->db->from( 'event' );
-        $this->db->join( 'user_profile', 'place_id = id', 'left' );
-
+        
 
 		// Delete this line after setting up the search conditions 
         die('Please see models/model_event.php for setting up the search method.');
@@ -195,8 +212,8 @@ class Model_event extends CI_Model
 		foreach ( $query->result_array() as $row )
 		{
 			$temp_result[] = array( 
-	'id' => $row['id'],
-	'place_id' => $row['place_id'],
+	'event_id' => $row['event_id'],
+	'placeID' => $row['placeID'],
 	'name' => $row['name'],
 	'photo' => $row['photo'],
 	'dateTime' => $row['dateTime'],
@@ -206,15 +223,6 @@ class Model_event extends CI_Model
         $this->db->flush_cache(); 
 		return $temp_result;
 	}
-
-	function related_user_profile()
-    {
-        $this->db->select( 'id AS user_profile_id, name AS user_profile_name' );
-        $rel_data = $this->db->get( 'user_profile' );
-        return $rel_data->result_array();
-    }
-
-
 
 
 
@@ -226,8 +234,8 @@ class Model_event extends CI_Model
     function fields( $withID = FALSE )
     {
         $fs = array(
-	'id' => lang('id'),
-	'place_id' => lang('place_id'),
+	'event_id' => lang('event_id'),
+	'placeID' => lang('placeID'),
 	'name' => lang('name'),
 	'photo' => lang('photo'),
 	'dateTime' => lang('dateTime'),
