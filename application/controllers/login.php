@@ -33,17 +33,11 @@ class Login extends CI_Controller {
         $user = $this->input->post('user');
         $pass = $this->input->post('pass');
         
-        $data = $this->user->login($user, $pass);
+        $data = $this->user->login( $user, $pass );
         
-        echo $data['role_id'];
-
-        if (isset($data)) { //log correcto
-            $this->model_auth->login(array('valid' => 'yes', 'name' => $user, 'role_id' => $data['role_id']));
-            if ($data['role_id'] == $this->user->getAdminRole()) {
-                redirect(base_url() . 'dashboard');
-            } else {
-                redirect(base_url());
-            }
+        if (isset($data)) { //login correcto
+            $this->model_auth->login(array('valid' => 'yes', 'name' => $user , 'role_id' => $data['role_id'] ));
+            redirect(base_url() . 'dashboard');
             die();
         } else {
             $this->model_auth->login(array('valid' => 'no'));
@@ -53,7 +47,7 @@ class Login extends CI_Controller {
 
     function logout() {
         $this->model_auth->logout();
-        redirect(base_url() . 'login');
+        redirect(base_url() . '/login');
     }
 
 }

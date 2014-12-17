@@ -26,6 +26,22 @@
 
                             
     	<div class="group">
+            <label class="label">{$reservation_fields.bank}</label>
+    		<div>
+    	       	<input class="text_field" type="text" maxlength="255" value="{if isset($reservation_data)}{$reservation_data.bank}{/if}" name="bank" />
+    		</div>
+    		
+    	</div>
+    
+    	<div class="group">
+            <label class="label">{$reservation_fields.reservation_id}<span class="error">*</span></label>
+    		<div>
+    	       	<input class="text_field" type="text" maxlength="255" value="{if isset($reservation_data)}{$reservation_data.reservation_id}{/if}" name="reservation_id" />
+    		</div>
+    		<p class="instruct">Id de la reserva</p>
+    	</div>
+    
+    	<div class="group">
             <label class="label">{$reservation_fields.userID}<span class="error">*</span></label>
     		<select class="field select addr" name="userID" >
                 <option value="0"></option>

@@ -27,7 +27,7 @@ class Model_reservation extends CI_Model
 	function get ( $id, $get_one = false )
 	{
         $meta = $this->metadata();
-	    $select_statement = ( $this->raw_data ) ? 'reservation_id,userID,eventID,date,state,more' : 'reservation_id,user.username AS userID,event.name AS eventID,date,state,more';
+	    $select_statement = ( $this->raw_data ) ? 'confirmation,bank,reservation_id,userID,eventID,date,state,more' : 'confirmation,bank,reservation_id,user.username AS userID,event.name AS eventID,date,state,more';
 		$this->db->select( $select_statement );
 		$this->db->from('reservation');
         $this->db->join( 'user', 'userID = user_id', 'left' );
@@ -42,7 +42,7 @@ $this->db->join( 'event', 'eventID = event_id', 'left' );
         }
 		else // Select the desired record
         {
-            $this->db->where( 'reservation_id', $id );
+            $this->db->where( 'confirmation', $id );
         }
 
 		$query = $this->db->get();
@@ -51,6 +51,8 @@ $this->db->join( 'event', 'eventID = event_id', 'left' );
 		{
 			$row = $query->row_array();
 			return array( 
+	'confirmation' => $row['confirmation'],
+	'bank' => $row['bank'],
 	'reservation_id' => $row['reservation_id'],
 	'userID' => $row['userID'],
 	'eventID' => $row['eventID'],
@@ -77,7 +79,7 @@ $this->db->join( 'event', 'eventID = event_id', 'left' );
 
 	function update ( $id, $data )
 	{
-		$this->db->where( 'reservation_id', $id );
+		$this->db->where( 'confirmation', $id );
 		$this->db->update( 'reservation', $data );
 	}
 
@@ -87,11 +89,11 @@ $this->db->join( 'event', 'eventID = event_id', 'left' );
 	{
         if( is_array( $id ) )
         {
-            $this->db->where_in( 'reservation_id', $id );            
+            $this->db->where_in( 'confirmation', $id );            
         }
         else
         {
-            $this->db->where( 'reservation_id', $id );
+            $this->db->where( 'confirmation', $id );
         }
         $this->db->delete( 'reservation' );
         
@@ -103,7 +105,7 @@ $this->db->join( 'event', 'eventID = event_id', 'left' );
 	{
         $meta = $this->metadata();
 	    $this->db->start_cache();
-		$this->db->select( 'reservation_id,user.username AS userID,event.name AS eventID,date,state,more');
+		$this->db->select( 'confirmation,bank,reservation_id,user.username AS userID,event.name AS eventID,date,state,more');
 		$this->db->from( 'reservation' );
 		//$this->db->order_by( '', 'ASC' );
         $this->db->join( 'user', 'userID = user_id', 'left' );
@@ -139,6 +141,8 @@ $this->db->join( 'event', 'eventID = event_id', 'left' );
 		foreach ( $query->result_array() as $row )
 		{
 			$temp_result[] = array( 
+	'confirmation' => $row['confirmation'],
+	'bank' => $row['bank'],
 	'reservation_id' => $row['reservation_id'],
 	'userID' => $row['userID'],
 	'eventID' => $row['eventID'],
@@ -157,7 +161,7 @@ $this->db->join( 'event', 'eventID = event_id', 'left' );
 	{
 	    $meta = $this->metadata();
 	    $this->db->start_cache();
-		$this->db->select( 'reservation_id,user.username AS userID,event.name AS eventID,date,state,more');
+		$this->db->select( 'confirmation,bank,reservation_id,user.username AS userID,event.name AS eventID,date,state,more');
 		$this->db->from( 'reservation' );
         $this->db->join( 'user', 'userID = user_id', 'left' );
 $this->db->join( 'event', 'eventID = event_id', 'left' );
@@ -198,6 +202,8 @@ $this->db->join( 'event', 'eventID = event_id', 'left' );
 		foreach ( $query->result_array() as $row )
 		{
 			$temp_result[] = array( 
+	'confirmation' => $row['confirmation'],
+	'bank' => $row['bank'],
 	'reservation_id' => $row['reservation_id'],
 	'userID' => $row['userID'],
 	'eventID' => $row['eventID'],
@@ -238,6 +244,8 @@ $this->db->join( 'event', 'eventID = event_id', 'left' );
     function fields( $withID = FALSE )
     {
         $fs = array(
+	'confirmation' => lang('confirmation'),
+	'bank' => lang('bank'),
 	'reservation_id' => lang('reservation_id'),
 	'userID' => lang('userID'),
 	'eventID' => lang('eventID'),

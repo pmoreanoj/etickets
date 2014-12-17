@@ -16,7 +16,9 @@
                             <table class="table">
                             	<thead>
                                     <th width="20"> </th>
-                                    			<th>{$reservation_fields.reservation_id}</th>
+                                    			<th>{$reservation_fields.confirmation}</th>
+			<th>{$reservation_fields.bank}</th>
+			<th>{$reservation_fields.reservation_id}</th>
 			<th>{$reservation_fields.userID}</th>
 			<th>{$reservation_fields.eventID}</th>
 			<th>{$reservation_fields.date}</th>
@@ -28,8 +30,10 @@
                             	<tbody>
                                 	{foreach $reservation_data as $row}
                                         <tr class="{cycle values='odd,even'}">
-                                            <td><input type="checkbox" class="checkbox" name="delete_ids[]" value="{$row.reservation_id}" /></td>
-                                            				<td>{$row.reservation_id}</td>
+                                            <td><input type="checkbox" class="checkbox" name="delete_ids[]" value="{$row.confirmation}" /></td>
+                                            				<td>{$row.confirmation}</td>
+				<td>{$row.bank}</td>
+				<td>{$row.reservation_id}</td>
 				<td>{$row.userID}</td>
 				<td>{$row.eventID}</td>
 				<td>{$row.date}</td>
@@ -37,9 +41,9 @@
 				<td>{$row.more}</td>
 
                                             <td width="80">
-                                                <a href="reservation/show/{$row.reservation_id}"><img src="iscaffold/images/view.png" alt="Show record" /></a>
-                                                <a href="reservation/edit/{$row.reservation_id}"><img src="iscaffold/images/edit.png" alt="Edit record" /></a>
-                                                <a href="javascript:chk('reservation/delete/{$row.reservation_id}')"><img src="iscaffold/images/delete.png" alt="Delete record" /></a>
+                                                <a href="reservation/show/{$row.confirmation}"><img src="iscaffold/images/view.png" alt="Show record" /></a>
+                                                <a href="reservation/edit/{$row.confirmation}"><img src="iscaffold/images/edit.png" alt="Edit record" /></a>
+                                                <a href="javascript:chk('reservation/delete/{$row.confirmation}')"><img src="iscaffold/images/delete.png" alt="Delete record" /></a>
                                             </td>
                             		    </tr>
                                 	{/foreach}

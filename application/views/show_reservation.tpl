@@ -17,6 +17,12 @@
                                 <th>Value</th>
                         	</thead>
 						    <tr class="{cycle values='odd,even'}">
+                            <td>{$reservation_fields.confirmation}:</td>
+                            <td>{$reservation_data.confirmation}</td>
+                        </tr><tr class="{cycle values='odd,even'}">
+                            <td>{$reservation_fields.bank}:</td>
+                            <td>{$reservation_data.bank}</td>
+                        </tr><tr class="{cycle values='odd,even'}">
                             <td>{$reservation_fields.reservation_id}:</td>
                             <td>{$reservation_data.reservation_id}</td>
                         </tr><tr class="{cycle values='odd,even'}">

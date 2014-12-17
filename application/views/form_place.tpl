@@ -26,7 +26,7 @@
 
                             
     	<div class="group">
-            <label class="label">{$place_fields.name}</label>
+            <label class="label">{$place_fields.name}<span class="error">*</span></label>
     		<div>
     	       	<input class="text_field" type="text" maxlength="255" value="{if isset($place_data)}{$place_data.name}{/if}" name="name" />
     		</div>

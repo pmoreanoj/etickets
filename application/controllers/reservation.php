@@ -97,11 +97,15 @@ $this->template->assign( 'related_event', $event_set );
 
                 /* we set the rules */
                 /* don't forget to edit these */
+				$this->form_validation->set_rules( 'bank', lang('bank'), '30' );
+				$this->form_validation->set_rules( 'reservation_id', lang('reservation_id'), 'required|max_length[11]|integer' );
 				$this->form_validation->set_rules( 'userID', lang('userID'), 'required|max_length[11]|integer' );
 				$this->form_validation->set_rules( 'eventID', lang('eventID'), 'required|max_length[11]|integer' );
 				$this->form_validation->set_rules( 'date', lang('date'), 'required' );
 				$this->form_validation->set_rules( 'state', lang('state'), 'required' );
 
+				$data_post['bank'] = $this->input->post( 'bank' );
+				$data_post['reservation_id'] = $this->input->post( 'reservation_id' );
 				$data_post['userID'] = $this->input->post( 'userID' );
 				$data_post['eventID'] = $this->input->post( 'eventID' );
 				$data_post['date'] = ( $this->input->post( 'date' ) == '' ) ? time() : strtotime( $this->input->post( 'date' ) );
@@ -177,11 +181,15 @@ $this->template->assign( 'related_event', $event_set );
                 $fields = $this->model_reservation->fields();
                 /* we set the rules */
                 /* don't forget to edit these */
+				$this->form_validation->set_rules( 'bank', lang('bank'), '30' );
+				$this->form_validation->set_rules( 'reservation_id', lang('reservation_id'), 'required|max_length[11]|integer' );
 				$this->form_validation->set_rules( 'userID', lang('userID'), 'required|max_length[11]|integer' );
 				$this->form_validation->set_rules( 'eventID', lang('eventID'), 'required|max_length[11]|integer' );
 				$this->form_validation->set_rules( 'date', lang('date'), 'required' );
 				$this->form_validation->set_rules( 'state', lang('state'), 'required' );
 
+				$data_post['bank'] = $this->input->post( 'bank' );
+				$data_post['reservation_id'] = $this->input->post( 'reservation_id' );
 				$data_post['userID'] = $this->input->post( 'userID' );
 				$data_post['eventID'] = $this->input->post( 'eventID' );
 				$data_post['date'] = ( $this->input->post( 'date' ) == '' ) ? time() : strtotime( $this->input->post( 'date' ) );
