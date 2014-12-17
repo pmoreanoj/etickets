@@ -39,14 +39,14 @@
 */
 
 $route['futbol'] 			 = "etickets/futbol";
-$route['conciertos'] 		 = "etickets/conciertos";
+$route['conciertos']                     = "etickets/conciertos";
 $route['nosotros'] 			 = "etickets/nosotros";
 $route['contacto'] 			 = "etickets/contacto";
 $route['login'] 			 = "etickets/login";
 $route['socios'] 			 = "etickets/socios";
-$route['condiciones'] 		 = "etickets/condiciones";
-$route['default_controller'] = "etickets";
-$route['404_override'] 		 = '';
+$route['condiciones']                    = "etickets/condiciones";
+$route['default_controller']             = "etickets";
+$route['404_override']                   = '';
 
 
 /* End of file routes.php */

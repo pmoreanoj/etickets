@@ -1,30 +1,21 @@
 -- phpMyAdmin SQL Dump
--- version 3.5.2
+-- version 4.0.9
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Dec 12, 2014 at 12:23 PM
--- Server version: 5.5.25a
--- PHP Version: 5.4.4
+-- Generation Time: Dec 17, 2014 at 04:29 PM
+-- Server version: 5.5.34
+-- PHP Version: 5.4.22
 
-SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
 
 --
 -- Database: `etickets`
 --
-
-drop database `etickets`;
-
-create database `etickets`;
-
-use `etickets`;
+DROP DATABASE IF EXISTS etickets;
+CREATE DATABASE IF NOT EXISTS `etickets` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `etickets`;
 
 -- --------------------------------------------------------
 
@@ -91,6 +82,29 @@ CREATE TABLE IF NOT EXISTS `reservation` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `role`
+--
+
+CREATE TABLE IF NOT EXISTS `role` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `role` varchar(50) NOT NULL,
+  `default` tinyint(1) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
+
+--
+-- Dumping data for table `role`
+--
+
+INSERT INTO `role` (`id`, `role`, `default`) VALUES
+(1, 'admin', 0),
+(2, 'organizador', 0),
+(3, 'vendedor', 0),
+(4, 'cliente', 1);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `seat`
 --
 
@@ -122,20 +136,81 @@ CREATE TABLE IF NOT EXISTS `section` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `role`
+-- Table structure for table `sf_config`
 --
 
-CREATE TABLE IF NOT EXISTS `role` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `role` varchar(50) NOT NULL,
-  `default` tinyint(1) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+CREATE TABLE IF NOT EXISTS `sf_config` (
+  `sf_id` int(5) unsigned NOT NULL AUTO_INCREMENT,
+  `sf_table` varchar(64) NOT NULL DEFAULT '',
+  `sf_field` varchar(64) NOT NULL DEFAULT '',
+  `sf_type` varchar(16) DEFAULT 'default',
+  `sf_related` varchar(100) DEFAULT '',
+  `sf_label` varchar(64) DEFAULT '',
+  `sf_desc` tinytext,
+  `sf_order` int(3) DEFAULT NULL,
+  `sf_hidden` int(1) DEFAULT '0',
+  PRIMARY KEY (`sf_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=48 ;
 
+--
+-- Dumping data for table `sf_config`
+--
+
+INSERT INTO `sf_config` (`sf_id`, `sf_table`, `sf_field`, `sf_type`, `sf_related`, `sf_label`, `sf_desc`, `sf_order`, `sf_hidden`) VALUES
+(1, 'event', 'id', 'default', '|', '', '', 0, 1),
+(2, 'event', 'place_id', 'related', 'event|id|place|id', 'Lugar', 'Lugar del evento', 1, 0),
+(3, 'event', 'name', 'default', '|', 'Nombre', 'Nombre del evento', 2, 0),
+(4, 'event', 'photo', 'file', '|', 'Foto', 'Foto del evento', 3, 0),
+(5, 'event', 'dateTime', 'default', '|', 'Fecha', 'Fecha y Hora del evento', 4, 0),
+(6, 'event', 'delete', 'checkbox', '|', '', '', 5, 1),
+(7, 'place', 'id', 'default', '|', '', '', 0, 0),
+(8, 'place', 'name', 'default', '|', '', '', 1, 0),
+(9, 'place', 'photo', 'default', '|', '', '', 2, 0),
+(10, 'place', 'description', 'default', '|', '', '', 3, 0),
+(11, 'place_has_section', 'place_id', 'default', '|', '', '', 0, 0),
+(12, 'place_has_section', 'section_id', 'default', '|', '', '', 1, 0),
+(13, 'reservation', 'id', 'default', '|', '', '', 0, 0),
+(14, 'reservation', 'user_id', 'default', '|', '', '', 1, 0),
+(15, 'reservation', 'event_id', 'default', '|', '', '', 2, 0),
+(16, 'reservation', 'date', 'default', '|', '', '', 3, 0),
+(17, 'reservation', 'state', 'default', '|', '', '', 4, 0),
+(18, 'reservation', 'more', 'default', '|', '', '', 5, 0),
+(19, 'role', 'id', 'default', '|', '', '', 0, 0),
+(20, 'role', 'role', 'default', '|', '', '', 1, 0),
+(21, 'role', 'default', 'default', '|', '', '', 2, 0),
+(22, 'seat', 'id', 'default', '|', '', '', 0, 0),
+(23, 'seat', 'section_id', 'default', '|', '', '', 1, 0),
+(24, 'seat', 'number_row', 'default', '|', '', '', 2, 0),
+(25, 'seat', 'number_seat', 'default', '|', '', '', 3, 0),
+(26, 'seat', 'occupied', 'default', '|', '', '', 4, 0),
+(27, 'section', 'id', 'default', '|', '', '', 0, 0),
+(28, 'section', 'rows', 'default', '|', '', '', 1, 0),
+(29, 'section', 'seats_per_rows', 'default', '|', '', '', 2, 0),
+(30, 'section', 'price', 'default', '|', '', '', 3, 0),
+(31, 'section', 'description', 'default', '|', '', '', 4, 0),
+(32, 'user', 'id', 'default', '|', '', '', 0, 0),
+(33, 'user', 'name', 'default', '|', '', '', 1, 0),
+(34, 'user', 'email', 'default', '|', '', '', 2, 0),
+(35, 'user', 'username', 'default', '|', '', '', 3, 0),
+(36, 'user', 'role_id', 'default', '|', '', '', 4, 0),
+(37, 'user', 'delete', 'default', '|', '', '', 5, 0),
+(38, 'user_profile', 'id', 'default', '|', '', '', 0, 0),
+(39, 'user_profile', 'user_id', 'default', '|', '', '', 1, 0),
+(40, 'user_profile', 'address', 'default', '|', '', '', 2, 0),
+(41, 'user_profile', 'city', 'default', '|', '', '', 3, 0),
+(42, 'user_profile', 'province', 'default', '|', '', '', 4, 0),
+(43, 'user_profile', 'zipcode', 'default', '|', '', '', 5, 0),
+(44, 'user_profile', 'phone', 'default', '|', '', '', 6, 0),
+(45, 'user_profile', 'celular', 'default', '|', '', '', 7, 0),
+(46, 'user_profile', 'role_id', 'default', '|', '', '', 8, 0),
+(47, 'user_profile', 'delete', 'default', '|', '', '', 9, 0);
+
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `user`
 --
+
 
 CREATE TABLE IF NOT EXISTS `user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -149,6 +224,10 @@ CREATE TABLE IF NOT EXISTS `user` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
+INSERT INTO `user` (`name`, `password`, `email`, `username`, `role_id`, `delete` ) VALUES
+	('admin', 'admin', 'admin@etickets.com', 'admin', 1, 0 );
+
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `user_profile`
@@ -162,12 +241,10 @@ CREATE TABLE IF NOT EXISTS `user_profile` (
   `province` varchar(40) NOT NULL,
   `zipcode` varchar(45) NOT NULL,
   `phone` varchar(20) NOT NULL,
-  `celular` varchar(20) NOT NULL, 
-  FOREIGN KEY(`user_id`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  PRIMARY KEY (`id`)
+  `celular` varchar(20) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `user_id` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
-
 
 --
 -- Constraints for dumped tables
@@ -178,7 +255,6 @@ CREATE TABLE IF NOT EXISTS `user_profile` (
 --
 ALTER TABLE `event`
   ADD CONSTRAINT `fk_event_place` FOREIGN KEY (`place_id`) REFERENCES `place` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-  
 
 --
 -- Constraints for table `place_has_section`
@@ -201,12 +277,8 @@ ALTER TABLE `seat`
   ADD CONSTRAINT `fk_seat_section1` FOREIGN KEY (`section_id`) REFERENCES `section` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 
-INSERT INTO `role` (`id`, `role`, `default`) VALUES
-(1, 'admin', 0),
-(2, 'organizador', 0),
-(3, 'vendedor', 0),
-(4, 'cliente', 1);
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+--
+-- Constraints for table `user_profile`
+--
+ALTER TABLE `user_profile`
+  ADD CONSTRAINT `user_profile_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
