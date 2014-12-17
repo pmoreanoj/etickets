@@ -59,11 +59,35 @@ z-index: 9999;
                         <li><i class="fa fa-phone"></i><span>0984506085</span></li>
                         <li><i class="fa fa-envelope"></i><span>etickets@gmail.com</span></li>
                     </ul>
-                    <ul class="loginbar">
-                        <li><a href="<?php echo base_url(); ?>nosotros" class="login-btn">Ayuda</a></li>
-                        <li class="devider">&nbsp;</li>
-                        <li><a href="<?php echo base_url(); ?>login" class="login-btn">Iniciar Sesión</a></li>
-                    </ul>
+                    <?php if( isset( $valid ) )
+                            {
+                                if( strcmp($valid, "yes") )
+                                {
+                                    ?>
+                                    <ul class="loginbar">
+                                        <li><a href="<?php echo base_url(); ?>nosotros" class="login-btn">Ayuda</a></li>
+                                        <li class="devider">&nbsp;</li>
+                                        <li><span class="login-btn" >Bienvenido <?php echo $name; ?></span></li>
+                                    </ul>
+                    <?php 
+                                }
+                                else
+                                {
+                                   ?><ul class="loginbar">
+                                        <li><a href="<?php echo base_url(); ?>nosotros" class="login-btn">Ayuda</a></li>
+                                        <li class="devider">&nbsp;</li>
+                                        <li><a href="<?php echo base_url(); ?>login" class="login-btn">Iniciar Sesión</a></li>
+                                    </ul><?php  
+                                }
+                            }
+                            else
+                            {
+                                ?><ul class="loginbar">
+                                        <li><a href="<?php echo base_url(); ?>nosotros" class="login-btn">Ayuda</a></li>
+                                        <li class="devider">&nbsp;</li>
+                                        <li><a href="<?php echo base_url(); ?>login" class="login-btn">Iniciar Sesión</a></li>
+                                    </ul><?php
+                            } ?>
                 </div>
             </div>
         </div>
