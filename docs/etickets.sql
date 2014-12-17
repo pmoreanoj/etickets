@@ -72,6 +72,8 @@ CREATE TABLE IF NOT EXISTS `reservation` (
   `userID` int(11) NOT NULL,
   `eventID` int(11) NOT NULL,
   `date` date NOT NULL,
+  `confirmation` varchar (100),
+  `bank` varchar(30), 
   `state` enum('PROCESSING','DELIVERED') NOT NULL DEFAULT 'PROCESSING',
   `more` text,
   PRIMARY KEY (`reservation_id`),
