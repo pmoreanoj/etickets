@@ -56,15 +56,15 @@
                 <h2>Inicio de sesión</h2>
                 <form class="form-horizontal" role="form" action="<?php echo base_url(); ?>login/validate" method="post" name="form">
                 <div class="form-group">
-                    <label for="username" class="col-sm-4 control-label">Nombre de usuario</label>
+                    <label for="user" class="col-sm-4 control-label">Nombre de usuario</label>
                     <div class="col-sm-4">
-                        <input type="text" class="form-control" id="username" name="username" placeholder="Nombre de usuario">
+                        <input type="text" class="form-control" id="user" name="user" placeholder="Nombre de usuario">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="password" class="col-sm-4 control-label">Contraseña</label>
                     <div class="col-sm-4">
-                        <input type="password" class="form-control" id="password" name="password" placeholder="Contraseña">
+                        <input type="pass" class="form-control" id="pass" name="pass" placeholder="Contraseña">
                     </div>
                 </div>
                 <div class="form-group">

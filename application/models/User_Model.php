@@ -17,7 +17,7 @@ class User_Model extends CI_Model
 
     function login( $username, $password )
     {
-        $param['username'] = $this->db->escape($username);
+        $param['username'] = $username;
         $param['password'] = $password;
 
         $sql = "SELECT `user_id`, `roleID` FROM `user` WHERE username=? AND password=?";
@@ -29,7 +29,7 @@ class User_Model extends CI_Model
            $data['role_id'] = $row->roleID;
         }
 
-        return $data;
+        return isset($data) ? $data : NULL;
     }
 
     function crearUsuario( $name, $username, $password, $email )

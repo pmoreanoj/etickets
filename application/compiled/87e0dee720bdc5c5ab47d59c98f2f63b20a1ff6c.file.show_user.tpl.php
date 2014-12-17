@@ -1,0 +1,105 @@
+<?php /* Smarty version Smarty-3.1.7, created on 2014-12-17 18:56:14
+         compiled from "application/views/show_user.tpl" */ ?>
+<?php /*%%SmartyHeaderCode:11483710975491c3be68c294-88690213%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+$_valid = $_smarty_tpl->decodeProperties(array (
+  'file_dependency' => 
+  array (
+    '87e0dee720bdc5c5ab47d59c98f2f63b20a1ff6c' => 
+    array (
+      0 => 'application/views/show_user.tpl',
+      1 => 1418834713,
+      2 => 'file',
+    ),
+  ),
+  'nocache_hash' => '11483710975491c3be68c294-88690213',
+  'function' => 
+  array (
+  ),
+  'variables' => 
+  array (
+    'table_name' => 0,
+    'id' => 0,
+    'user_fields' => 0,
+    'user_data' => 0,
+  ),
+  'has_nocache_code' => false,
+  'version' => 'Smarty-3.1.7',
+  'unifunc' => 'content_5491c3be6d857',
+),false); /*/%%SmartyHeaderCode%%*/?>
+<?php if ($_valid && !is_callable('content_5491c3be6d857')) {function content_5491c3be6d857($_smarty_tpl) {?><?php if (!is_callable('smarty_function_cycle')) include '/Applications/XAMPP/xamppfiles/htdocs/etickets/application/libraries/smarty/plugins/function.cycle.php';
+?><div class="block" id="block-tables">
+
+                <div class="secondary-navigation">
+                    <ul class="wat-cf">
+                        <li class="first"><a href="user">Listing</a></li>
+                        <li><a href="user/create/">New record</a></li>
+                    </ul>
+                </div>
+
+                <div class="content">
+                    <div class="inner">
+						<h3>Details of <?php echo $_smarty_tpl->tpl_vars['table_name']->value;?>
+, record #<?php echo $_smarty_tpl->tpl_vars['id']->value;?>
+</h3>
+
+						<table class="table" width="50%">
+                        	<thead>
+                                <th width="20%">Field</th>
+                                <th>Value</th>
+                        	</thead>
+						    <tr class="<?php echo smarty_function_cycle(array('values'=>'odd,even'),$_smarty_tpl);?>
+">
+                            <td><?php echo $_smarty_tpl->tpl_vars['user_fields']->value['user_id'];?>
+:</td>
+                            <td><?php echo $_smarty_tpl->tpl_vars['user_data']->value['user_id'];?>
+</td>
+                        </tr><tr class="<?php echo smarty_function_cycle(array('values'=>'odd,even'),$_smarty_tpl);?>
+">
+                            <td><?php echo $_smarty_tpl->tpl_vars['user_fields']->value['password'];?>
+:</td>
+                            <td><?php echo $_smarty_tpl->tpl_vars['user_data']->value['password'];?>
+</td>
+                        </tr><tr class="<?php echo smarty_function_cycle(array('values'=>'odd,even'),$_smarty_tpl);?>
+">
+                            <td><?php echo $_smarty_tpl->tpl_vars['user_fields']->value['roleID'];?>
+:</td>
+                            <td><?php echo $_smarty_tpl->tpl_vars['user_data']->value['roleID'];?>
+</td>
+                        </tr><tr class="<?php echo smarty_function_cycle(array('values'=>'odd,even'),$_smarty_tpl);?>
+">
+                            <td><?php echo $_smarty_tpl->tpl_vars['user_fields']->value['name'];?>
+:</td>
+                            <td><?php echo $_smarty_tpl->tpl_vars['user_data']->value['name'];?>
+</td>
+                        </tr><tr class="<?php echo smarty_function_cycle(array('values'=>'odd,even'),$_smarty_tpl);?>
+">
+                            <td><?php echo $_smarty_tpl->tpl_vars['user_fields']->value['email'];?>
+:</td>
+                            <td><?php echo $_smarty_tpl->tpl_vars['user_data']->value['email'];?>
+</td>
+                        </tr><tr class="<?php echo smarty_function_cycle(array('values'=>'odd,even'),$_smarty_tpl);?>
+">
+                            <td><?php echo $_smarty_tpl->tpl_vars['user_fields']->value['username'];?>
+:</td>
+                            <td><?php echo $_smarty_tpl->tpl_vars['user_data']->value['username'];?>
+</td>
+                        </tr><tr class="<?php echo smarty_function_cycle(array('values'=>'odd,even'),$_smarty_tpl);?>
+">
+                            <td><?php echo $_smarty_tpl->tpl_vars['user_fields']->value['delete'];?>
+:</td>
+                            <td><?php echo $_smarty_tpl->tpl_vars['user_data']->value['delete'];?>
+</td>
+                        </tr>
+						</table>
+                        <div class="actions-bar wat-cf">
+                            <div class="actions">
+                                <a class="button" href="user/edit/<?php echo $_smarty_tpl->tpl_vars['id']->value;?>
+">
+                                    <img src="iscaffold/backend_skins/images/icons/application_edit.png" alt="Edit record"> Edit record
+                                </a>
+                            </div>
+                        </div>
+                    </div><!-- .inner -->
+                </div><!-- .content -->
+            </div><!-- .block -->
+<?php }} ?>
