@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Model_role extends CI_Model 
+class Model_category extends CI_Model 
 {
     function __construct()
     {
@@ -17,7 +17,7 @@ class Model_role extends CI_Model
         /**
 		 *    bool $this->raw_data		
 		 *    Used to decide what data should the SQL queries retrieve if tables are joined
-		 *     - TRUE:  just the field names of the role table
+		 *     - TRUE:  just the field names of the category table
 		 *     - FALSE: related fields are replaced with the forign tables values
 		 *    Triggered to TRUE in the controller/edit method		 
 		 */
@@ -27,9 +27,9 @@ class Model_role extends CI_Model
 	function get ( $id, $get_one = false )
 	{
         
-	    $select_statement = ( $this->raw_data ) ? 'role_id,role,default' : 'role_id,role,default';
+	    $select_statement = ( $this->raw_data ) ? 'category_id,category' : 'category_id,category';
 		$this->db->select( $select_statement );
-		$this->db->from('role');
+		$this->db->from('category');
         
 
 		// Pick one record
@@ -40,7 +40,7 @@ class Model_role extends CI_Model
         }
 		else // Select the desired record
         {
-            $this->db->where( 'role_id', $id );
+            $this->db->where( 'category_id', $id );
         }
 
 		$query = $this->db->get();
@@ -49,9 +49,8 @@ class Model_role extends CI_Model
 		{
 			$row = $query->row_array();
 			return array( 
-	'role_id' => $row['role_id'],
-	'role' => $row['role'],
-	'default' => $row['default'],
+	'category_id' => $row['category_id'],
+	'category' => $row['category'],
  );
 		}
         else
@@ -64,7 +63,7 @@ class Model_role extends CI_Model
 
 	function insert ( $data )
 	{
-		$this->db->insert( 'role', $data );
+		$this->db->insert( 'category', $data );
 		return $this->db->insert_id();
 	}
 	
@@ -72,8 +71,8 @@ class Model_role extends CI_Model
 
 	function update ( $id, $data )
 	{
-		$this->db->where( 'role_id', $id );
-		$this->db->update( 'role', $data );
+		$this->db->where( 'category_id', $id );
+		$this->db->update( 'category', $data );
 	}
 
 
@@ -82,20 +81,16 @@ class Model_role extends CI_Model
 	{
         if( is_array( $id ) )
         {
-            $this->db->where_in( 'role_id', $id );            
+            $this->db->where_in( 'category_id', $id );            
         }
         else
         {
-            $this->db->where( 'role_id', $id );
+            $this->db->where( 'category_id', $id );
         }
-        $this->db->delete( 'role' );
+        $this->db->delete( 'category' );
         
-		$this->db->where( 'role_id', $id );
-        $this->db->delete('user_role');
-
-
-		$this->db->where( 'role_id', $id );
-        $this->db->delete('user_role');
+		$this->db->where( 'category_id', $id );
+        $this->db->delete('event_category');
 
 
 	}
@@ -106,8 +101,8 @@ class Model_role extends CI_Model
 	{
         
 	    $this->db->start_cache();
-		$this->db->select( 'role_id,role,default');
-		$this->db->from( 'role' );
+		$this->db->select( 'category_id,category');
+		$this->db->from( 'category' );
 		//$this->db->order_by( '', 'ASC' );
         
 
@@ -117,8 +112,8 @@ class Model_role extends CI_Model
         if( $this->pagination_enabled == TRUE )
         {
             $config = array();
-            $config['total_rows']  = $this->db->count_all_results('role');
-            $config['base_url']    = 'role/index/';
+            $config['total_rows']  = $this->db->count_all_results('category');
+            $config['base_url']    = 'category/index/';
             $config['uri_segment'] = 3;
             $config['cur_tag_open'] = '<span class="current">';
             $config['cur_tag_close'] = '</span>';
@@ -140,9 +135,8 @@ class Model_role extends CI_Model
 		foreach ( $query->result_array() as $row )
 		{
 			$temp_result[] = array( 
-	'role_id' => $row['role_id'],
-	'role' => $row['role'],
-	'default' => $row['default'],
+	'category_id' => $row['category_id'],
+	'category' => $row['category'],
  );
 		}
         $this->db->flush_cache(); 
@@ -155,12 +149,12 @@ class Model_role extends CI_Model
 	{
 	    $meta = $this->metadata();
 	    $this->db->start_cache();
-		$this->db->select( 'role_id,role,default');
-		$this->db->from( 'role' );
+		$this->db->select( 'category_id,category');
+		$this->db->from( 'category' );
         
 
 		// Delete this line after setting up the search conditions 
-        die('Please see models/model_role.php for setting up the search method.');
+        die('Please see models/model_category.php for setting up the search method.');
 		
         /**
          *  Rename field_name_to_search to the field you wish to search 
@@ -174,8 +168,8 @@ class Model_role extends CI_Model
         if( $this->pagination_enabled == TRUE )
         {
             $config = array();
-            $config['total_rows']  = $this->db->count_all_results('role');
-            $config['base_url']    = '/role/search/'.$keyword.'/';
+            $config['total_rows']  = $this->db->count_all_results('category');
+            $config['base_url']    = '/category/search/'.$keyword.'/';
             $config['uri_segment'] = 4;
             $config['per_page']    = $this->pagination_per_page;
             $config['num_links']   = $this->pagination_num_links;
@@ -194,9 +188,8 @@ class Model_role extends CI_Model
 		foreach ( $query->result_array() as $row )
 		{
 			$temp_result[] = array( 
-	'role_id' => $row['role_id'],
-	'role' => $row['role'],
-	'default' => $row['default'],
+	'category_id' => $row['category_id'],
+	'category' => $row['category'],
  );
 		}
         $this->db->flush_cache(); 
@@ -213,9 +206,8 @@ class Model_role extends CI_Model
     function fields( $withID = FALSE )
     {
         $fs = array(
-	'role_id' => lang('role_id'),
-	'role' => lang('role'),
-	'default' => lang('default')
+	'category_id' => lang('category_id'),
+	'category' => lang('category')
 );
 
         if( $withID == FALSE )
@@ -241,7 +233,7 @@ class Model_role extends CI_Model
     {
         $this->load->library('explain_table');
 
-        $metadata = $this->explain_table->parse( 'role' );
+        $metadata = $this->explain_table->parse( 'category' );
 
         foreach( $metadata as $k => $md )
         {

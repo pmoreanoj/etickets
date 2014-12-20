@@ -26,6 +26,14 @@
 
                             
     	<div class="group">
+            <label class="label">{$event_fields.event_id}<span class="error">*</span></label>
+    		<div>
+    	       	<input class="text_field" type="text" maxlength="255" value="{if isset($event_data)}{$event_data.event_id}{/if}" name="event_id" />
+    		</div>
+    		<p class="instruct">Id del evento</p>
+    	</div>
+    
+    	<div class="group">
             <label class="label">{$event_fields.placeID}<span class="error">*</span></label>
     		<div>
     	       	<input class="text_field" type="text" maxlength="255" value="{if isset($event_data)}{$event_data.placeID}{/if}" name="placeID" />

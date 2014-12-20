@@ -19,6 +19,17 @@ USE `etickets`;
 
 -- --------------------------------------------------------
 
+CREATE TABLE IF NOT EXISTS `category` (
+  `category_id` int(11) NOT NULL AUTO_INCREMENT,
+  `category` varchar(50) NOT NULL,
+  PRIMARY KEY (`category_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
+
+INSERT INTO `category` (`category_id`, `category`) VALUES
+(1, 'futbol'),
+(2, 'concierto'),
+(3, 'fiesta');
+
 --
 -- Table structure for table `event`
 --
@@ -30,6 +41,7 @@ CREATE TABLE IF NOT EXISTS `event` (
   `photo` varchar(100),
   `dateTime` datetime NOT NULL,
   `delete` tinyint(1) NOT NULL DEFAULT '0',
+  `categoryID` int(11) NOT NULL, 
   PRIMARY KEY (`event_id`),
   KEY `fk_event_place_idx` (`placeID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
@@ -94,6 +106,7 @@ CREATE TABLE IF NOT EXISTS `role` (
   PRIMARY KEY (`role_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
 
+
 --
 -- Dumping data for table `role`
 --
@@ -103,6 +116,8 @@ INSERT INTO `role` (`role_id`, `role`, `default`) VALUES
 (2, 'organizador', 0),
 (3, 'vendedor', 0),
 (4, 'cliente', 1);
+
+
 
 -- --------------------------------------------------------
 
@@ -159,53 +174,63 @@ CREATE TABLE IF NOT EXISTS `sf_config` (
 --
 
 INSERT INTO `sf_config` (`sf_id`, `sf_table`, `sf_field`, `sf_type`, `sf_related`, `sf_label`, `sf_desc`, `sf_order`, `sf_hidden`) VALUES
-(1, 'event', 'id', 'default', '|', '', '', 0, 1),
-(2, 'event', 'place_id', 'related', 'place|place_id|place|name', 'Lugar', 'Lugar del evento', 1, 0),
 (3, 'event', 'name', 'default', '|', 'Nombre', 'Nombre del evento', 2, 0),
 (4, 'event', 'photo', 'file', '|', 'Foto', 'Foto del evento', 3, 0),
 (5, 'event', 'dateTime', 'default', '|', 'Fecha', 'Fecha y Hora del evento', 4, 0),
-(6, 'event', 'delete', 'checkbox', '|', '', '', 5, 1),
-(7, 'place', 'id', 'default', '|', '', '', 0, 0),
+(6, 'event', 'delete', 'checkbox', '|', 'Borrado', '', 5, 1),
 (8, 'place', 'name', 'default', '|', 'Nombre', 'Nombre del lugar', 1, 0),
 (9, 'place', 'photo', 'file', '|', 'Foto', 'Foto del Lugar', 2, 0),
 (10, 'place', 'description', 'default', '|', 'Descripcion', 'Desripcion del Lugar', 3, 0),
-(11, 'place_has_section', 'place_id', 'related', 'place|place_id|place|name', 'Lugar', 'Id del lugar', 0, 0),
-(12, 'place_has_section', 'section_id', 'related', 'section|section_id|section|description', 'Seccion', 'Id de la sección', 1, 0),
-(13, 'reservation', 'id', 'default', '|', '', '', 0, 0),
-(14, 'reservation', 'user_id', 'default', '|', '', '', 1, 0),
-(15, 'reservation', 'event_id', 'default', '|', '', '', 2, 0),
-(16, 'reservation', 'date', 'default', '|', '', '', 3, 0),
-(17, 'reservation', 'state', 'default', '|', '', '', 4, 0),
-(18, 'reservation', 'more', 'default', '|', '', '', 5, 0),
-(19, 'role', 'id', 'default', '|', '', '', 0, 0),
-(20, 'role', 'role', 'default', '|', '', '', 1, 0),
-(21, 'role', 'default', 'default', '|', '', '', 2, 0),
-(22, 'seat', 'id', 'default', '|', '', '', 0, 0),
-(23, 'seat', 'section_id', 'default', '|', '', '', 1, 0),
-(24, 'seat', 'number_row', 'default', '|', '', '', 2, 0),
-(25, 'seat', 'number_seat', 'default', '|', '', '', 3, 0),
-(26, 'seat', 'occupied', 'default', '|', '', '', 4, 0),
-(27, 'section', 'id', 'default', '|', '', '', 0, 0),
-(28, 'section', 'rows', 'default', '|', '', '', 1, 0),
-(29, 'section', 'seats_per_rows', 'default', '|', '', '', 2, 0),
-(30, 'section', 'price', 'default', '|', '', '', 3, 0),
-(31, 'section', 'description', 'default', '|', '', '', 4, 0),
-(32, 'user', 'id', 'default', '|', '', '', 0, 0),
-(33, 'user', 'name', 'default', '|', '', '', 2, 0),
-(34, 'user', 'email', 'default', '|', '', '', 3, 0),
-(35, 'user', 'username', 'default', '|', '', '', 4, 0),
-(36, 'user', 'role_id', 'default', '|', '', '', 5, 0),
-(37, 'user', 'delete', 'default', '|', '', '', 6, 0),
-(38, 'user_profile', 'id', 'default', '|', '', '', 0, 0),
-(39, 'user_profile', 'user_id', 'default', '|', '', '', 1, 0),
-(40, 'user_profile', 'address', 'default', '|', '', '', 2, 0),
-(41, 'user_profile', 'city', 'default', '|', '', '', 3, 0),
-(42, 'user_profile', 'province', 'default', '|', '', '', 4, 0),
-(43, 'user_profile', 'zipcode', 'default', '|', '', '', 5, 0),
-(44, 'user_profile', 'phone', 'default', '|', '', '', 6, 0),
-(45, 'user_profile', 'celular', 'default', '|', '', '', 7, 0),
-(46, 'user_profile', 'role_id', 'default', '|', '', '', 8, 0),
-(47, 'user_profile', 'delete', 'default', '|', '', '', 9, 0);
+(16, 'reservation', 'date', 'date', '|', 'Fecha y Hora', 'Fecha de la reserva', 5, 0),
+(17, 'reservation', 'state', 'enum_values', '|', 'Estado', 'Estado de la reserva', 6, 0),
+(18, 'reservation', 'more', 'default', '|', 'Mas', 'Mas información', 7, 0),
+(20, 'role', 'role', 'enum_values', '|', 'Rol', 'Nombre del Rol', 1, 0),
+(21, 'role', 'default', 'checkbox', '|', 'Defecto', 'Rol por defecto', 2, 0),
+(24, 'seat', 'number_row', 'default', '|', 'Numero de fila', 'Numero de la fila donde esta la silla', 2, 0),
+(25, 'seat', 'number_seat', 'default', '|', 'Numero de silla', 'Numero de silla', 3, 0),
+(26, 'seat', 'occupied', 'checkbox', '|', 'Ocupada', 'Si la silla ya esta ocupada', 4, 0),
+(28, 'section', 'rows', 'default', '|', 'FIlas', 'Numero de filas de la seccion', 1, 0),
+(29, 'section', 'seats_per_rows', 'default', '|', 'Sillas por fila', 'Numero de sillas por fila', 2, 0),
+(30, 'section', 'price', 'default', '|', 'Precio', 'Precio de la seccion', 3, 0),
+(31, 'section', 'description', 'default', '|', 'Descripcion', 'Descripcion de la seccion', 4, 0),
+(33, 'user', 'name', 'default', '|', 'Nombre', 'Nombre completo del usuario', 3, 0),
+(34, 'user', 'email', 'default', '|', 'E-mail', 'E-mail del usuario', 4, 0),
+(35, 'user', 'username', 'default', '|', 'Usuario', 'Usuario', 5, 0),
+(37, 'user', 'delete', 'default', '|', 'Borrado', 'Si el usuario se borro', 6, 0),
+(40, 'user_profile', 'address', 'default', '|', 'DIreccion', 'Dirección del usuario', 2, 0),
+(41, 'user_profile', 'city', 'default', '|', 'Ciudad', 'Ciudad del usuario', 3, 0),
+(42, 'user_profile', 'province', 'default', '|', 'Provincia', 'Provincia del Usuario', 4, 0),
+(43, 'user_profile', 'zipcode', 'default', '|', 'Codigo Postal', 'Codigo Postal', 5, 0),
+(44, 'user_profile', 'phone', 'default', '|', 'Telefono', 'Telefono del usuario', 6, 0),
+(45, 'user_profile', 'celular', 'default', '|', 'Celular', 'Celular del usuario', 7, 0),
+(48, 'sf_config', 'sf_id', 'default', '', '', NULL, NULL, 0),
+(49, 'sf_config', 'sf_table', 'default', '', '', NULL, NULL, 0),
+(50, 'sf_config', 'sf_field', 'default', '', '', NULL, NULL, 0),
+(51, 'sf_config', 'sf_type', 'default', '', '', NULL, NULL, 0),
+(52, 'sf_config', 'sf_related', 'default', '', '', NULL, NULL, 0),
+(53, 'sf_config', 'sf_label', 'default', '', '', NULL, NULL, 0),
+(54, 'sf_config', 'sf_desc', 'default', '', '', NULL, NULL, 0),
+(55, 'sf_config', 'sf_order', 'default', '', '', NULL, NULL, 0),
+(56, 'sf_config', 'sf_hidden', 'default', '', '', NULL, NULL, 0),
+(57, 'event', 'event_id', 'default', '|', 'ID', 'Id del evento', 0, 0),
+(58, 'event', 'placeID', 'default', '|', 'Lugar', 'Id del lugar', 1, 0),
+(59, 'place', 'place_id', 'default', '|', 'Id', 'ID del lugar', 0, 1),
+(60, 'place_has_section', 'placeID', 'default', '|', 'ID del Lugar', '', 0, 0),
+(61, 'place_has_section', 'sectionID', 'default', '|', 'Id de la Seccion', '', 1, 0),
+(62, 'reservation', 'reservation_id', 'default', '|', 'ID Reserva', 'Id de la reserva', 2, 0),
+(63, 'reservation', 'userID', 'related', 'user|user_id|user|username', 'Usuario', 'ID del usuario', 3, 0),
+(64, 'reservation', 'eventID', 'related', 'event|event_id|user|name', 'Evento', 'ID del evento', 4, 0),
+(65, 'role', 'role_id', 'default', '|', 'ID ', 'Id del rol', 0, 0),
+(66, 'seat', 'seat_id', 'default', '|', 'ID de la silla', 'ID de la silla', 0, 0),
+(67, 'seat', 'sectionID', 'related', 'section|section_id|section|description', 'Seccion', 'ID de la sección a la que pertenece', 1, 0),
+(68, 'section', 'section_id', 'default', '|', 'ID', 'ID de la seccion', 0, 0),
+(69, 'user', 'user_id', 'default', '|', 'ID', 'ID del usuario', 0, 0),
+(70, 'user', 'password', 'default', '|', 'Contrasena', 'Contrasena del usuario', 1, 0),
+(71, 'user', 'roleID', 'related', 'role|role_id|role|role', 'Rol', 'Rol del usuario', 2, 0),
+(72, 'user_profile', 'profile_id', 'default', '|', 'ID', 'Id del perfil', 0, 0),
+(73, 'user_profile', 'userID', 'related', 'user|user_id|user|name', 'Usuario', 'ID del usuario', 1, 0),
+(74, 'reservation', 'confirmation', 'default', '|', 'Confirmacion de Pago', '', 0, 0),
+(75, 'reservation', 'bank', 'default', '|', 'Banco de Pago', '', 1, 0);
 
 -- --------------------------------------------------------
 
@@ -227,7 +252,8 @@ CREATE TABLE IF NOT EXISTS `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 INSERT INTO `user` (`name`, `password`, `email`, `username`, `roleID`, `delete` ) VALUES
-	('admin', 'admin', 'admin@etickets.com', 'admin', 1, 0 );
+	('admin', 'admin', 'admin@etickets.com', 'admin', 1, 0 ),
+	('cliente', 'cliente', 'cliente@etickets.com', 'cliente', 4, 0 );
 
 -- --------------------------------------------------------
 
@@ -256,7 +282,8 @@ CREATE TABLE IF NOT EXISTS `user_profile` (
 -- Constraints for table `event`
 --
 ALTER TABLE `event`
-  ADD CONSTRAINT `fk_event_place` FOREIGN KEY (`placeID`) REFERENCES `place` (`place_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_event_place` FOREIGN KEY (`placeID`) REFERENCES `place` (`place_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_event_category` FOREIGN KEY (`categoryID`) REFERENCES `category` (`category_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `place_has_section`

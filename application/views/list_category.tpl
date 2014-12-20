@@ -2,8 +2,8 @@
 
                 <div class="secondary-navigation">
                     <ul class="wat-cf">
-                        <li class="first active"><a href="event">Listing</a></li>
-                        <li><a href="event/create/">New record</a></li>
+                        <li class="first active"><a href="category">Listing</a></li>
+                        <li><a href="category/create/">New record</a></li>
                     </ul>
                 </div>
 
@@ -11,35 +11,27 @@
                     <div class="inner">
                         <h3>List of {$table_name}</h3>
 
-                        {if !empty( $event_data )}
-                        <form action="event/delete" method="post" id="listing_form">
+                        {if !empty( $category_data )}
+                        <form action="category/delete" method="post" id="listing_form">
                             <table class="table">
                             	<thead>
                                     <th width="20"> </th>
-                                    			<th>{$event_fields.categoryID}</th>
-			<th>{$event_fields.event_id}</th>
-			<th>{$event_fields.placeID}</th>
-			<th>{$event_fields.name}</th>
-			<th>{$event_fields.photo}</th>
-			<th>{$event_fields.dateTime}</th>
+                                    			<th>{$category_fields.category_id}</th>
+			<th>{$category_fields.category}</th>
 
                                     <th width="80">Actions</th>
                             	</thead>
                             	<tbody>
-                                	{foreach $event_data as $row}
+                                	{foreach $category_data as $row}
                                         <tr class="{cycle values='odd,even'}">
-                                            <td><input type="checkbox" class="checkbox" name="delete_ids[]" value="{$row.categoryID}" /></td>
-                                            				<td>{$row.categoryID}</td>
-				<td>{$row.event_id}</td>
-				<td>{$row.placeID}</td>
-				<td>{$row.name}</td>
-				<td>{$row.photo}</td>
-				<td>{$row.dateTime}</td>
+                                            <td><input type="checkbox" class="checkbox" name="delete_ids[]" value="{$row.category_id}" /></td>
+                                            				<td>{$row.category_id}</td>
+				<td>{$row.category}</td>
 
                                             <td width="80">
-                                                <a href="event/show/{$row.categoryID}"><img src="iscaffold/images/view.png" alt="Show record" /></a>
-                                                <a href="event/edit/{$row.categoryID}"><img src="iscaffold/images/edit.png" alt="Edit record" /></a>
-                                                <a href="javascript:chk('event/delete/{$row.categoryID}')"><img src="iscaffold/images/delete.png" alt="Delete record" /></a>
+                                                <a href="category/show/{$row.category_id}"><img src="iscaffold/images/view.png" alt="Show record" /></a>
+                                                <a href="category/edit/{$row.category_id}"><img src="iscaffold/images/edit.png" alt="Edit record" /></a>
+                                                <a href="javascript:chk('category/delete/{$row.category_id}')"><img src="iscaffold/images/delete.png" alt="Delete record" /></a>
                                             </td>
                             		    </tr>
                                 	{/foreach}

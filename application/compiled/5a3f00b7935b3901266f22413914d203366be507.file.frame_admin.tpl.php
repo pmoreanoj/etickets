@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.7, created on 2014-12-17 21:30:25
+<?php /* Smarty version Smarty-3.1.7, created on 2014-12-20 19:59:53
          compiled from "application/views/frame_admin.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:9614532835491e727bbd306-96168861%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '5a3f00b7935b3901266f22413914d203366be507' => 
     array (
       0 => 'application/views/frame_admin.tpl',
-      1 => 1418848148,
+      1 => 1419101918,
       2 => 'file',
     ),
   ),
@@ -85,7 +85,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
                 <div class="block">
                   <h3>Navigation</h3>
                   <ul class="navigation">
-                    <ul id="top_menu">						<li<?php if (isset($_smarty_tpl->tpl_vars['table_name']->value)){?><?php if ($_smarty_tpl->tpl_vars['table_name']->value=='Event'){?> class='active'<?php }?><?php }?>><a href='event'>Event</a></li>
+                    <ul id="top_menu">						<li<?php if (isset($_smarty_tpl->tpl_vars['table_name']->value)){?><?php if ($_smarty_tpl->tpl_vars['table_name']->value=='Category'){?> class='active'<?php }?><?php }?>><a href='category'>Category</a></li>
+						<li<?php if (isset($_smarty_tpl->tpl_vars['table_name']->value)){?><?php if ($_smarty_tpl->tpl_vars['table_name']->value=='Event'){?> class='active'<?php }?><?php }?>><a href='event'>Event</a></li>
 						<li<?php if (isset($_smarty_tpl->tpl_vars['table_name']->value)){?><?php if ($_smarty_tpl->tpl_vars['table_name']->value=='Place'){?> class='active'<?php }?><?php }?>><a href='place'>Place</a></li>
 						<li<?php if (isset($_smarty_tpl->tpl_vars['table_name']->value)){?><?php if ($_smarty_tpl->tpl_vars['table_name']->value=='Place_has_section'){?> class='active'<?php }?><?php }?>><a href='place_has_section'>Place_has_section</a></li>
 						<li<?php if (isset($_smarty_tpl->tpl_vars['table_name']->value)){?><?php if ($_smarty_tpl->tpl_vars['table_name']->value=='Reservation'){?> class='active'<?php }?><?php }?>><a href='reservation'>Reservation</a></li>

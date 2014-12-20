@@ -56,7 +56,8 @@
                 <div class="block">
                   <h3>Navigation</h3>
                   <ul class="navigation">
-                    <ul id="top_menu">						<li{if isset($table_name)}{if $table_name == 'Event'} class='active'{/if}{/if}><a href='event'>Event</a></li>
+                    <ul id="top_menu">						<li{if isset($table_name)}{if $table_name == 'Category'} class='active'{/if}{/if}><a href='category'>Category</a></li>
+						<li{if isset($table_name)}{if $table_name == 'Event'} class='active'{/if}{/if}><a href='event'>Event</a></li>
 						<li{if isset($table_name)}{if $table_name == 'Place'} class='active'{/if}{/if}><a href='place'>Place</a></li>
 						<li{if isset($table_name)}{if $table_name == 'Place_has_section'} class='active'{/if}{/if}><a href='place_has_section'>Place_has_section</a></li>
 						<li{if isset($table_name)}{if $table_name == 'Reservation'} class='active'{/if}{/if}><a href='reservation'>Reservation</a></li>

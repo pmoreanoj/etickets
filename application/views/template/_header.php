@@ -61,13 +61,13 @@ z-index: 9999;
                     </ul>
                     <?php if( isset( $valid ) )
                             {
-                                if( strcmp($valid, "yes") )
+                                if( strcmp($valid, "yes") == 0 )
                                 {
                                     ?>
                                     <ul class="loginbar">
                                         <li><a href="<?php echo base_url(); ?>nosotros" class="login-btn">Ayuda</a></li>
                                         <li class="devider">&nbsp;</li>
-                                        <li><span class="login-btn" >Bienvenido <?php echo $name; ?></span></li>
+                                        <li><span class="login-btn" >Bienvenido <?php echo $name; ?></span> | <a href="<?php echo base_url(); ?>login/logout" class="login-btn">Cerrar Sesion</a></li>
                                     </ul>
                     <?php 
                                 }
@@ -111,8 +111,11 @@ z-index: 9999;
                             <li class="dropdown active">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Eventos<b class="caret"></b></a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="<?php echo base_url(); ?>futbol">Partidos de futbol</a></li>
-                                    <li><a href="<?php echo base_url(); ?>conciertos">Conciertos</a></li>
+                                    <?php foreach( $categorias as $categoria )
+                                    {
+                                        echo "<li><a href='". base_url() ."eventos/evento?id=".$categoria['category_id']."'>".$categoria['category']."</a></li>";
+                                    }
+                                    ?>
                                 </ul>
                             </li>
                             <li class="dropdown">

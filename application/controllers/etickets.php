@@ -25,27 +25,15 @@ class etickets extends CI_Controller {
         
         $this->load->helper('url');
         $this->load->library('session');
+        $this->load->model('model_category', "categorias");
         
         $this->data = $this->session->userdata('logged_in');
-        $this->logged_in = $this->data['valid'];
-        $this->name = $this->data['name'];
-        $this->role_id = $this->data['role_id'];
+        
+        $this->data['categorias'] = $this->categorias->lister( );
      }
 
     public function index() {
         $contenido['contenido'] = "index.php";
-        $contenido['data'] = $this->data;
-        $this->load->view("template/_layout.php", $contenido);
-    }
-
-    public function futbol() {
-        $contenido['contenido'] = "events_soccer.php";
-        $contenido['data'] = $this->data;
-        $this->load->view("template/_layout.php", $contenido);
-    }
-
-    public function conciertos() {
-        $contenido['contenido'] = "events_concerts.php";
         $contenido['data'] = $this->data;
         $this->load->view("template/_layout.php", $contenido);
     }

@@ -2,8 +2,8 @@
 
                 <div class="secondary-navigation">
                     <ul class="wat-cf">
-                        <li class="first"><a href="role">Listing</a></li>
-                        <li class="{if $action_mode == 'create'}active{/if}"><a href="role/create/">New record</a></li>
+                        <li class="first"><a href="category">Listing</a></li>
+                        <li class="{if $action_mode == 'create'}active{/if}"><a href="category/create/">New record</a></li>
                     </ul>
                 </div>
 
@@ -22,22 +22,15 @@
                             </div>
                         {/if}
 
-                        <form class="form" method='post' action='role/{$action_mode}/{if isset($record_id)}{$record_id}{/if}' enctype="multipart/form-data">
+                        <form class="form" method='post' action='category/{$action_mode}/{if isset($record_id)}{$record_id}{/if}' enctype="multipart/form-data">
 
                             
     	<div class="group">
-            <label class="label">{$role_fields.role}<span class="error">*</span></label>
+            <label class="label">{$category_fields.category}<span class="error">*</span></label>
     		<div>
-    	       	<input class="text_field" type="text" maxlength="255" value="{if isset($role_data)}{$role_data.role}{/if}" name="role" />
+    	       	<input class="text_field" type="text" maxlength="255" value="{if isset($category_data)}{$category_data.category}{/if}" name="category" />
     		</div>
-    		<p class="instruct">Nombre del Rol</p>
-    	</div>
-    
-    	<div class="group">
-            <label class="label">{$role_fields.default}<span class="error">*</span></label>
-            <input class="field checkbox" type="checkbox" value="1" name="default"{if isset($role_data)}{if $role_data.default == 1} checked="checked"{/if}{/if} />
-
-    		<p class="instruct">Rol por defecto</p>
+    		
     	</div>
     
 

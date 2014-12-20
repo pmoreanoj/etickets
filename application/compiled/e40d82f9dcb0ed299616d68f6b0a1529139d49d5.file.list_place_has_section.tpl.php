@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.7, created on 2014-12-17 21:33:43
+<?php /* Smarty version Smarty-3.1.7, created on 2014-12-20 19:57:55
          compiled from "application/views/list_place_has_section.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:3318615265491e8a799aff2-92973454%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'e40d82f9dcb0ed299616d68f6b0a1529139d49d5' => 
     array (
       0 => 'application/views/list_place_has_section.tpl',
-      1 => 1418848148,
+      1 => 1419098876,
       2 => 'file',
     ),
   ),
@@ -15,6 +15,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'function' => 
   array (
   ),
+  'version' => 'Smarty-3.1.7',
+  'unifunc' => 'content_5491e8a79e08c',
   'variables' => 
   array (
     'table_name' => 0,
@@ -24,8 +26,6 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'pager' => 0,
   ),
   'has_nocache_code' => false,
-  'version' => 'Smarty-3.1.7',
-  'unifunc' => 'content_5491e8a79e08c',
 ),false); /*/%%SmartyHeaderCode%%*/?>
 <?php if ($_valid && !is_callable('content_5491e8a79e08c')) {function content_5491e8a79e08c($_smarty_tpl) {?><?php if (!is_callable('smarty_function_cycle')) include '/Applications/XAMPP/xamppfiles/htdocs/etickets/application/libraries/smarty/plugins/function.cycle.php';
 ?><div class="block" id="block-tables">

@@ -17,6 +17,9 @@
                                 <th>Value</th>
                         	</thead>
 						    <tr class="{cycle values='odd,even'}">
+                            <td>{$event_fields.categoryID}:</td>
+                            <td>{$event_data.categoryID}</td>
+                        </tr><tr class="{cycle values='odd,even'}">
                             <td>{$event_fields.event_id}:</td>
                             <td>{$event_data.event_id}</td>
                         </tr><tr class="{cycle values='odd,even'}">

@@ -15,22 +15,19 @@ class Dashboard extends CI_Controller {
         $this->load->library('template');
         $this->load->helper('url');
         $this->load->model('model_auth');
+        $this->load->library('session');
+        $this->load->model('User_Model', 'user');
 
-        $this->logged_in = $this->model_auth->check(TRUE);
-        $this->role = $this->model_auth->getRole();
-        $this->role_id = $this->model_auth->getUserRole();
-        
-        if ($this->role_id == 1) {
+        $this->data = $this->session->userdata('logged_in');
+
+        if ($this->data['role_id'] == $this->user->getAdminRole()) {
+            $this->logged_in = $this->model_auth->check(TRUE);
             $this->template->assign('logged_in', $this->logged_in);
-            $this->template->assign('role', $this->role);
-            $this->template->assign('role_id', $this->role_id);
 
             $this->template->assign('template', 'dashboard');
             $this->template->display('frame_admin.tpl');
-        }
-        else
-        {
-            redirect(base_url());
+        } else {
+            redirect();
         }
     }
 

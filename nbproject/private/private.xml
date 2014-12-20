@@ -2,6 +2,18 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/Applications/XAMPP/xamppfiles/htdocs/etickets/application/models/model_auth.php</file>
+            <file>file:/Applications/XAMPP/xamppfiles/htdocs/etickets/application/views/template/_header.php</file>
+            <file>file:/Applications/XAMPP/xamppfiles/htdocs/etickets/application/views/frame_admin.tpl</file>
+            <file>file:/Applications/XAMPP/xamppfiles/htdocs/etickets/application/controllers/etickets.php</file>
+            <file>file:/Applications/XAMPP/xamppfiles/htdocs/etickets/application/models/User_Model.php</file>
+            <file>file:/Applications/XAMPP/xamppfiles/htdocs/etickets/application/controllers/login.php</file>
+            <file>file:/Applications/XAMPP/xamppfiles/htdocs/etickets/application/config/routes.php</file>
+            <file>file:/Applications/XAMPP/xamppfiles/htdocs/etickets/application/controllers/index.html</file>
+            <file>file:/Applications/XAMPP/xamppfiles/htdocs/etickets/application/views/template/_layout.php</file>
+            <file>file:/Applications/XAMPP/xamppfiles/htdocs/etickets/docs/etickets.sql</file>
+            <file>file:/Applications/XAMPP/xamppfiles/htdocs/etickets/application/controllers/dashboard.php</file>
+        </group>
     </open-files>
 </project-private>
