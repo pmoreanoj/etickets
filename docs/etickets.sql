@@ -174,10 +174,6 @@ CREATE TABLE IF NOT EXISTS `sf_config` (
 --
 
 INSERT INTO `sf_config` (`sf_id`, `sf_table`, `sf_field`, `sf_type`, `sf_related`, `sf_label`, `sf_desc`, `sf_order`, `sf_hidden`) VALUES
-(3, 'event', 'name', 'default', '|', 'Nombre', 'Nombre del evento', 2, 0),
-(4, 'event', 'photo', 'file', '|', 'Foto', 'Foto del evento', 3, 0),
-(5, 'event', 'dateTime', 'default', '|', 'Fecha', 'Fecha y Hora del evento', 4, 0),
-(6, 'event', 'delete', 'checkbox', '|', 'Borrado', '', 5, 1),
 (8, 'place', 'name', 'default', '|', 'Nombre', 'Nombre del lugar', 1, 0),
 (9, 'place', 'photo', 'file', '|', 'Foto', 'Foto del Lugar', 2, 0),
 (10, 'place', 'description', 'default', '|', 'Descripcion', 'Desripcion del Lugar', 3, 0),

@@ -66,7 +66,11 @@ class Event extends CI_Controller {
         switch ($_SERVER ['REQUEST_METHOD']) {
             case 'GET':
                 $fields = $this->model_event->fields();
+                $category_set = $this->model_event->related_category();
+                $place_set = $this->model_event->related_place();
 
+                $this->template->assign('related_category', $category_set);
+                $this->template->assign('related_place', $place_set);
 
 
                 $this->template->assign('action_mode', 'create');
@@ -85,25 +89,29 @@ class Event extends CI_Controller {
 
                 /* we set the rules */
                 /* don't forget to edit these */
-                $this->form_validation->set_rules('event_id', lang('event_id'), 'required|max_length[11]|integer');
-                $this->form_validation->set_rules('placeID', lang('placeID'), 'required|max_length[11]|integer');
                 $this->form_validation->set_rules('name', lang('name'), 'required|max_length[100]');
                 $this->form_validation->set_rules('photo', lang('photo'), '100');
                 $this->form_validation->set_rules('dateTime', lang('dateTime'), 'required');
                 $this->form_validation->set_rules('delete', lang('delete'), 'required|max_length[1]|integer');
+                $this->form_validation->set_rules('categoryID', lang('categoryID'), 'required|max_length[11]|integer');
+                $this->form_validation->set_rules('placeID', lang('placeID'), 'required|max_length[11]|integer');
 
-                $data_post['event_id'] = $this->input->post('event_id');
-                $data_post['placeID'] = $this->input->post('placeID');
                 $data_post['name'] = $this->input->post('name');
                 $data_post['photo'] = ( empty($_FILES['photo']['name']) ) ? $this->input->post('photo-original-name') : $this->uploader->upload('photo');
                 $data_post['dateTime'] = $this->input->post('dateTime');
-                $data_post['delete'] = ( $this->input->post('delete') == FALSE ) ? 0 : $this->input->post('delete');
+                $data_post['delete'] = $this->input->post('delete');
+                $data_post['categoryID'] = $this->input->post('categoryID');
+                $data_post['placeID'] = $this->input->post('placeID');
 
-                if ($this->form_validation->run() == FALSE || $this->uploader->success == FALSE || $this->uploader->required_empty !== FALSE) {
+                if ($this->form_validation->run() == FALSE || $this->uploader->success == FALSE) {
                     $errors = validation_errors();
                     $errors .= ( $this->uploader->success ) ? '' : $this->uploader->response;
                     $errors .= $this->uploader->required_empty;
+                    $category_set = $this->model_event->related_category();
+                    $place_set = $this->model_event->related_place();
 
+                    $this->template->assign('related_category', $category_set);
+                    $this->template->assign('related_place', $place_set);
 
 
                     $this->template->assign('errors', $errors);
@@ -135,8 +143,12 @@ class Event extends CI_Controller {
                 $this->model_event->raw_data = TRUE;
                 $data = $this->model_event->get($id);
                 $fields = $this->model_event->fields();
+                $category_set = $this->model_event->related_category();
+                $place_set = $this->model_event->related_place();
 
 
+                $this->template->assign('related_category', $category_set);
+                $this->template->assign('related_place', $place_set);
 
 
                 $this->template->assign('action_mode', 'edit');
@@ -154,25 +166,29 @@ class Event extends CI_Controller {
                 $fields = $this->model_event->fields();
                 /* we set the rules */
                 /* don't forget to edit these */
-                $this->form_validation->set_rules('event_id', lang('event_id'), 'required|max_length[11]|integer');
-                $this->form_validation->set_rules('placeID', lang('placeID'), 'required|max_length[11]|integer');
                 $this->form_validation->set_rules('name', lang('name'), 'required|max_length[100]');
                 $this->form_validation->set_rules('photo', lang('photo'), '100');
                 $this->form_validation->set_rules('dateTime', lang('dateTime'), 'required');
                 $this->form_validation->set_rules('delete', lang('delete'), 'required|max_length[1]|integer');
+                $this->form_validation->set_rules('categoryID', lang('categoryID'), 'required|max_length[11]|integer');
+                $this->form_validation->set_rules('placeID', lang('placeID'), 'required|max_length[11]|integer');
 
-                $data_post['event_id'] = $this->input->post('event_id');
-                $data_post['placeID'] = $this->input->post('placeID');
                 $data_post['name'] = $this->input->post('name');
                 $data_post['photo'] = ( empty($_FILES['photo']['name']) ) ? $this->input->post('photo-original-name') : $this->uploader->upload('photo');
                 $data_post['dateTime'] = $this->input->post('dateTime');
-                $data_post['delete'] = ( $this->input->post('delete') == FALSE ) ? 0 : $this->input->post('delete');
+                $data_post['delete'] = $this->input->post('delete');
+                $data_post['categoryID'] = $this->input->post('categoryID');
+                $data_post['placeID'] = $this->input->post('placeID');
 
-                if ($this->form_validation->run() == FALSE || $this->uploader->success == FALSE || $this->uploader->required_empty !== FALSE) {
+                if ($this->form_validation->run() == FALSE || $this->uploader->success == FALSE) {
                     $errors = validation_errors();
                     $errors .= ( $this->uploader->success ) ? '' : $this->uploader->response;
                     $errors .= $this->uploader->required_empty;
+                    $category_set = $this->model_event->related_category();
+                    $place_set = $this->model_event->related_place();
 
+                    $this->template->assign('related_category', $category_set);
+                    $this->template->assign('related_place', $place_set);
 
 
                     $this->template->assign('action_mode', 'edit');

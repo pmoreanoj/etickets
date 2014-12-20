@@ -9,7 +9,7 @@
                 echo "</tr><tr>";
             }
 
-            echo "<td><img src='" . APPPATH . 'uploads/' . $evento['photo'] . "' /></td>";
+            echo "<td><a href='" . base_url() . "eventos/evento?id=" . $evento['event_id'] . "' ><img src='" . base_url() . "uploads/" . $evento['photo'] . "' /></a></td>";
         }
         echo "</tr>";
         ?>

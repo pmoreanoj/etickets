@@ -27,10 +27,12 @@ class Model_event extends CI_Model {
     }
 
     function get($id, $get_one = false) {
-
-        $select_statement = ( $this->raw_data ) ? 'categoryID,event_id,placeID,name,photo,dateTime,delete' : 'category.category AS categoryID,event_id,placeID,name,photo,dateTime,delete';
+        $this->db->flush_cache( );
+        $select_statement = ( $this->raw_data ) ? 'event_id,event.name,event.photo,dateTime,delete,categoryID,placeID' : 'event_id,event.name,event.photo,dateTime,delete,category.category_id AS categoryID,place.name AS placeID';
         $this->db->select($select_statement);
         $this->db->from('event');
+        $this->db->join('category', 'categoryID = category_id', 'left');
+        $this->db->join('place', 'placeID = place_id', 'left');
 
 
         // Pick one record
@@ -38,7 +40,7 @@ class Model_event extends CI_Model {
         if ($get_one) {
             $this->db->limit(1, 0);
         } else { // Select the desired record
-            $this->db->where('categoryID', $id);
+            $this->db->where('event_id', $id);
         }
 
         $query = $this->db->get();
@@ -46,13 +48,13 @@ class Model_event extends CI_Model {
         if ($query->num_rows() > 0) {
             $row = $query->row_array();
             return array(
-                'categoryID' => $row['categoryID'],
                 'event_id' => $row['event_id'],
-                'placeID' => $row['placeID'],
                 'name' => $row['name'],
                 'photo' => $row['photo'],
                 'dateTime' => $row['dateTime'],
                 'delete' => $row['delete'],
+                'categoryID' => $row['categoryID'],
+                'placeID' => $row['placeID'],
             );
         } else {
             return array();
@@ -65,15 +67,15 @@ class Model_event extends CI_Model {
     }
 
     function update($id, $data) {
-        $this->db->where('categoryID', $id);
+        $this->db->where('event_id', $id);
         $this->db->update('event', $data);
     }
 
     function delete($id) {
         if (is_array($id)) {
-            $this->db->where_in('categoryID', $id);
+            $this->db->where_in('event_id', $id);
         } else {
-            $this->db->where('categoryID', $id);
+            $this->db->where('event_id', $id);
         }
         $this->db->delete('event');
 
@@ -104,9 +106,11 @@ class Model_event extends CI_Model {
     function lister($page = FALSE) {
 
         $this->db->start_cache();
-        $this->db->select('category.category AS categoryID,event_id,placeID,name,photo,dateTime,delete');
+        $this->db->select('event_id,event.name,event.photo,dateTime,delete,category.category_id AS categoryID,place.name AS placeID');
         $this->db->from('event');
         //$this->db->order_by( '', 'ASC' );
+        $this->db->join('category', 'categoryID = category_id', 'left');
+        $this->db->join('place', 'placeID = place_id', 'left');
 
 
         /**
@@ -136,27 +140,27 @@ class Model_event extends CI_Model {
 
         foreach ($query->result_array() as $row) {
             $temp_result[] = array(
-                'categoryID' => $row['categoryID'],
                 'event_id' => $row['event_id'],
-                'placeID' => $row['placeID'],
                 'name' => $row['name'],
                 'photo' => $row['photo'],
                 'dateTime' => $row['dateTime'],
                 'delete' => $row['delete'],
+                'categoryID' => $row['categoryID'],
+                'placeID' => $row['placeID'],
             );
         }
         $this->db->flush_cache();
         return $temp_result;
     }
-    
-    function listerCategory( $category ) {
+
+    function listerCategory($category) {
 
         $this->db->start_cache();
-        $this->db->select('event_id,placeID,name,photo,dateTime,delete');
+        $this->db->select('event_id,place.name AS placeID,event.name,event.photo,dateTime,delete');
         $this->db->where('categoryID', $category);
         $this->db->from('event');
+        $this->db->join('place', 'placeID = place_id', 'left');
         //$this->db->order_by( '', 'ASC' );
-
         // Get the results
         $query = $this->db->get();
 
@@ -179,8 +183,10 @@ class Model_event extends CI_Model {
     function search($keyword, $page = FALSE) {
         $meta = $this->metadata();
         $this->db->start_cache();
-        $this->db->select('category.category AS categoryID,event_id,placeID,name,photo,dateTime,delete');
+        $this->db->select('event_id,event.name,event.photo,dateTime,delete,category.category_id AS categoryID,place.name AS placeID');
         $this->db->from('event');
+        $this->db->join('category', 'categoryID = category_id', 'left');
+        $this->db->join('place', 'placeID = place_id', 'left');
 
 
         // Delete this line after setting up the search conditions 
@@ -216,17 +222,29 @@ class Model_event extends CI_Model {
 
         foreach ($query->result_array() as $row) {
             $temp_result[] = array(
-                'categoryID' => $row['categoryID'],
                 'event_id' => $row['event_id'],
-                'placeID' => $row['placeID'],
                 'name' => $row['name'],
                 'photo' => $row['photo'],
                 'dateTime' => $row['dateTime'],
                 'delete' => $row['delete'],
+                'categoryID' => $row['categoryID'],
+                'placeID' => $row['placeID'],
             );
         }
         $this->db->flush_cache();
         return $temp_result;
+    }
+
+    function related_category() {
+        $this->db->select('category_id AS category_id, category_id AS category_name');
+        $rel_data = $this->db->get('category');
+        return $rel_data->result_array();
+    }
+
+    function related_place() {
+        $this->db->select('place_id AS place_id, name AS place_name');
+        $rel_data = $this->db->get('place');
+        return $rel_data->result_array();
     }
 
     /**
@@ -234,13 +252,13 @@ class Model_event extends CI_Model {
      */
     function fields($withID = FALSE) {
         $fs = array(
-            'categoryID' => lang('categoryID'),
             'event_id' => lang('event_id'),
-            'placeID' => lang('placeID'),
             'name' => lang('name'),
             'photo' => lang('photo'),
             'dateTime' => lang('dateTime'),
-            'delete' => lang('delete')
+            'delete' => lang('delete'),
+            'categoryID' => lang('categoryID'),
+            'placeID' => lang('placeID')
         );
 
         if ($withID == FALSE) {

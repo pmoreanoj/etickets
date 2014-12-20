@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.7, created on 2014-12-20 19:57:55
+<?php /* Smarty version Smarty-3.1.7, created on 2014-12-20 23:13:41
          compiled from "application/views/list_place_has_section.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:3318615265491e8a799aff2-92973454%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'e40d82f9dcb0ed299616d68f6b0a1529139d49d5' => 
     array (
       0 => 'application/views/list_place_has_section.tpl',
-      1 => 1419098876,
+      1 => 1419113504,
       2 => 'file',
     ),
   ),

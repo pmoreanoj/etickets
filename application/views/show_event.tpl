@@ -17,14 +17,8 @@
                                 <th>Value</th>
                         	</thead>
 						    <tr class="{cycle values='odd,even'}">
-                            <td>{$event_fields.categoryID}:</td>
-                            <td>{$event_data.categoryID}</td>
-                        </tr><tr class="{cycle values='odd,even'}">
                             <td>{$event_fields.event_id}:</td>
                             <td>{$event_data.event_id}</td>
-                        </tr><tr class="{cycle values='odd,even'}">
-                            <td>{$event_fields.placeID}:</td>
-                            <td>{$event_data.placeID}</td>
                         </tr><tr class="{cycle values='odd,even'}">
                             <td>{$event_fields.name}:</td>
                             <td>{$event_data.name}</td>
@@ -37,6 +31,12 @@
                         </tr><tr class="{cycle values='odd,even'}">
                             <td>{$event_fields.delete}:</td>
                             <td>{$event_data.delete}</td>
+                        </tr><tr class="{cycle values='odd,even'}">
+                            <td>{$event_fields.categoryID}:</td>
+                            <td>{$event_data.categoryID}</td>
+                        </tr><tr class="{cycle values='odd,even'}">
+                            <td>{$event_fields.placeID}:</td>
+                            <td>{$event_data.placeID}</td>
                         </tr>
 						</table>
                         <div class="actions-bar wat-cf">

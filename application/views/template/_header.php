@@ -8,7 +8,7 @@
         <meta name="author" content="">
         <title>E-Tickets - El entretenimiento nunca fue tan fácil y seguro</title>
         <!-- Bootstrap core CSS -->
-        <link href="<?php echo base_url(); ?>assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <link href="<?php echo base_url(); ?>assets/bootstrap/css/bootstrap.css" rel="stylesheet">
 
 	<!-- CSS Implementing Plugins -->
         <link rel="stylesheet" href="<?php echo base_url(); ?>assets/custom/css/flexslider.css" type="text/css" media="screen">    	
@@ -113,7 +113,7 @@ z-index: 9999;
                                 <ul class="dropdown-menu">
                                     <?php foreach( $categorias as $categoria )
                                     {
-                                        echo "<li><a href='". base_url() ."eventos/evento?id=".$categoria['category_id']."'>".$categoria['category']."</a></li>";
+                                        echo "<li><a href='". base_url() ."eventos/categoria?id=".$categoria['category_id']."'>".$categoria['category']."</a></li>";
                                     }
                                     ?>
                                 </ul>

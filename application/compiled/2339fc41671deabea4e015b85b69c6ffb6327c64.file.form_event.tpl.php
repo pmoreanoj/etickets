@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.7, created on 2014-12-17 23:16:22
+<?php /* Smarty version Smarty-3.1.7, created on 2014-12-20 20:30:21
          compiled from "application/views/form_event.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:1012793487549200b6215369-00336500%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '2339fc41671deabea4e015b85b69c6ffb6327c64' => 
     array (
       0 => 'application/views/form_event.tpl',
-      1 => 1418848148,
+      1 => 1419103801,
       2 => 'file',
     ),
   ),
@@ -15,6 +15,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'function' => 
   array (
   ),
+  'version' => 'Smarty-3.1.7',
+  'unifunc' => 'content_549200b6271ba',
   'variables' => 
   array (
     'action_mode' => 0,
@@ -22,10 +24,11 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'errors' => 0,
     'event_fields' => 0,
     'event_data' => 0,
+    'related_category' => 0,
+    'rel' => 0,
+    'related_place' => 0,
   ),
   'has_nocache_code' => false,
-  'version' => 'Smarty-3.1.7',
-  'unifunc' => 'content_549200b6271ba',
 ),false); /*/%%SmartyHeaderCode%%*/?>
 <?php if ($_valid && !is_callable('content_549200b6271ba')) {function content_549200b6271ba($_smarty_tpl) {?><div class="block" id="block-tables">
 
@@ -59,23 +62,13 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 
                             
     	<div class="group">
-            <label class="label"><?php echo $_smarty_tpl->tpl_vars['event_fields']->value['placeID'];?>
-<span class="error">*</span></label>
-    		<div>
-    	       	<input class="text_field" type="text" maxlength="255" value="<?php if (isset($_smarty_tpl->tpl_vars['event_data']->value)){?><?php echo $_smarty_tpl->tpl_vars['event_data']->value['placeID'];?>
-<?php }?>" name="placeID" />
-    		</div>
-    		<p class="instruct">Id del lugar</p>
-    	</div>
-    
-    	<div class="group">
             <label class="label"><?php echo $_smarty_tpl->tpl_vars['event_fields']->value['name'];?>
 <span class="error">*</span></label>
     		<div>
     	       	<input class="text_field" type="text" maxlength="255" value="<?php if (isset($_smarty_tpl->tpl_vars['event_data']->value)){?><?php echo $_smarty_tpl->tpl_vars['event_data']->value['name'];?>
 <?php }?>" name="name" />
     		</div>
-    		<p class="instruct">Nombre del evento</p>
+    		<p class="instruct">Nombre del Evento</p>
     	</div>
     
     	<div class="group">
@@ -105,16 +98,54 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     	       	<input class="text_field" type="text" maxlength="255" value="<?php if (isset($_smarty_tpl->tpl_vars['event_data']->value)){?><?php echo $_smarty_tpl->tpl_vars['event_data']->value['dateTime'];?>
 <?php }?>" name="dateTime" />
     		</div>
-    		<p class="instruct">Fecha y Hora del evento</p>
+    		<p class="instruct">Fecha del evento</p>
     	</div>
     
     	<div class="group">
             <label class="label"><?php echo $_smarty_tpl->tpl_vars['event_fields']->value['delete'];?>
 <span class="error">*</span></label>
-            <input class="field checkbox" type="checkbox" value="1" name="delete"<?php if (isset($_smarty_tpl->tpl_vars['event_data']->value)){?><?php if ($_smarty_tpl->tpl_vars['event_data']->value['delete']==1){?> checked="checked"<?php }?><?php }?> />
-
-    		
+    		<div>
+    	       	<input class="text_field" type="text" maxlength="255" value="<?php if (isset($_smarty_tpl->tpl_vars['event_data']->value)){?><?php echo $_smarty_tpl->tpl_vars['event_data']->value['delete'];?>
+<?php }?>" name="delete" />
+    		</div>
+    		<p class="instruct">El evento esta borrado</p>
     	</div>
+    
+    	<div class="group">
+            <label class="label"><?php echo $_smarty_tpl->tpl_vars['event_fields']->value['categoryID'];?>
+<span class="error">*</span></label>
+    		<select class="field select addr" name="categoryID" >
+                <option value="0"></option>
+                <?php  $_smarty_tpl->tpl_vars['rel'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['rel']->_loop = false;
+ $_from = $_smarty_tpl->tpl_vars['related_category']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['rel']->key => $_smarty_tpl->tpl_vars['rel']->value){
+$_smarty_tpl->tpl_vars['rel']->_loop = true;
+?>
+                    <option value="<?php echo $_smarty_tpl->tpl_vars['rel']->value['category_id'];?>
+"<?php if (isset($_smarty_tpl->tpl_vars['event_data']->value)){?><?php if ($_smarty_tpl->tpl_vars['event_data']->value['categoryID']==$_smarty_tpl->tpl_vars['rel']->value['category_id']){?> selected="selected"<?php }?><?php }?>><?php echo $_smarty_tpl->tpl_vars['rel']->value['category_name'];?>
+</option>
+                <?php } ?>
+        	</select>
+    		<p class="instruct">Categoria que pertenece el evento</p>
+        </div>
+    
+    	<div class="group">
+            <label class="label"><?php echo $_smarty_tpl->tpl_vars['event_fields']->value['placeID'];?>
+<span class="error">*</span></label>
+    		<select class="field select addr" name="placeID" >
+                <option value="0"></option>
+                <?php  $_smarty_tpl->tpl_vars['rel'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['rel']->_loop = false;
+ $_from = $_smarty_tpl->tpl_vars['related_place']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['rel']->key => $_smarty_tpl->tpl_vars['rel']->value){
+$_smarty_tpl->tpl_vars['rel']->_loop = true;
+?>
+                    <option value="<?php echo $_smarty_tpl->tpl_vars['rel']->value['place_id'];?>
+"<?php if (isset($_smarty_tpl->tpl_vars['event_data']->value)){?><?php if ($_smarty_tpl->tpl_vars['event_data']->value['placeID']==$_smarty_tpl->tpl_vars['rel']->value['place_id']){?> selected="selected"<?php }?><?php }?>><?php echo $_smarty_tpl->tpl_vars['rel']->value['place_name'];?>
+</option>
+                <?php } ?>
+        	</select>
+    		<p class="instruct">Id del lugar</p>
+        </div>
     
 
                             <div class="group navform wat-cf">

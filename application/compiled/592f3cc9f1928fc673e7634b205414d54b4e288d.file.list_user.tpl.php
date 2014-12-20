@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.7, created on 2014-12-20 20:00:43
+<?php /* Smarty version Smarty-3.1.7, created on 2014-12-20 20:06:39
          compiled from "application/views/list_user.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:11483688865495c75b341ff2-65206293%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '592f3cc9f1928fc673e7634b205414d54b4e288d' => 
     array (
       0 => 'application/views/list_user.tpl',
-      1 => 1419101918,
+      1 => 1419102315,
       2 => 'file',
     ),
   ),
@@ -15,6 +15,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'function' => 
   array (
   ),
+  'version' => 'Smarty-3.1.7',
+  'unifunc' => 'content_5495c75b38233',
   'variables' => 
   array (
     'table_name' => 0,
@@ -24,8 +26,6 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'pager' => 0,
   ),
   'has_nocache_code' => false,
-  'version' => 'Smarty-3.1.7',
-  'unifunc' => 'content_5495c75b38233',
 ),false); /*/%%SmartyHeaderCode%%*/?>
 <?php if ($_valid && !is_callable('content_5495c75b38233')) {function content_5495c75b38233($_smarty_tpl) {?><?php if (!is_callable('smarty_function_cycle')) include '/Applications/XAMPP/xamppfiles/htdocs/etickets/application/libraries/smarty/plugins/function.cycle.php';
 ?><div class="block" id="block-tables">
@@ -47,9 +47,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
                             <table class="table">
                             	<thead>
                                     <th width="20"> </th>
-                                    			<th><?php echo $_smarty_tpl->tpl_vars['user_fields']->value['user_id'];?>
-</th>
-			<th><?php echo $_smarty_tpl->tpl_vars['user_fields']->value['password'];?>
+                                    			<th><?php echo $_smarty_tpl->tpl_vars['user_fields']->value['password'];?>
 </th>
 			<th><?php echo $_smarty_tpl->tpl_vars['user_fields']->value['roleID'];?>
 </th>
@@ -74,9 +72,7 @@ $_smarty_tpl->tpl_vars['row']->_loop = true;
 ">
                                             <td><input type="checkbox" class="checkbox" name="delete_ids[]" value="<?php echo $_smarty_tpl->tpl_vars['row']->value['user_id'];?>
 " /></td>
-                                            				<td><?php echo $_smarty_tpl->tpl_vars['row']->value['user_id'];?>
-</td>
-				<td><?php echo $_smarty_tpl->tpl_vars['row']->value['password'];?>
+                                            				<td><?php echo $_smarty_tpl->tpl_vars['row']->value['password'];?>
 </td>
 				<td><?php echo $_smarty_tpl->tpl_vars['row']->value['roleID'];?>
 </td>

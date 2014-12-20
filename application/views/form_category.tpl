@@ -30,7 +30,7 @@
     		<div>
     	       	<input class="text_field" type="text" maxlength="255" value="{if isset($category_data)}{$category_data.category}{/if}" name="category" />
     		</div>
-    		
+    		<p class="instruct">Nombre de la categoria</p>
     	</div>
     
 

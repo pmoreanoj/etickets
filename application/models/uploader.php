@@ -5,7 +5,7 @@ class Uploader extends CI_Model {
     function __construct() {
         parent::__construct();
 
-        $config['upload_path'] = APPPATH . 'uploads/';
+        $config['upload_path'] = './uploads/';
         $config['allowed_types'] = 'gif|jpg|png';
         $config['max_size'] = '8192'; // kbytes
         $config['encrypt_name'] = TRUE;

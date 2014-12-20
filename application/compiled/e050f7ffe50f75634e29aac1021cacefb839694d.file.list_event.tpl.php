@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.7, created on 2014-12-17 21:33:41
+<?php /* Smarty version Smarty-3.1.7, created on 2014-12-20 23:28:56
          compiled from "application/views/list_event.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:11333039775491e75fe087d7-99462571%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'e050f7ffe50f75634e29aac1021cacefb839694d' => 
     array (
       0 => 'application/views/list_event.tpl',
-      1 => 1418848148,
+      1 => 1419113504,
       2 => 'file',
     ),
   ),
@@ -49,13 +49,17 @@ $_valid = $_smarty_tpl->decodeProperties(array (
                                     <th width="20"> </th>
                                     			<th><?php echo $_smarty_tpl->tpl_vars['event_fields']->value['event_id'];?>
 </th>
-			<th><?php echo $_smarty_tpl->tpl_vars['event_fields']->value['placeID'];?>
-</th>
 			<th><?php echo $_smarty_tpl->tpl_vars['event_fields']->value['name'];?>
 </th>
 			<th><?php echo $_smarty_tpl->tpl_vars['event_fields']->value['photo'];?>
 </th>
 			<th><?php echo $_smarty_tpl->tpl_vars['event_fields']->value['dateTime'];?>
+</th>
+			<th><?php echo $_smarty_tpl->tpl_vars['event_fields']->value['delete'];?>
+</th>
+			<th><?php echo $_smarty_tpl->tpl_vars['event_fields']->value['categoryID'];?>
+</th>
+			<th><?php echo $_smarty_tpl->tpl_vars['event_fields']->value['placeID'];?>
 </th>
 
                                     <th width="80">Actions</th>
@@ -72,13 +76,17 @@ $_smarty_tpl->tpl_vars['row']->_loop = true;
 " /></td>
                                             				<td><?php echo $_smarty_tpl->tpl_vars['row']->value['event_id'];?>
 </td>
-				<td><?php echo $_smarty_tpl->tpl_vars['row']->value['placeID'];?>
-</td>
 				<td><?php echo $_smarty_tpl->tpl_vars['row']->value['name'];?>
 </td>
 				<td><?php echo $_smarty_tpl->tpl_vars['row']->value['photo'];?>
 </td>
 				<td><?php echo $_smarty_tpl->tpl_vars['row']->value['dateTime'];?>
+</td>
+				<td><?php echo $_smarty_tpl->tpl_vars['row']->value['delete'];?>
+</td>
+				<td><?php echo $_smarty_tpl->tpl_vars['row']->value['categoryID'];?>
+</td>
+				<td><?php echo $_smarty_tpl->tpl_vars['row']->value['placeID'];?>
 </td>
 
                                             <td width="80">

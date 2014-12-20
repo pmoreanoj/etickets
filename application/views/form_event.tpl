@@ -26,27 +26,11 @@
 
                             
     	<div class="group">
-            <label class="label">{$event_fields.event_id}<span class="error">*</span></label>
-    		<div>
-    	       	<input class="text_field" type="text" maxlength="255" value="{if isset($event_data)}{$event_data.event_id}{/if}" name="event_id" />
-    		</div>
-    		<p class="instruct">Id del evento</p>
-    	</div>
-    
-    	<div class="group">
-            <label class="label">{$event_fields.placeID}<span class="error">*</span></label>
-    		<div>
-    	       	<input class="text_field" type="text" maxlength="255" value="{if isset($event_data)}{$event_data.placeID}{/if}" name="placeID" />
-    		</div>
-    		<p class="instruct">Id del lugar</p>
-    	</div>
-    
-    	<div class="group">
             <label class="label">{$event_fields.name}<span class="error">*</span></label>
     		<div>
     	       	<input class="text_field" type="text" maxlength="255" value="{if isset($event_data)}{$event_data.name}{/if}" name="name" />
     		</div>
-    		<p class="instruct">Nombre del evento</p>
+    		<p class="instruct">Nombre del Evento</p>
     	</div>
     
     	<div class="group">
@@ -70,15 +54,38 @@
     		<div>
     	       	<input class="text_field" type="text" maxlength="255" value="{if isset($event_data)}{$event_data.dateTime}{/if}" name="dateTime" />
     		</div>
-    		<p class="instruct">Fecha y Hora del evento</p>
+    		<p class="instruct">Fecha del evento</p>
     	</div>
     
     	<div class="group">
             <label class="label">{$event_fields.delete}<span class="error">*</span></label>
-            <input class="field checkbox" type="checkbox" value="1" name="delete"{if isset($event_data)}{if $event_data.delete == 1} checked="checked"{/if}{/if} />
-
-    		
+    		<div>
+    	       	<input class="text_field" type="text" maxlength="255" value="{if isset($event_data)}{$event_data.delete}{/if}" name="delete" />
+    		</div>
+    		<p class="instruct">El evento esta borrado</p>
     	</div>
+    
+    	<div class="group">
+            <label class="label">{$event_fields.categoryID}<span class="error">*</span></label>
+    		<select class="field select addr" name="categoryID" >
+                <option value="0"></option>
+                {foreach $related_category as $rel}
+                    <option value="{$rel.category_id}"{if isset($event_data)}{if $event_data.categoryID == $rel.category_id} selected="selected"{/if}{/if}>{$rel.category_name}</option>
+                {/foreach}
+        	</select>
+    		<p class="instruct">Categoria que pertenece el evento</p>
+        </div>
+    
+    	<div class="group">
+            <label class="label">{$event_fields.placeID}<span class="error">*</span></label>
+    		<select class="field select addr" name="placeID" >
+                <option value="0"></option>
+                {foreach $related_place as $rel}
+                    <option value="{$rel.place_id}"{if isset($event_data)}{if $event_data.placeID == $rel.place_id} selected="selected"{/if}{/if}>{$rel.place_name}</option>
+                {/foreach}
+        	</select>
+    		<p class="instruct">Id del lugar</p>
+        </div>
     
 
                             <div class="group navform wat-cf">

@@ -32,7 +32,7 @@ class eventos extends CI_Controller {
         $this->data['categorias'] = $this->categorias->lister( );
      }
      
-     public function evento()
+     public function categoria()
      {
         $this->load->model('model_event', "eventos");
         $this->data['eventos'] = $this->eventos->listerCategory( $this->input->get('id') );
@@ -41,6 +41,41 @@ class eventos extends CI_Controller {
         $contenido['contenido'] = 'categoria.php';
         $contenido['data'] = $this->data;
         $this->load->view("template/_layout.php", $contenido);
+     }
+     
+     public function evento( )
+     {
+        $this->load->model('model_event', "eventos");
+        $this->load->model('model_place', "lugares");
+        $this->load->model('model_place_has_section', "place_has_section");
+        $this->load->model('model_section', "secciones");
+        $this->eventos->raw_data = TRUE;
+        $evento = $this->eventos->get($this->input->get('id'));
+        $placeID = $evento['placeID'];
+        
+        $this->lugares->raw_data = TRUE;
+        $lugar = $this->lugares->get($placeID);
+        
+        $this->place_has_section->raw_data = TRUE;
+        $sectionsArray = $this->place_has_section->listerPlaceID($placeID);
+        
+        $sections = array();
+        
+        foreach( $sectionsArray as $sectionArray )
+        {
+            $section = $this->secciones->get($sectionArray['sectionID']);
+            array_push( $sections, $section );
+        }
+        
+        $this->data['lugar'] = $lugar;
+        $this->data['secciones'] = $sections;
+        $this->data['evento'] = $evento;
+        
+        $contenido['contenido'] = 'evento.php';
+        $contenido['data']      = $this->data;
+        
+        $this->load->view('template/_layout.php', $contenido);
+        
      }
      
 
