@@ -1,7 +1,8 @@
 <?php
 
-if (!defined('BASEPATH'))
+if (!defined('BASEPATH')) {
     exit('No direct script access allowed');
+}
 
 class Model_reservation extends CI_Model {
 
@@ -40,7 +41,7 @@ class Model_reservation extends CI_Model {
         if ($get_one) {
             $this->db->limit(1, 0);
         } else { // Select the desired record
-            $this->db->where('confirmation', $id);
+            $this->db->where('reservation_id', $id);
         }
 
         $query = $this->db->get();
@@ -53,7 +54,7 @@ class Model_reservation extends CI_Model {
                 'reservation_id' => $row['reservation_id'],
                 'userID' => $row['userID'],
                 'eventID' => $row['eventID'],
-                'date' => date('Y-m-d', $row['date']),
+                'date' => $row['date'],
                 'state' => ( array_search($row['state'], $meta['state']['enum_values']) !== FALSE ) ? $meta['state']['enum_names'][array_search($row['state'], $meta['state']['enum_values'])] : '',
                 'more' => $row['more'],
             );

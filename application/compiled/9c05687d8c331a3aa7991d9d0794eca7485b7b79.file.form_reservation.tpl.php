@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.7, created on 2014-12-20 23:10:19
+<?php /* Smarty version Smarty-3.1.7, created on 2014-12-21 00:41:39
          compiled from "application/views/form_reservation.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:13343467215495f3cbb38f99-03921895%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '9c05687d8c331a3aa7991d9d0794eca7485b7b79' => 
     array (
       0 => 'application/views/form_reservation.tpl',
-      1 => 1419103647,
+      1 => 1419113504,
       2 => 'file',
     ),
   ),
@@ -15,6 +15,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'function' => 
   array (
   ),
+  'version' => 'Smarty-3.1.7',
+  'unifunc' => 'content_5495f3cbbc014',
   'variables' => 
   array (
     'action_mode' => 0,
@@ -30,8 +32,6 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'k' => 0,
   ),
   'has_nocache_code' => false,
-  'version' => 'Smarty-3.1.7',
-  'unifunc' => 'content_5495f3cbbc014',
 ),false); /*/%%SmartyHeaderCode%%*/?>
 <?php if ($_valid && !is_callable('content_5495f3cbbc014')) {function content_5495f3cbbc014($_smarty_tpl) {?><?php if (!is_callable('smarty_modifier_date_format')) include '/Applications/XAMPP/xamppfiles/htdocs/etickets/application/libraries/smarty/plugins/modifier.date_format.php';
 ?><div class="block" id="block-tables">

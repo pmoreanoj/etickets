@@ -32,12 +32,23 @@ class Login extends CI_Controller {
     function validate() {
         $user = $this->input->post('user');
         $pass = $this->input->post('pass');
-        
-        $data = $this->user->login( $user, $pass );
-        
+
+        $data = $this->user->login($user, $pass);
+
         if (isset($data)) { //login correcto
-            $this->model_auth->login(array('valid' => 'yes', 'name' => $user , 'role_id' => $data['role_id'] ));
-            redirect(base_url() . 'dashboard');
+            $this->model_auth->login(array('valid' => 'yes', 'name' => $user, 'role_id' => $data['role_id'], "user_id" => $data['user_id']));
+            if ($data['role_id'] == $this->user->getAdminRole()) {
+                redirect(base_url() . 'dashboard');
+            }
+            else if( $this->session->userdata('eventInfo') )
+            {
+                $eventInfo = $this->session->userdata('eventInfo');
+                redirect($eventInfo['currentURL']);
+            }
+            else
+            {
+                redirect();
+            }
             die();
         } else {
             $this->model_auth->login(array('valid' => 'no'));

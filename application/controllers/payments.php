@@ -31,15 +31,15 @@ class payments extends CI_Controller {
         $this->name = $this->data['name'];
         $this->role_id = $this->data['role_id'];
         $this->load->model('model_category', "categorias");
-        
-        $this->data['categorias'] = $this->categorias->lister( );
+
+        $this->data['categorias'] = $this->categorias->lister();
     }
 
     public function success() {
-        if (!isset($_GET['tx'])){
+        if (!isset($_GET['tx'])) {
             return fail();
         }
-        
+
         $tx = $_GET['tx'];
 
         $request = curl_init();
@@ -52,7 +52,7 @@ class payments extends CI_Controller {
                 (
                 'cmd' => '_notify-synch',
                 'tx' => $tx,
-                'at' => 'Ds3punjblX1ILNKSzXJHEcQ3ITxo3DVPZ-i4d5fSPjSJugpzlDXSUsbtPcO',
+                'at' => 'WX80QWpDozsx2BWtkMXs0IA7OZv1S3oiAgdVRJbw8mrN_xwOI6UjJEGof60',
             )),
             CURLOPT_RETURNTRANSFER => TRUE,
             CURLOPT_HEADER => FALSE,
@@ -62,14 +62,23 @@ class payments extends CI_Controller {
         $response = curl_exec($request);
         $status = curl_getinfo($request, CURLINFO_HTTP_CODE);
         curl_close($request);
-        
-        $aResponse = $this->sortResponse( $response );
-        
+
+        $aResponse = $this->sortResponse($response);
+
         $this->data['response']['first-name'] = $aResponse['first_name'];
         $this->data['response']['last-name'] = $aResponse['last_name'];
         $this->data['response']['item-name'] = $aResponse['item_name'];
         $this->data['response']['amount'] = $aResponse['payment_gross'];
-        
+        $this->data['response']['transactionID'] = $aResponse['txn_id'];
+        $this->data['response']['bank'] = 'paypal';
+        $this->data['response']['localidad'] = $this->session->userdata('buyInfo');
+
+        $eventInfo = $this->session->userdata('eventInfo');
+
+        $this->data['response']['eventID'] = $eventInfo['currentID'];
+
+        $this->crearReserva();
+
         $contenido['contenido'] = 'success.php';
         $contenido['data'] = $this->data;
         $this->load->view("template/_layout.php", $contenido);
@@ -94,6 +103,28 @@ class payments extends CI_Controller {
             return $response;
         }
         return NULL;
+    }
+
+    public function buy() {
+        $this->session->set_userdata('buyInfo', $this->input->post('localidad'));
+    }
+
+    private function crearReserva() {
+        $this->load->model('model_reservation');
+        
+        $userInfo = $this->session->userdata('logged_in');
+        $userID = $userInfo['user_id'];
+        $data_post['bank'] = $this->data['response']['bank'];
+        $data_post['userID'] = $userID;
+        $data_post['eventID'] = $this->data['response']['eventID'];
+        $data_post['date'] = time();
+        $data_post['state'] = "DELIVERED";
+        $data_post['more'] = $this->data['response']['localidad'];
+        $data_post['confirmation'] = $this->data['response']['transactionID'];
+
+
+        $insert_id = $this->model_reservation->insert($data_post);
+        $this->data['response']['reserva'] = $insert_id;
     }
 
 }

@@ -8,17 +8,7 @@
                         <h4>¡Síguenos!</h4>
                         <a href="#">Facebook</a><br>
                         <a href="#">Twitter</a><br>
-                        <h4>Nuestras promociones</h4>
-                        <p>Si estas interesado, ¡Regístrate!</p>
-                        <div>
-                            <form class="form-inline" role="form">
-                                <div class="form-group">
-                                    <label class="sr-only" for="exampleInputEmail2">Correo electrónico</label>
-                                    <input type="email" class="form-control" id="exampleInputEmail2" placeholder="Enter email">
-                                </div>
-                                <button type="submit" class="btn btn-brand">Subscríbete</button>
-                            </form>
-                        </div>          
+                         
                     </div>
                     <div class="col-md-2">
                         <h4>Quiénes Somos</h4>
@@ -74,6 +64,12 @@
       	App.init();
         App.initSliders();
         Index.initParallaxSlider();
+    });
+</script>
+
+<script>
+    $("#btnPagoPaypal").submit(function(event) {
+        $.post( "<?php echo base_url(); ?>payments/buy" , { localidad: $( "#localidad option:selected" ).text() } );
     });
 </script>
 </body>

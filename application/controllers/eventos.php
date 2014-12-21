@@ -22,29 +22,30 @@ class eventos extends CI_Controller {
      */
     function __construct() {
         parent::__construct();
-        
+
         $this->load->helper('url');
         $this->load->library('session');
         $this->load->model('model_category', "categorias");
-        
+
         $this->data = $this->session->userdata('logged_in');
-        
-        $this->data['categorias'] = $this->categorias->lister( );
-     }
-     
-     public function categoria()
-     {
+
+        $this->data['categorias'] = $this->categorias->lister();
+    }
+
+    public function categoria() {
         $this->load->model('model_event', "eventos");
-        $this->data['eventos'] = $this->eventos->listerCategory( $this->input->get('id') );
-        
-        
+        $this->data['eventos'] = $this->eventos->listerCategory($this->input->get('id'));
+
+
         $contenido['contenido'] = 'categoria.php';
         $contenido['data'] = $this->data;
         $this->load->view("template/_layout.php", $contenido);
-     }
-     
-     public function evento( )
-     {
+    }
+
+    public function evento() {
+        $eventInfo['currentURL'] = current_url() . "?id=" . $this->input->get('id');
+        $eventInfo['currentID' ] = $this->input->get('id');
+        $this->session->set_userdata('eventInfo', $eventInfo );
         $this->load->model('model_event', "eventos");
         $this->load->model('model_place', "lugares");
         $this->load->model('model_place_has_section', "place_has_section");
@@ -52,31 +53,28 @@ class eventos extends CI_Controller {
         $this->eventos->raw_data = TRUE;
         $evento = $this->eventos->get($this->input->get('id'));
         $placeID = $evento['placeID'];
-        
+
         $this->lugares->raw_data = TRUE;
         $lugar = $this->lugares->get($placeID);
-        
+
         $this->place_has_section->raw_data = TRUE;
         $sectionsArray = $this->place_has_section->listerPlaceID($placeID);
-        
+
         $sections = array();
-        
-        foreach( $sectionsArray as $sectionArray )
-        {
+
+        foreach ($sectionsArray as $sectionArray) {
             $section = $this->secciones->get($sectionArray['sectionID']);
-            array_push( $sections, $section );
+            array_push($sections, $section);
         }
-        
+
         $this->data['lugar'] = $lugar;
         $this->data['secciones'] = $sections;
         $this->data['evento'] = $evento;
-        
+
         $contenido['contenido'] = 'evento.php';
-        $contenido['data']      = $this->data;
-        
+        $contenido['data'] = $this->data;
+
         $this->load->view('template/_layout.php', $contenido);
-        
-     }
-     
+    }
 
 }

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Dec 17, 2014 at 04:29 PM
+-- Generation Time: Dec 21, 2014 at 12:39 AM
 -- Server version: 5.5.34
 -- PHP Version: 5.4.22
 
@@ -13,38 +13,57 @@ SET time_zone = "+00:00";
 --
 -- Database: `etickets`
 --
-DROP DATABASE IF EXISTS etickets;
 CREATE DATABASE IF NOT EXISTS `etickets` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
 USE `etickets`;
 
 -- --------------------------------------------------------
 
+--
+-- Table structure for table `category`
+--
+
+DROP TABLE IF EXISTS `category`;
 CREATE TABLE IF NOT EXISTS `category` (
   `category_id` int(11) NOT NULL AUTO_INCREMENT,
   `category` varchar(50) NOT NULL,
   PRIMARY KEY (`category_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
 
+--
+-- Dumping data for table `category`
+--
+
 INSERT INTO `category` (`category_id`, `category`) VALUES
 (1, 'futbol'),
 (2, 'concierto'),
 (3, 'fiesta');
 
+-- --------------------------------------------------------
+
 --
 -- Table structure for table `event`
 --
 
+DROP TABLE IF EXISTS `event`;
 CREATE TABLE IF NOT EXISTS `event` (
   `event_id` int(11) NOT NULL AUTO_INCREMENT,
   `placeID` int(11) NOT NULL,
   `name` varchar(100) NOT NULL,
-  `photo` varchar(100),
+  `photo` varchar(400) DEFAULT NULL,
   `dateTime` datetime NOT NULL,
   `delete` tinyint(1) NOT NULL DEFAULT '0',
-  `categoryID` int(11) NOT NULL, 
+  `categoryID` int(11) NOT NULL,
   PRIMARY KEY (`event_id`),
-  KEY `fk_event_place_idx` (`placeID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  KEY `fk_event_place_idx` (`placeID`),
+  KEY `fk_event_category` (`categoryID`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `event`
+--
+
+INSERT INTO `event` (`event_id`, `placeID`, `name`, `photo`, `dateTime`, `delete`, `categoryID`) VALUES
+(1, 1, 'Partido 1', '8e01d989b82092ccbd314c9cbd3ee0bd.png', '0000-00-00 00:00:00', 0, 1);
 
 -- --------------------------------------------------------
 
@@ -52,13 +71,21 @@ CREATE TABLE IF NOT EXISTS `event` (
 -- Table structure for table `place`
 --
 
+DROP TABLE IF EXISTS `place`;
 CREATE TABLE IF NOT EXISTS `place` (
   `place_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) NOT NULL,
-  `photo` varchar(100),
+  `photo` varchar(100) DEFAULT NULL,
   `description` text,
   PRIMARY KEY (`place_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `place`
+--
+
+INSERT INTO `place` (`place_id`, `name`, `photo`, `description`) VALUES
+(1, 'Estadio Atahualpa', 'bdca8e9de6a5001c6f438ad4d6e2d436.jpg', 'El estadio atahualpa en quito');
 
 -- --------------------------------------------------------
 
@@ -66,6 +93,7 @@ CREATE TABLE IF NOT EXISTS `place` (
 -- Table structure for table `place_has_section`
 --
 
+DROP TABLE IF EXISTS `place_has_section`;
 CREATE TABLE IF NOT EXISTS `place_has_section` (
   `placeID` int(11) NOT NULL,
   `sectionID` int(11) NOT NULL,
@@ -73,19 +101,29 @@ CREATE TABLE IF NOT EXISTS `place_has_section` (
   KEY `fk_place_has_section_section1_idx` (`sectionID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `place_has_section`
+--
+
+INSERT INTO `place_has_section` (`placeID`, `sectionID`) VALUES
+(1, 1),
+(1, 2),
+(1, 3);
+
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `reservation`
 --
 
+DROP TABLE IF EXISTS `reservation`;
 CREATE TABLE IF NOT EXISTS `reservation` (
   `reservation_id` int(11) NOT NULL AUTO_INCREMENT,
   `userID` int(11) NOT NULL,
   `eventID` int(11) NOT NULL,
   `date` date NOT NULL,
-  `confirmation` varchar (100),
-  `bank` varchar(30), 
+  `confirmation` varchar(100) DEFAULT NULL,
+  `bank` varchar(30) DEFAULT NULL,
   `state` enum('PROCESSING','DELIVERED') NOT NULL DEFAULT 'PROCESSING',
   `more` text,
   PRIMARY KEY (`reservation_id`),
@@ -99,13 +137,13 @@ CREATE TABLE IF NOT EXISTS `reservation` (
 -- Table structure for table `role`
 --
 
+DROP TABLE IF EXISTS `role`;
 CREATE TABLE IF NOT EXISTS `role` (
   `role_id` int(11) NOT NULL AUTO_INCREMENT,
   `role` varchar(50) NOT NULL,
   `default` tinyint(1) NOT NULL,
   PRIMARY KEY (`role_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
-
 
 --
 -- Dumping data for table `role`
@@ -117,14 +155,13 @@ INSERT INTO `role` (`role_id`, `role`, `default`) VALUES
 (3, 'vendedor', 0),
 (4, 'cliente', 1);
 
-
-
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `seat`
 --
 
+DROP TABLE IF EXISTS `seat`;
 CREATE TABLE IF NOT EXISTS `seat` (
   `seat_id` int(11) NOT NULL AUTO_INCREMENT,
   `sectionID` int(11) NOT NULL,
@@ -141,6 +178,7 @@ CREATE TABLE IF NOT EXISTS `seat` (
 -- Table structure for table `section`
 --
 
+DROP TABLE IF EXISTS `section`;
 CREATE TABLE IF NOT EXISTS `section` (
   `section_id` int(11) NOT NULL AUTO_INCREMENT,
   `rows` int(11) NOT NULL,
@@ -148,7 +186,16 @@ CREATE TABLE IF NOT EXISTS `section` (
   `price` float NOT NULL,
   `description` text,
   PRIMARY KEY (`section_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+
+--
+-- Dumping data for table `section`
+--
+
+INSERT INTO `section` (`section_id`, `rows`, `seats_per_rows`, `price`, `description`) VALUES
+(1, 15, 10, 20, 'Tribuna'),
+(2, 15, 15, 15, 'General'),
+(3, 30, 30, 30, 'Palco');
 
 -- --------------------------------------------------------
 
@@ -156,6 +203,7 @@ CREATE TABLE IF NOT EXISTS `section` (
 -- Table structure for table `sf_config`
 --
 
+DROP TABLE IF EXISTS `sf_config`;
 CREATE TABLE IF NOT EXISTS `sf_config` (
   `sf_id` int(5) unsigned NOT NULL AUTO_INCREMENT,
   `sf_table` varchar(64) NOT NULL DEFAULT '',
@@ -167,7 +215,7 @@ CREATE TABLE IF NOT EXISTS `sf_config` (
   `sf_order` int(3) DEFAULT NULL,
   `sf_hidden` int(1) DEFAULT '0',
   PRIMARY KEY (`sf_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=48 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=83 ;
 
 --
 -- Dumping data for table `sf_config`
@@ -209,10 +257,10 @@ INSERT INTO `sf_config` (`sf_id`, `sf_table`, `sf_field`, `sf_type`, `sf_related
 (55, 'sf_config', 'sf_order', 'default', '', '', NULL, NULL, 0),
 (56, 'sf_config', 'sf_hidden', 'default', '', '', NULL, NULL, 0),
 (57, 'event', 'event_id', 'default', '|', 'ID', 'Id del evento', 0, 0),
-(58, 'event', 'placeID', 'default', '|', 'Lugar', 'Id del lugar', 1, 0),
+(58, 'event', 'placeID', 'related', 'place|place_id|user|name', 'Lugar', 'Id del lugar', 6, 0),
 (59, 'place', 'place_id', 'default', '|', 'Id', 'ID del lugar', 0, 1),
-(60, 'place_has_section', 'placeID', 'default', '|', 'ID del Lugar', '', 0, 0),
-(61, 'place_has_section', 'sectionID', 'default', '|', 'Id de la Seccion', '', 1, 0),
+(60, 'place_has_section', 'placeID', 'related', 'place|place_id|place|name', 'ID del Lugar', '', 0, 0),
+(61, 'place_has_section', 'sectionID', 'related', 'section|section_id|section|description', 'Id de la Seccion', '', 1, 0),
 (62, 'reservation', 'reservation_id', 'default', '|', 'ID Reserva', 'Id de la reserva', 2, 0),
 (63, 'reservation', 'userID', 'related', 'user|user_id|user|username', 'Usuario', 'ID del usuario', 3, 0),
 (64, 'reservation', 'eventID', 'related', 'event|event_id|user|name', 'Evento', 'ID del evento', 4, 0),
@@ -226,7 +274,14 @@ INSERT INTO `sf_config` (`sf_id`, `sf_table`, `sf_field`, `sf_type`, `sf_related
 (72, 'user_profile', 'profile_id', 'default', '|', 'ID', 'Id del perfil', 0, 0),
 (73, 'user_profile', 'userID', 'related', 'user|user_id|user|name', 'Usuario', 'ID del usuario', 1, 0),
 (74, 'reservation', 'confirmation', 'default', '|', 'Confirmacion de Pago', '', 0, 0),
-(75, 'reservation', 'bank', 'default', '|', 'Banco de Pago', '', 1, 0);
+(75, 'reservation', 'bank', 'default', '|', 'Banco de Pago', '', 1, 0),
+(76, 'category', 'category_id', 'default', '|', 'Id', 'Id de la categoria', 0, 0),
+(77, 'category', 'category', 'default', '|', 'Categoria', 'Nombre de la categoria', 1, 0),
+(78, 'event', 'name', 'default', '|', 'Nombre', 'Nombre del Evento', 1, 0),
+(79, 'event', 'photo', 'file', '|', 'Foto', 'Foto del evento', 2, 0),
+(80, 'event', 'dateTime', 'default', '|', 'Fecha y Hora', 'Fecha del evento', 3, 0),
+(81, 'event', 'delete', 'default', '|', 'Borrado', 'El evento esta borrado', 4, 0),
+(82, 'event', 'categoryID', 'related', 'category|category_id|category|category_id', 'Categoria', 'Categoria que pertenece el evento', 5, 0);
 
 -- --------------------------------------------------------
 
@@ -234,22 +289,26 @@ INSERT INTO `sf_config` (`sf_id`, `sf_table`, `sf_field`, `sf_type`, `sf_related
 -- Table structure for table `user`
 --
 
-
+DROP TABLE IF EXISTS `user`;
 CREATE TABLE IF NOT EXISTS `user` (
   `user_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
   `password` varchar(300) NOT NULL,
   `email` varchar(80) NOT NULL,
   `username` varchar(45) NOT NULL,
-  `roleID` int(11) NOT NULL, 
+  `roleID` int(11) NOT NULL,
   `delete` tinyint(1) NOT NULL DEFAULT '0',
-  FOREIGN KEY(`roleID`) REFERENCES `role` (`role_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  PRIMARY KEY (`user_id`),
+  KEY `roleID` (`roleID`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
-INSERT INTO `user` (`name`, `password`, `email`, `username`, `roleID`, `delete` ) VALUES
-	('admin', 'admin', 'admin@etickets.com', 'admin', 1, 0 ),
-	('cliente', 'cliente', 'cliente@etickets.com', 'cliente', 4, 0 );
+--
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`user_id`, `name`, `password`, `email`, `username`, `roleID`, `delete`) VALUES
+(1, 'admin', 'admin', 'admin@etickets.com', 'admin', 1, 0),
+(2, 'cliente', 'cliente', 'cliente@etickets.com', 'cliente', 4, 0);
 
 -- --------------------------------------------------------
 
@@ -257,6 +316,7 @@ INSERT INTO `user` (`name`, `password`, `email`, `username`, `roleID`, `delete` 
 -- Table structure for table `user_profile`
 --
 
+DROP TABLE IF EXISTS `user_profile`;
 CREATE TABLE IF NOT EXISTS `user_profile` (
   `profile_id` int(11) NOT NULL AUTO_INCREMENT,
   `userID` int(11) NOT NULL,
@@ -278,8 +338,8 @@ CREATE TABLE IF NOT EXISTS `user_profile` (
 -- Constraints for table `event`
 --
 ALTER TABLE `event`
-  ADD CONSTRAINT `fk_event_place` FOREIGN KEY (`placeID`) REFERENCES `place` (`place_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_event_category` FOREIGN KEY (`categoryID`) REFERENCES `category` (`category_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_event_category` FOREIGN KEY (`categoryID`) REFERENCES `category` (`category_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_event_place` FOREIGN KEY (`placeID`) REFERENCES `place` (`place_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `place_has_section`
@@ -301,6 +361,11 @@ ALTER TABLE `reservation`
 ALTER TABLE `seat`
   ADD CONSTRAINT `fk_seat_section1` FOREIGN KEY (`sectionID`) REFERENCES `section` (`section_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
+--
+-- Constraints for table `user`
+--
+ALTER TABLE `user`
+  ADD CONSTRAINT `user_ibfk_1` FOREIGN KEY (`roleID`) REFERENCES `role` (`role_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `user_profile`
